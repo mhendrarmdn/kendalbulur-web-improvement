@@ -1027,3 +1027,139 @@ h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-seri
   .idm-track{height:25px}
   .idm-category strong{text-align:left}
 }
+
+
+/* ==========================================================
+   KKM DEMO FEATURES — 22 Oct 2026
+   ========================================================== */
+.demo-badge{display:inline-flex;align-items:center;padding:5px 9px;border:1px solid #D4A72C;background:#FFF8E5;color:#7F1110;border-radius:4px;font:700 10px/1 "Poppins",sans-serif;letter-spacing:.08em}
+.demo-note{margin:14px 0;padding:11px 14px;border-left:4px solid #D4A72C;background:#fff9e9;color:#6e5730;font-size:12px}
+.year-switch{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:8px 0 20px}
+.year-switch button{border:1px solid #ddd;background:#f6f6f6;color:#444;border-radius:999px;padding:8px 22px;font:600 12px "Poppins",sans-serif;cursor:pointer;transition:.18s}
+.year-switch button:hover,.year-switch button.active{background:#69a619;color:#fff;border-color:#69a619;box-shadow:0 5px 12px rgba(105,166,25,.2)}
+.download-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin:12px 0 18px}
+.download-btn{border:1px solid #7F1110!important;background:#fff!important;color:#7F1110!important;border-radius:5px!important;padding:10px 16px!important;font:600 12px "Poppins",sans-serif!important;cursor:pointer!important;transition:background .18s,color .18s,transform .1s!important}
+.download-btn:hover,.download-btn:focus,.download-btn:active{background:#7F1110!important;color:#fff!important}
+.download-btn:active{transform:translateY(1px)}
+.demo-poster{width:min(760px,100%);margin:0 auto 34px;background:linear-gradient(145deg,#f4e5d6,#fff8df);border:1px solid #e4d5c4;padding:24px;box-shadow:0 8px 22px rgba(62,31,25,.08)}
+.demo-poster-head{display:flex;justify-content:space-between;gap:20px;align-items:center;padding-bottom:14px;border-bottom:2px dotted #7d685e;font:700 24px "Poppins",sans-serif;color:#7F1110}
+.demo-poster-head span{color:#a4792a}
+.demo-poster-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.demo-poster-grid>div{padding:16px;border-radius:8px;background:rgba(255,255,255,.65)}
+.demo-poster-grid h4{margin:0 0 8px;font:700 13px "Poppins",sans-serif;color:#7F1110}
+.demo-poster-grid strong{font:700 18px "Poppins",sans-serif}
+.demo-poster-grid p{font-size:11px;color:#665b57;margin:6px 0 0}
+.demo-watermark{text-align:center;margin-top:20px;font:700 10px "Poppins",sans-serif;letter-spacing:.08em;color:#7F1110}
+.demo-number{color:#7F1110;font-weight:600}
+.finance-table tr.level-0 td,.data-table tr.level-0 td{font-weight:800;background:#f3e7e2!important}
+.finance-table tr.level-1 td,.data-table tr.level-1 td{font-weight:700;background:#f9efec!important}
+.finance-table tr.total-row td,.data-table tr.total-row td{font-weight:800;background:#F4E8D0!important;color:#4e3513}
+.finance-table tr.grand-total td,.data-table tr.grand-total td{font-weight:800;background:#D4A72C!important;color:#292525}
+
+/* Directory */
+.directory-section{padding:8px 0 34px}
+.directory-section+.directory-section{border-top:1px solid #eee;padding-top:34px}
+.directory-heading{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:18px}
+.directory-heading h2{margin:0;font:700 26px "Poppins",sans-serif;color:#382b2a}
+.directory-heading p{margin:4px 0 0;color:#756b68;font-size:12px}
+.demo-person-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.demo-person-card{height:310px;perspective:1000px;cursor:pointer}
+.demo-person-card .flip-inner{height:100%}
+.demo-person-card .flip-face{padding:18px}
+.demo-person-photo{width:104px;height:104px;border-radius:50%;margin:0 auto 12px;object-fit:cover;background:#f2e5e2;border:5px solid #fff;box-shadow:0 0 0 1px #eadedb}
+.demo-person-name{font:700 14px "Poppins",sans-serif;margin:3px 0;color:#332b29;text-align:center}
+.demo-person-role{text-align:center;font-size:11px;color:#7F1110;font-weight:700}
+.demo-person-meta{text-align:center;font-size:10px;color:#777;margin-top:8px}
+.demo-person-card .flip-back{text-align:left}
+.demo-person-card .flip-back h3{text-align:left;font-size:14px}
+.demo-person-card .flip-back p{font-size:10.5px;margin:8px 0;color:#f7e7e4}
+
+/* Agenda / RDIS-inspired */
+.agenda-demo{max-width:1120px;margin:auto}
+.calendar-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:16px 0}
+.calendar-nav,.calendar-views{display:flex;gap:7px;align-items:center}
+.calendar-toolbar button{border:1px solid #ddd;background:#fff;padding:8px 11px;border-radius:5px;font:600 11px "Poppins",sans-serif;cursor:pointer}
+.calendar-toolbar button:hover,.calendar-toolbar button.active{background:#7F1110;color:#fff;border-color:#7F1110}
+.calendar-title{font:700 22px "Poppins",sans-serif;color:#382b2a}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);border-left:1px solid #e5dedb;border-top:1px solid #e5dedb;background:#fff}
+.calendar-cell{min-height:105px;border-right:1px solid #e5dedb;border-bottom:1px solid #e5dedb;padding:7px;position:relative}
+.calendar-cell.header{min-height:0;background:#7F1110;color:#fff;text-align:center;font:600 11px "Poppins",sans-serif;padding:8px}
+.calendar-cell.muted{background:#fbf9f8;color:#aaa}
+.calendar-day{font-size:11px;font-weight:700}
+.calendar-event{display:block;margin-top:5px;padding:4px 5px;border-radius:3px;background:#F4E8D0;color:#5f3517;font-size:9px;line-height:1.25;cursor:pointer;border-left:3px solid #D4A72C}
+.calendar-event.demo{background:#f8e4e2;color:#7F1110;border-left-color:#7F1110}
+.agenda-history{display:grid;gap:10px;margin-top:20px}
+.history-item{display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:center;border:1px solid #e8e1de;background:#fff;padding:13px;border-radius:7px}
+.history-date{text-align:center;background:#7F1110;color:#fff;border-radius:5px;padding:8px 5px;font:700 12px "Poppins",sans-serif}
+.history-date b{font-size:22px;display:block;line-height:1}
+.history-item h3{font-size:13px;margin:0 0 4px}
+.history-item p{margin:0;color:#777;font-size:10.5px}
+.status-pill{font:700 9px "Poppins",sans-serif;padding:5px 8px;border-radius:999px;background:#eee;color:#666}
+.status-pill.done{background:#e7f4ea;color:#267044}.status-pill.upcoming{background:#fff1d3;color:#8c650e}
+
+/* Interactive wilayah / ISFO-inspired */
+.wilayah-interactive{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:24px;align-items:start;margin:22px 0}
+.map-stage{position:relative;border:1px solid #ddd;background:#fafafa;overflow:hidden}
+.map-stage>img{width:100%;height:auto;display:block;filter:saturate(.7)}
+.dusun-zone{position:absolute;border:0;background:rgba(100,100,100,.12);cursor:pointer;transition:background .18s,box-shadow .18s;outline:0}
+.dusun-zone:hover{background:rgba(127,17,16,.22);box-shadow:inset 0 0 0 2px rgba(127,17,16,.45)}
+.dusun-zone.active{background:rgba(127,17,16,.38);box-shadow:inset 0 0 0 2px #7F1110}
+.dusun-zone span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(255,255,255,.88);color:#7F1110;padding:4px 7px;border-radius:4px;font:700 10px "Poppins",sans-serif;white-space:nowrap}
+.zone-rongganan{left:31%;top:16%;width:47%;height:31%;clip-path:polygon(7% 3%,93% 0,100% 75%,70% 100%,15% 90%,0 40%)}
+.zone-genting{left:33%;top:43%;width:43%;height:27%;clip-path:polygon(0 5%,100% 0,94% 100%,5% 94%)}
+.zone-kendalbulur{left:28%;top:67%;width:47%;height:23%;clip-path:polygon(10% 0,100% 4%,90% 100%,0 85%)}
+.dusun-detail{border:1px solid #eadfda;background:#fff;padding:20px;border-radius:8px;box-shadow:0 8px 22px rgba(0,0,0,.05)}
+.dusun-detail h3{font:700 22px "Poppins",sans-serif;margin:0 0 8px;color:#7F1110}
+.dusun-detail ul{padding-left:18px}.dusun-detail li{font-size:12px;margin:8px 0}
+.source-links{border-top:1px solid #eee;margin-top:14px;padding-top:10px;font-size:9px;color:#888}
+
+/* Homepage closer to original screenshots */
+.home-agenda-map{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
+.home-panel{border:1px solid #ddd;border-radius:16px;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.28);overflow:hidden;padding:14px}
+.home-panel h3{text-align:center;font:700 18px "Poppins",sans-serif;color:#7F1110;margin:0 0 8px}
+.home-panel iframe{width:100%;height:245px;border:0}
+.about-replica{text-align:center;padding:70px 0 30px;background:#fffafa}
+.about-replica h2{font:700 27px "Poppins",sans-serif;color:#7F1110;margin:0 0 18px}
+.about-replica>div>p{max-width:950px;margin:0 auto 10px;font-size:12px}
+.geo-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:760px;margin:28px auto 0;text-align:left}
+.geo-card{padding:18px 24px;border-radius:18px;color:#fff;box-shadow:0 3px 9px rgba(0,0,0,.18)}
+.geo-card.maroon{background:#8f100f}.geo-card.gold{background:#d9aa29}
+.geo-card h3{font:700 italic 17px "Poppins",sans-serif;margin:0 0 8px;color:#fff}.geo-card p{margin:2px 0;font-size:11px;color:#fff}
+.gov-carousel{background:#8f100f;padding:30px 0 42px;color:#fff;overflow:hidden}
+.gov-carousel h2{text-align:center;color:#fff;font:700 26px "Poppins",sans-serif;margin:0 0 24px}
+.gov-track-wrap{position:relative;max-width:960px;margin:auto;padding:0 42px}
+.gov-track{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.gov-track::-webkit-scrollbar{display:none}
+.gov-card{flex:0 0 210px;background:#fff;color:#222;border-radius:14px;padding:12px;scroll-snap-align:start;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.gov-card img{width:100%;aspect-ratio:.78/1;object-fit:cover;border-radius:10px}
+.gov-card b{display:block;text-align:center;font:700 14px "Poppins",sans-serif;margin-top:10px}.gov-card span{display:block;text-align:center;font-size:11px}
+.gov-arrow{position:absolute;top:45%;width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:20px;cursor:pointer}.gov-arrow.prev{left:0}.gov-arrow.next{right:0}
+.bumdes-replica{padding:35px 0 0;background:#fffaf7;background-image:radial-gradient(circle at 20% 20%,rgba(127,17,16,.04) 0 2px,transparent 3px);background-size:34px 34px}
+.bumdes-replica h2{text-align:center;color:#6b0b0a;font:700 26px "Poppins",sans-serif}
+.bumdes-mosaic{display:grid;grid-template-columns:1.25fr .8fr .8fr;gap:14px;align-items:stretch}
+.bumdes-photo{grid-row:span 2;min-height:360px;background:url('https://beta.jadesta.com/imgpost/65914.jpg') center/cover;border-radius:24px}
+.bum-card{padding:24px;border-radius:26px;border:1px solid #342222;color:#fff;min-height:150px}.bum-card.maroon{background:#8f100f}.bum-card.gold{background:#d9aa29}.bum-card h3{font:700 20px "Poppins",sans-serif;margin:0 0 4px;color:#fff}.bum-card p{font-size:11px;margin:0;color:#fff}
+.bumdes-cta{margin-top:30px;background:linear-gradient(90deg,rgba(127,17,16,.9),rgba(127,17,16,.7)),url('https://kendalbulur.id/wp-content/uploads/2025/11/3d-cartoon-latin-american-village-scenery.jpg') center/cover;color:#fff;padding:18px 8%;display:flex;justify-content:space-between;align-items:center;gap:20px}.bumdes-cta h3{font:700 26px "Poppins",sans-serif;margin:0;color:#fff}
+
+/* Institution detail cards */
+.institution-demo{display:grid;gap:18px}
+.institution-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.info-tile{border:1px solid #eadfda;padding:16px;background:#fff}.info-tile h3{font-size:14px;color:#7F1110;margin:0 0 7px}.info-tile p,.info-tile li{font-size:11px;color:#625854}
+.member-table{width:100%;border-collapse:collapse}.member-table th{background:#7F1110;color:#fff;padding:8px;font-size:11px}.member-table td{border-bottom:1px solid #eee;padding:8px;font-size:11px}
+.demo-disclaimer{padding:9px 12px;background:#fff5df;border:1px solid #efd089;color:#76551c;font-size:10px;margin-bottom:14px}
+
+@media(max-width:900px){
+ .demo-person-grid{grid-template-columns:repeat(2,1fr)}
+ .wilayah-interactive,.home-agenda-map,.bumdes-mosaic{grid-template-columns:1fr}
+ .bumdes-photo{grid-row:auto;min-height:280px}
+ .institution-summary{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+ .demo-poster-grid,.geo-cards{grid-template-columns:1fr}
+ .demo-person-grid{grid-template-columns:1fr}
+ .calendar-cell{min-height:72px;padding:4px}.calendar-event{font-size:8px}
+ .history-item{grid-template-columns:58px 1fr}.history-item .status-pill{grid-column:2}
+ .directory-heading{align-items:flex-start;flex-direction:column}
+ .gov-track-wrap{padding:0 26px}.gov-card{flex-basis:180px}
+ .bumdes-cta{align-items:flex-start;flex-direction:column}
+ .download-actions{justify-content:flex-start}
+}
