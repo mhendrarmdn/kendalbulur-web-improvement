@@ -326,3 +326,120 @@ h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-seri
     min-width:max-content;
   }
 }
+
+
+/* ==========================================================
+   HEADER PIXEL CALIBRATION — compare against original screenshot
+   Only desktop header geometry is affected.
+   ========================================================== */
+@media (min-width:1025px){
+  .kb-header{
+    height:58px!important;
+    min-height:58px!important;
+  }
+  .kb-head-inner{
+    width:min(1024px,calc(100% - 32px))!important;
+    max-width:1024px!important;
+    height:58px!important;
+    min-height:58px!important;
+    margin-inline:auto!important;
+    padding:0!important;
+    display:flex!important;
+    align-items:center!important;
+    overflow:visible!important;
+  }
+
+  .kb-brand{
+    flex:0 0 23%!important;
+    width:23%!important;
+    min-width:23%!important;
+    max-width:23%!important;
+    height:58px!important;
+    display:block!important;
+    position:relative!important;
+    overflow:visible!important;
+  }
+  .kb-brand img{
+    position:absolute!important;
+    left:0!important;
+    top:5px!important;
+    width:48px!important;
+    height:48px!important;
+    max-width:48px!important;
+    object-fit:contain!important;
+  }
+  .kb-brand-copy{
+    position:absolute!important;
+    left:54px!important;
+    top:3px!important;
+    white-space:nowrap!important;
+    line-height:1!important;
+  }
+  .kb-brand-copy .small{
+    font-family:"Inter",Sans-serif!important;
+    font-size:13px!important;
+    font-weight:500!important;
+    line-height:1!important;
+    color:#292525!important;
+  }
+  .kb-brand-copy .big{
+    font-family:"Poppins",Sans-serif!important;
+    font-size:19.2px!important;
+    font-weight:700!important;
+    line-height:1!important;
+    letter-spacing:0!important;
+    margin:1px 0 0!important;
+    white-space:nowrap!important;
+  }
+  .kb-brand-copy .sub{
+    font-family:"Inter",Sans-serif!important;
+    font-size:9px!important;
+    font-weight:500!important;
+    line-height:1!important;
+    margin-top:5px!important;
+    white-space:nowrap!important;
+  }
+
+  .kb-nav{
+    flex:0 0 77%!important;
+    width:77%!important;
+    min-width:77%!important;
+    max-width:77%!important;
+    height:58px!important;
+    margin:0!important;
+    gap:0!important;
+    justify-content:flex-end!important;
+    align-items:center!important;
+    white-space:nowrap!important;
+    overflow:visible!important;
+  }
+  .kb-nav>a,
+  .kb-nav-item>a{
+    flex:0 0 auto!important;
+    min-width:max-content!important;
+    height:58px!important;
+    margin:0 7px!important;
+    padding:0!important;
+    display:flex!important;
+    align-items:center!important;
+    gap:3px!important;
+    white-space:nowrap!important;
+    font-family:"Poppins",Sans-serif!important;
+    font-size:12px!important;
+    font-weight:500!important;
+    line-height:1!important;
+    letter-spacing:0!important;
+  }
+  .kb-nav-item{
+    flex:0 0 auto!important;
+    height:58px!important;
+    white-space:nowrap!important;
+  }
+  .kb-caret{
+    font-size:8px!important;
+    margin-left:2px!important;
+  }
+  .kb-dropdown{
+    top:52px!important;
+  }
+}
