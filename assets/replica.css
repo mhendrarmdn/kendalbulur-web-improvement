@@ -1701,3 +1701,10 @@ h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-seri
   .agenda-filterbar{grid-template-columns:1fr}
   .agenda-filterbar .calendar-nav{grid-column:auto}
 }
+
+
+/* Agenda history active-state badge */
+.status-pill.active{
+  background:#e7f5ec!important;
+  color:#256a3d!important;
+}
