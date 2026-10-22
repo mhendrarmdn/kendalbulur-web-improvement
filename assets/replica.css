@@ -587,3 +587,21 @@ h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-seri
   .kb-dropdown-item.open > .kb-submenu{display:block}
   .kb-submenu a{display:block;padding:10px 18px!important;font-size:12px}
 }
+
+
+/* EXACT 3 VISUAL TWEAKS REQUESTED — no other layout changes */
+@media (min-width:1025px){
+  .kb-brand-copy .small{
+    font-weight:700!important;
+  }
+
+  .kb-brand-copy .big{
+    color:#7F1110!important;
+  }
+
+  .kb-nav > a.active::after,
+  .kb-nav-item > a.active::after{
+    bottom:13px!important;
+    height:1px!important;
+  }
+}
