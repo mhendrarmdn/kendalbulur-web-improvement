@@ -211,7 +211,8 @@ function rowHtml(row){
 }
 function summaryProgress(name,item){
  const width=Math.min(100,item.b?item.r/item.b*100:0);
- return `<div class="ref-progress-group"><div class="name">${name}</div><div class="amounts">${rp(item.r)} | ${rp(item.b)}</div><div class="ref-progress"><div class="fill" style="width:${width}%"></div><span class="pct">${pct(item.r,item.b)}%</span></div></div>`;
+ const label=pct(item.r,item.b)+'%';
+ return `<div class="ref-progress-group"><div class="name">${name}</div><div class="amounts">${rp(item.r)} | ${rp(item.b)}</div><div class="ref-progress" aria-label="${name}: ${label}"><div class="fill" style="--progress:${width}%"><span class="pct">${label}</span></div></div></div>`;
 }
 function renderTable(year, target){
  target.innerHTML=rowsForYear(year).map(rowHtml).join('');
