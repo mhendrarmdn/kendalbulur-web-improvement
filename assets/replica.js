@@ -4,39 +4,40 @@ const FOOTER_LOGO='https://kendalbulur.id/storage/2025/11/cropped-Untitled-1-01.
 const nav=[
  {t:'BERANDA',u:'/'},
  {t:'PROFIL',c:[
-   ['Sejarah','/profil-desa/sejarah-desa/'],
-   ['Wilayah','/profil-desa/wilayah-desa/'],
-   ['Peta Desa','/profil-desa/peta-desa/'],
-   ['Visi Misi','/profil-desa/profil-umum/'],
-   ['SOTK','/profil-desa/sotk/'],
-   ['Profil KADES','/profil-desa/kepala-desa/'],
-   ['IDM','/profil-desa/idm/']
+   {t:'Sejarah',u:'/profil-desa/sejarah-desa/'},
+   {t:'Wilayah',u:'/profil-desa/wilayah-desa/'},
+   {t:'Peta Desa',u:'/profil-desa/peta-desa/'},
+   {t:'Visi Misi',u:'/profil-desa/profil-umum/'},
+   {t:'SOTK',u:'/profil-desa/sotk/'},
+   {t:'Profil KADES',u:'/profil-desa/kepala-desa/'},
+   {t:'IDM',u:'/profil-desa/idm/'}
  ]},
  {t:'LEMBAGA DESA',c:[
-   ['BPD','/lembaga-desa/bpd/'],
-   ['LAD','/lembaga-desa/lad/'],
-   ['BUMDesa','/lembaga-desa/bumdesa/'],
-   ['KDMP','/lembaga-desa/kdmp/']
+   {t:'BPD',u:'/lembaga-desa/bpd/'},
+   {t:'LAD',u:'/lembaga-desa/lad/'},
+   {t:'BUMDesa',u:'/lembaga-desa/bumdesa/'},
+   {t:'KDMP',u:'/lembaga-desa/kdmp/'}
  ]},
  {t:'LEMBAGA KEMASYARAKATAN',c:[
-   ['PKK','/lembaga-kemasyarakatan/pkk/'],
-   ['RT/RW','/rt-rw/'],
-   ['RW 001','/rt-rw/'],
-   ['Satlinmas','/lembaga-kemasyarakatan/satlinmas/'],
-   ['Posyandu','/lembaga-kemasyarakatan/posyandu/'],
-   ['Kartar','/lembaga-kemasyarakatan/karang-taruna/'],
-   ['FAD','/lembaga-kemasyarakatan/fad/']
+   {t:'PKK',u:'/lembaga-kemasyarakatan/pkk/'},
+   {t:'RT/RW',u:'/rt-rw/',c:[
+     {t:'RT 001 RW 001',u:'/rt-rw/'}
+   ]},
+   {t:'Satlinmas',u:'/lembaga-kemasyarakatan/satlinmas/'},
+   {t:'Posyandu',u:'/lembaga-kemasyarakatan/posyandu/'},
+   {t:'Kartar',u:'/lembaga-kemasyarakatan/karang-taruna/'},
+   {t:'FAD',u:'/lembaga-kemasyarakatan/fad/'}
  ]},
  {t:'REGULASI',c:[
-   ['PERDES','/regulasi/perdes/'],
-   ['PERKADES','/regulasi/perkades/'],
-   ['SK','/regulasi/sk/']
+   {t:'PERDES',u:'/regulasi/perdes/'},
+   {t:'PERKADES',u:'/regulasi/perkades/'},
+   {t:'SK',u:'/regulasi/sk/'}
  ]},
  {t:'PPID',c:[
-   ['APBDesa','/anggaran/'],
-   ['Agenda','/agenda/'],
-   ['Realisasi','/realisasi-apbdesa/'],
-   ['Simpeldesa','/simpeldesa/']
+   {t:'APBDesa',u:'/anggaran/'},
+   {t:'Agenda',u:'/agenda/'},
+   {t:'Realisasi',u:'/realisasi-apbdesa/'},
+   {t:'Simpeldesa',u:'/simpeldesa/'}
  ]},
  {t:'WARTA DESA',u:'/warta-desa/'},
  {t:'POTENSI DESA',u:'/potensi-desa/'}
@@ -45,17 +46,33 @@ const nav=[
 function active(u){
   return location.pathname===u || (u!=='/' && location.pathname.startsWith(u));
 }
+function itemActive(item){
+  return (item.u && active(item.u)) || (item.c && item.c.some(itemActive));
+}
+function renderDropdownItem(item){
+  if(item.c){
+    return `<div class="kb-dropdown-item has-children ${itemActive(item)?'active':''}">
+      <a href="${item.u||'#'}" class="${item.u&&active(item.u)?'active':''}">
+        <span>${item.t}</span><span class="kb-side-caret" aria-hidden="true"></span>
+      </a>
+      <div class="kb-submenu">
+        ${item.c.map(child=>`<a href="${child.u}" class="${active(child.u)?'active':''}">${child.t}</a>`).join('')}
+      </div>
+    </div>`;
+  }
+  return `<a href="${item.u}" class="${active(item.u)?'active':''}">${item.t}</a>`;
+}
 
 function renderHeader(){
  const el=document.querySelector('[data-header]');
  if(!el)return;
  const menu=nav.map(n=>n.c
   ? `<div class="kb-nav-item">
-       <a class="${n.c.some(x=>active(x[1]))?'active':''}" href="#">
-         ${n.t}<span class="kb-caret">⌄</span>
+       <a class="${itemActive(n)?'active':''}" href="#">
+         <span>${n.t}</span><span class="kb-caret" aria-hidden="true"></span>
        </a>
        <div class="kb-dropdown">
-         ${n.c.map(x=>`<a href="${x[1]}" class="${active(x[1])?'active':''}">${x[0]}</a>`).join('')}
+         ${n.c.map(renderDropdownItem).join('')}
        </div>
      </div>`
   : `<a href="${n.u}" class="${active(n.u)?'active':''}">${n.t}</a>`
@@ -80,8 +97,12 @@ function renderHeader(){
  const btn=el.querySelector('.kb-menu-btn');
  const n=el.querySelector('.kb-nav');
  btn?.addEventListener('click',()=>n.classList.toggle('open'));
+
  el.querySelectorAll('.kb-nav-item>a').forEach(a=>a.addEventListener('click',e=>{
-   if(innerWidth<981){e.preventDefault();a.parentElement.classList.toggle('open')}
+   if(innerWidth<1025){e.preventDefault();a.parentElement.classList.toggle('open')}
+ }));
+ el.querySelectorAll('.kb-dropdown-item.has-children>a').forEach(a=>a.addEventListener('click',e=>{
+   if(innerWidth<1025){e.preventDefault();a.parentElement.classList.toggle('open')}
  }));
 }
 
