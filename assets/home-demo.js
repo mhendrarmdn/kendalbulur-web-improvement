@@ -4,14 +4,14 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.querySelector('[data-gov-next]')?.addEventListener('click',()=>track?.scrollBy({left:470,behavior:'smooth'}));
 
   const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const ease=t=>1-Math.pow(1-t,3);
+  const ease=t=>1-Math.pow(1-t,3);\n  const idNumber=new Intl.NumberFormat('id-ID');
   function animateNumber(el,target,duration=1200,pad=0){
-    if(prefersReduced){el.textContent=String(target).padStart(pad,'0');return;}
+    if(prefersReduced){el.textContent=pad?String(target).padStart(pad,'0'):idNumber.format(target);return;}
     const start=performance.now();
     function frame(now){
       const p=Math.min(1,(now-start)/duration);
       const value=Math.round(target*ease(p));
-      el.textContent=String(value).padStart(pad,'0');
+      el.textContent=pad?String(value).padStart(pad,'0'):idNumber.format(value);
       if(p<1) requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
