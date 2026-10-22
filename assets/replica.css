@@ -1708,3 +1708,110 @@ h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-seri
   background:#e7f5ec!important;
   color:#256a3d!important;
 }
+
+
+/* ==========================================================
+   BUMDESA LARASATI — official-structure prototype
+   ========================================================== */
+.bumdes-legal-intro{
+  margin:0 0 24px;
+  padding:18px 20px;
+  border-left:4px solid #7F1110;
+  background:#fff8f5;
+}
+.bumdes-legal-intro p{margin:0 0 8px;font-size:13px;line-height:1.75}
+.bumdes-legal-intro p:last-child{margin-bottom:0}
+.bumdes-org{
+  margin:18px 0 10px;
+  overflow-x:auto;
+  padding:8px 6px 22px;
+}
+.bumdes-org-canvas{
+  min-width:1120px;
+  display:grid;
+  grid-template-columns:repeat(10,1fr);
+  gap:14px 10px;
+  position:relative;
+}
+.bumdes-org-box{
+  background:#7F1110;
+  color:#fff;
+  border:2px solid #5f0d0c;
+  border-radius:8px;
+  padding:14px 16px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(127,17,16,.12);
+  position:relative;
+}
+.bumdes-org-box h4{
+  margin:0 0 7px;
+  color:#fff;
+  font:700 13px/1.35 "Poppins",sans-serif;
+  text-transform:uppercase;
+}
+.bumdes-org-box p,.bumdes-org-box li{
+  margin:3px 0;
+  color:#fff;
+  font-size:11px;
+  line-height:1.5;
+}
+.bumdes-org-box ul{list-style:none;padding:0;margin:0;text-align:left}
+.bumdes-org-box.advisor{grid-column:4/7}
+.bumdes-org-box.bpd{grid-column:7/9;align-self:center}
+.bumdes-org-box.supervisor{grid-column:6/9}
+.bumdes-org-box.direction{grid-column:4/8}
+.bumdes-org-trunk{
+  grid-column:1/11;height:2px;background:#8f7772;margin:4px 6% -2px;
+}
+.bumdes-unit{grid-column:span 2}
+.bumdes-unit .unit-person{
+  display:block;
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid rgba(255,255,255,.35);
+  font-weight:700;
+}
+.bumdes-unit .unit-sub{
+  margin:9px -16px -14px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1px;
+  background:#d8c4bf;
+  border-top:1px solid #5f0d0c;
+}
+.bumdes-unit .unit-sub span{
+  background:#f7ece9;
+  color:#7F1110;
+  padding:7px;
+  font:600 10px "Poppins",sans-serif;
+}
+.bumdes-org-caption{
+  margin:8px 0 0;
+  text-align:center;
+  color:#766864;
+  font-size:10px;
+}
+.bumdes-cert-download{
+  margin-top:34px;
+  padding:22px;
+  border:1px solid #eadfda;
+  border-radius:10px;
+  background:#fff;
+  text-align:center;
+}
+.bumdes-cert-download h3{margin:0 0 8px;color:#7F1110}
+.bumdes-cert-download p{max-width:760px;margin:0 auto 12px;font-size:12px;color:#625854}
+.bumdes-cert-download a{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:#7F1110;
+  font:700 13px "Poppins",sans-serif;
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+.bumdes-cert-download a:hover,.bumdes-cert-download a:focus{color:#D4A72C}
+@media(max-width:760px){
+  .bumdes-org{margin-left:-4px;margin-right:-4px}
+  .bumdes-legal-intro{padding:15px}
+}
