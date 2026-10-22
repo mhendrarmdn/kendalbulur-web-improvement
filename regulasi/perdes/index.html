@@ -1,1 +1,30 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Peraturan Desa – Desa Kendalbulur</title><link rel="stylesheet" href="/assets/replica.css"></head><body><div data-header></div><section class="page-hero"><div class="kb-container"><div class="crumb">Beranda / Regulasi / Perdes</div><h1>Peraturan Desa</h1></div></section><main class="page-content"><div class="kb-container"><div class="content-shell"><article class="article"><h2>Arsip Peraturan Desa</h2><p>Daftar Perdes pada website lama dipertahankan sebagai arsip, tetapi prototype menyarankan format metadata yang konsisten.</p><div class="table-scroll"><table class="data-table"><thead><tr><th>Jenis</th><th>Nomor/Tahun</th><th>Judul</th><th>Status</th><th>Dokumen</th></tr></thead><tbody><tr><td>Perdes</td><td>—</td><td>Arsip lama yang sudah tersedia di website</td><td>Perlu validasi metadata</td><td>PDF</td></tr><tr><td>Perdes</td><td>—</td><td>Tambahkan dokumen baru setelah verifikasi sekretaris desa</td><td>Menunggu</td><td>—</td></tr></tbody></table></div><p><span class="proposal-chip">Fitur Usulan</span> Sediakan pencarian, filter tahun, status berlaku, dan tombol PDF. Duplikasi nomor/tautan harus diperiksa sebelum publikasi.</p></article><aside><div class="side-box"><h3>Regulasi</h3><div class="side-links"><a href="/regulasi/perdes/">Peraturan Desa</a><a href="/regulasi/perkades/">Peraturan Kepala Desa</a><a href="/regulasi/sk/">Surat Keputusan</a></div></div><div class="side-box"><h3>PPID</h3><div class="side-links"><a href="/anggaran/">APBDesa</a><a href="/agenda/">Agenda</a><a href="/realisasi-apbdesa/">Realisasi</a></div></div></aside></div></div></main><div data-footer></div><script src="/assets/replica.js"></script></body></html>
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Peraturan Desa – Desa Kendalbulur</title><link rel="stylesheet" href="/assets/replica.css"></head><body><div data-header></div>
+<section class="page-hero"><div class="kb-container"><div class="crumb">Beranda / Regulasi / Perdes</div><h1>Peraturan Desa</h1><p>Arsip Perdes dengan pencarian dan filter metadata.</p></div></section>
+<main class="page-content"><div class="kb-container"><div class="content-shell"><article class="article">
+<h2>Arsip Peraturan Desa</h2>
+<p>Dua dokumen pertama di bawah berasal dari PDF scan yang kamu unggah. Baris lain diberi label DEMO untuk menunjukkan cara kerja filter tahun/status pada prototype.</p>
+
+<div class="filter-toolbar" style="grid-template-columns:minmax(240px,1fr) repeat(2,minmax(150px,.35fr))">
+  <input type="search" data-reg-search placeholder="Cari nomor, judul, atau kata kunci...">
+  <select data-reg-year><option value="all">Semua tahun</option><option value="2026">2026</option><option value="2025">2025</option><option value="2021">2021</option><option value="2018">2018</option></select>
+  <select data-reg-status><option value="all">Semua status</option><option value="Berlaku">Berlaku</option><option value="Arsip">Arsip</option><option value="Perlu Validasi">Perlu Validasi</option></select>
+</div>
+<div class="filter-result-count" data-reg-count></div>
+
+<div class="table-scroll"><table class="data-table regulation-table"><thead><tr><th>Jenis</th><th>Nomor/Tahun</th><th>Judul</th><th>Status</th><th>Dokumen</th></tr></thead><tbody>
+<tr data-reg-row data-year="2018" data-status="Arsip" data-search="perdes 04 2018 apbdes anggaran pendapatan belanja desa 2019 arsip">
+<td>Perdes</td><td><b>04 / 2018</b></td><td>Anggaran Pendapatan dan Belanja Desa Tahun Anggaran 2019<br><small>Total pendapatan dan belanja dalam dokumen: Rp1.986.879.364</small></td><td><span class="status archive">Arsip</span></td><td><a class="doc-btn" href="#" data-pdf-source="apbdes-2019">PDF sumber</a></td></tr>
+<tr data-reg-row data-year="2018" data-status="Arsip" data-search="perdes 04 2018 penyertaan modal bumdes larasati dana desa 2018 arsip">
+<td>Perdes</td><td><b>04 / 2018</b></td><td>Penyertaan Modal Pemerintah Desa Kendalbulur pada BUMDesa “Larasati” dari Dana Desa Tahun Anggaran 2018<br><small>Nilai penyertaan modal pada scan: Rp19.000.000</small></td><td><span class="status archive">Arsip</span></td><td><a class="doc-btn" href="#" data-pdf-source="modal-larasati">PDF sumber</a></td></tr>
+<tr data-reg-row data-year="2021" data-status="Perlu Validasi" data-search="perdes 03 2021 kelestarian lingkungan hidup perlu validasi">
+<td>Perdes</td><td><b>03 / 2021</b></td><td>Kelestarian Lingkungan Hidup <span class="demo-badge">REFERENSI</span></td><td><span class="status archive">Perlu Validasi</span></td><td>Metadata saja</td></tr>
+<tr data-reg-row data-year="2025" data-status="Berlaku" data-search="perdes 2025 contoh regulasi pelayanan desa demo berlaku">
+<td>Perdes</td><td><b>DEMO / 2025</b></td><td>Contoh Peraturan Desa untuk demonstrasi filter <span class="demo-badge">DEMO</span></td><td><span class="status active">Berlaku</span></td><td>Demo</td></tr>
+<tr data-reg-row data-year="2026" data-status="Berlaku" data-search="perdes 2026 contoh regulasi layanan digital demo berlaku">
+<td>Perdes</td><td><b>DEMO / 2026</b></td><td>Contoh regulasi layanan digital desa <span class="demo-badge">DEMO</span></td><td><span class="status active">Berlaku</span></td><td>Demo</td></tr>
+</tbody></table></div>
+
+<div class="demo-note"><b>Catatan dokumen PDF:</b> metadata dua scan asli sudah masuk ke prototype dan filter sudah berfungsi. File binary scan yang kamu unggah belum dapat dipublikasikan melalui konektor GitHub berbasis teks; untuk production file yang sama perlu ditempatkan di WordPress Media Library atau folder aset repo, lalu URL tombol di atas tinggal diganti.</div>
+</article>
+<aside><div class="side-box"><h3>Regulasi</h3><div class="side-links"><a href="/regulasi/perdes/">Peraturan Desa</a><a href="/regulasi/perkades/">Peraturan Kepala Desa</a><a href="/regulasi/sk/">Surat Keputusan</a></div></div><div class="side-box"><h3>PPID</h3><div class="side-links"><a href="/anggaran/">APBDesa</a><a href="/agenda/">Agenda</a><a href="/realisasi-apbdesa/">Realisasi</a></div></div></aside>
+</div></div></main><div data-footer></div><script src="/assets/replica.js"></script><script src="/assets/regulasi-demo.js"></script></body></html>
