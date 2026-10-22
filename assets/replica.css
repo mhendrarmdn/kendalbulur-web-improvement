@@ -239,3 +239,9 @@ h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-seri
  .footer-grid{grid-template-columns:1fr;padding-bottom:40px}
  .apb-preview{grid-template-columns:1fr}
 }
+
+/* Saved Elementor inner pages are full-width, without the prototype sidebar */
+.content-shell{grid-template-columns:1fr!important;max-width:1140px}
+.content-shell>aside{display:none!important}
+.article{width:100%}
+.article>.card,.article>.profile-cards,.article>.potential-grid,.article>.bumdes-grid{max-width:1140px}
