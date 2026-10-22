@@ -1163,3 +1163,106 @@ h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-seri
  .bumdes-cta{align-items:flex-start;flex-direction:column}
  .download-actions{justify-content:flex-start}
 }
+
+
+/* ==========================================================
+   FINAL UX POLISH — 22 Oct 2026
+   ========================================================== */
+
+/* Footer hover / focus */
+.footer-links a,
+.footer .socials span{
+  transition:color .2s ease, transform .2s ease, border-color .2s ease;
+}
+.footer-links a:hover,
+.footer-links a:focus,
+.footer-links a:active{
+  color:#FFD54A!important;
+  transform:translateX(2px);
+}
+.footer .socials span:hover,
+.footer .socials span:focus{
+  color:#FFD54A!important;
+  border-color:#FFD54A!important;
+}
+
+/* Count-up data warga */
+.stat strong[data-count],
+.stat strong[data-count-pair]{
+  font-variant-numeric:tabular-nums;
+  min-width:4ch;
+}
+
+/* Simpeldesa citizen-first page */
+.simpel-hero-copy h2{font-size:30px;line-height:1.25;margin:6px 0 12px;color:#292525}
+.simpel-hero-copy>p{font-size:18px;line-height:1.65;color:#3f3937;margin:0 0 16px}
+.simpel-benefits{display:grid;gap:9px;margin:14px 0 18px}
+.simpel-benefit{display:flex;gap:10px;align-items:flex-start;font-size:16px;color:#3a3432;line-height:1.45}
+.simpel-benefit::before{content:"✓";width:22px;height:22px;border-radius:50%;display:grid;place-items:center;flex:0 0 22px;background:#F4E8D0;color:#7F1110;font-weight:800;font-size:12px}
+.simpel-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.kb-btn-secondary{background:#fff;color:#7F1110;border:1px solid #7F1110}
+.kb-btn-secondary:hover,.kb-btn-secondary:focus{background:#7F1110;color:#fff}
+.simpel-operator-note{margin-top:20px;border:1px dashed #D4A72C;background:#fff9e8;padding:14px 16px;border-radius:6px}
+.simpel-operator-note h3{margin:0 0 7px;font-size:13px;color:#7F1110}
+.simpel-operator-note ul{margin:0;padding-left:18px}
+.simpel-operator-note li{font-size:12px;color:#685a4b;margin:4px 0}
+.citizen-flow{margin-top:30px}
+.citizen-flow h3{font-size:22px;margin-bottom:14px}
+.flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;position:relative}
+.flow-grid::before{content:"";position:absolute;left:8%;right:8%;top:54px;height:2px;background:#e2d2cd;z-index:0}
+.flow-card{position:relative;z-index:1;background:#fff;border:1px solid #eadfda;border-radius:10px;padding:18px 16px;min-height:165px;text-align:center}
+.flow-card .step{width:42px;height:42px;margin:0 auto 10px;border-radius:50%;display:grid;place-items:center;background:#F4E8D0;color:#7F1110;font:800 18px "Poppins",sans-serif;border:2px solid #fff;box-shadow:0 0 0 1px #e5d9d4}
+.flow-card h4{font-size:16px;margin:0 0 6px;color:#292525}
+.flow-card p{font-size:12px;color:#6a605d;margin:0}
+.flow-card.cta-step{border-color:#7F1110;box-shadow:0 5px 18px rgba(127,17,16,.08)}
+.flow-card.cta-step .step{background:#7F1110;color:#fff}
+.flow-arrow{display:none}
+.simpel-infographic-small{max-width:520px;margin:auto}
+
+/* Source-like long form institution pages */
+.institution-profile{max-width:940px;margin:0 auto}
+.institution-profile .profile-cover{text-align:center;padding:22px 18px 28px;border-bottom:3px solid #7F1110;margin-bottom:26px;background:linear-gradient(180deg,#fff,#fff9f7)}
+.institution-profile .profile-cover .overline{font:700 12px "Poppins",sans-serif;color:#7F1110;letter-spacing:.12em}
+.institution-profile .profile-cover h1{font:800 30px/1.25 "Poppins",sans-serif;color:#7F1110;margin:8px 0}
+.institution-profile .profile-cover p{margin:0;color:#5d5350;font-size:13px}
+.institution-profile .chapter{margin:32px 0}
+.institution-profile .chapter>h2{font:800 20px "Poppins",sans-serif;color:#7F1110;border-bottom:2px solid #F4E8D0;padding-bottom:7px;margin-bottom:14px}
+.institution-profile h3{font:700 15px "Poppins",sans-serif;color:#3e3532;margin:16px 0 7px}
+.institution-profile p,.institution-profile li{font-size:13px;line-height:1.75;color:#514947}
+.institution-profile ol,.institution-profile ul{padding-left:22px}
+.institution-table{width:100%;border-collapse:collapse;margin:12px 0 18px}
+.institution-table th{width:34%;text-align:left;background:#7F1110;color:#fff;padding:9px 11px;font:600 12px "Poppins",sans-serif}
+.institution-table td{border:1px solid #eee;padding:9px 11px;font-size:12px}
+.institution-table tr:nth-child(even) td{background:#fbf7f5}
+.institution-signoff{margin-top:34px;text-align:right;font-size:12px}
+.institution-source-note{margin:16px 0;padding:11px 14px;background:#fff9e8;border-left:4px solid #D4A72C;font-size:11px;color:#675848}
+
+/* Improved village map based on supplied reference */
+.village-map-shell{position:relative;border:1px solid #cfc4a9;background:linear-gradient(135deg,#eff49a,#f7ef74);overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.06)}
+.village-map-shell svg{display:block;width:100%;height:auto}
+.village-map-shell .map-outline{fill:#a9da75;stroke:#0d1813;stroke-width:8;stroke-dasharray:12 7}
+.village-map-shell .dusun-shape{cursor:pointer;transition:fill .18s,opacity .18s;stroke:#cf2222;stroke-width:5;stroke-dasharray:12 7;opacity:.92}
+.village-map-shell .dusun-shape:hover{fill:#7F1110!important;opacity:.45}
+.village-map-shell .dusun-shape.active{fill:#7F1110!important;opacity:.58}
+.village-map-shell .road{fill:none;stroke:#d68700;stroke-width:5}
+.village-map-shell .river{fill:none;stroke:#41a9ba;stroke-width:3}
+.village-map-shell .map-label{font:700 18px "Poppins",sans-serif;fill:#161616;pointer-events:none}
+.village-map-shell .edge-label{font:700 14px "Poppins",sans-serif;fill:#161616}
+.village-map-shell .legend{font:600 11px "Inter",sans-serif;fill:#222}
+.village-map-shell .poi-label{font:700 11px "Poppins",sans-serif;fill:#1f1f1f}
+.map-instruction{font-size:11px;color:#756966;margin:9px 0 0}
+
+/* Responsive */
+@media(max-width:900px){
+  .flow-grid{grid-template-columns:1fr 1fr}
+  .flow-grid::before{display:none}
+}
+@media(max-width:640px){
+  .simpel-hero-copy h2{font-size:24px}
+  .simpel-hero-copy>p{font-size:16px}
+  .simpel-benefit{font-size:15px}
+  .flow-grid{grid-template-columns:1fr}
+  .flow-card{min-height:auto;text-align:left}
+  .flow-card .step{margin:0 0 10px}
+  .institution-profile .profile-cover h1{font-size:24px}
+}
