@@ -245,3 +245,73 @@ h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-seri
 .content-shell>aside{display:none!important}
 .article{width:100%}
 .article>.card,.article>.profile-cards,.article>.potential-grid,.article>.bumdes-grid{max-width:1140px}
+
+
+/* ============================================================
+   APBDes realization reference
+   Structure adapted from user-provided Desa Cibiru Wetan page.
+   Visual language remains Kendalbulur.
+   ============================================================ */
+.realisasi-report{max-width:1140px;margin:0 auto}
+.realisasi-heading{text-align:center;margin:4px 0 26px}
+.realisasi-heading h2,.realisasi-heading h3{
+  margin:4px 0;font-family:"Poppins",Sans-serif;color:var(--kb-text);font-weight:600
+}
+.realisasi-heading h2{font-size:23.04px}
+.realisasi-heading h3{font-size:19.2px}
+.realisasi-heading .year{font-size:19.2px;font-weight:700;margin-top:7px}
+.report-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+
+.finance-table-wrap{overflow:auto;border:1px solid #d7cbc7;background:#fff}
+.finance-table{width:100%;min-width:930px;border-collapse:collapse;font-family:"Inter",Sans-serif;font-size:12px}
+.finance-table th,.finance-table td{border:1px solid #d7cbc7;padding:7px 8px;vertical-align:top}
+.finance-table thead th{
+  background:linear-gradient(to bottom,#9d2926 0%,#861714 66%,#7F1110 100%);
+  color:#fff;font-family:"Poppins",Sans-serif;font-size:12px;font-weight:600;text-align:center
+}
+.finance-table td.num{text-align:right;white-space:nowrap}
+.finance-table tbody tr:nth-child(even){background:#fbf3f0}
+.finance-table tr.level-0{font-weight:700;background:#f3e7e2!important}
+.finance-table tr.level-1{font-weight:600;background:#f9efec!important}
+.finance-table tr.total-row{
+  font-weight:700;background:#F4E8D0!important;color:#4e3513
+}
+.finance-table tr.grand-total{
+  font-weight:800;background:#D4A72C!important;color:#292525
+}
+.finance-table .indent-1{padding-left:18px}
+.finance-table .indent-2{padding-left:34px}
+.finance-table .waiting{color:#8f7772;font-style:italic}
+
+.realization-progress-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:34px
+}
+.realization-panel{background:#fff;border-top:3px solid var(--kb-red);padding:4px 0 0}
+.realization-panel h3{
+  font-family:"Poppins",Sans-serif;text-align:center;font-size:17px;font-weight:600;margin:8px 0
+}
+.realization-panel .subhead{
+  text-align:center;font-size:12px;font-weight:600;padding:10px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;margin-bottom:16px
+}
+.ref-progress-group{margin:0 0 15px}
+.ref-progress-group .name{font-size:12px;line-height:1.45}
+.ref-progress-group .amounts{font-size:12px;font-weight:700;margin:2px 0 5px}
+.ref-progress{
+  height:14px;background:repeating-linear-gradient(45deg,#efe3df,#efe3df 7px,#e4d4cf 7px,#e4d4cf 14px);
+  position:relative;overflow:hidden;border-radius:0
+}
+.ref-progress .fill{
+  height:100%;background:repeating-linear-gradient(45deg,#7F1110,#7F1110 7px,#982724 7px,#982724 14px)
+}
+.ref-progress .pct{
+  position:absolute;right:8px;top:-3px;font-size:10px;font-weight:700;color:#292525;line-height:20px
+}
+.ref-progress.empty .pct{color:#776a66}
+.reference-note{
+  margin-top:24px;padding:13px 15px;border-left:4px solid var(--kb-accent);background:#fff9ea;
+  font-size:11px;color:#695634
+}
+
+@media(max-width:900px){
+ .realization-progress-grid{grid-template-columns:1fr}
+}
