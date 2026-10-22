@@ -1266,3 +1266,245 @@ h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-seri
   .flow-card .step{margin:0 0 10px}
   .institution-profile .profile-cover h1{font-size:24px}
 }
+
+
+/* ==========================================================
+   UX ROUND 3 — requested 22 Oct 2026
+   ========================================================== */
+
+/* Desktop navigation: closer to original site's bold menu */
+@media (min-width:1025px){
+  .kb-nav>a,.kb-nav-item>a{
+    font-weight:650!important;
+  }
+  .kb-dropdown a,.kb-submenu a{
+    font-weight:550!important;
+  }
+}
+
+/* Home APBDes year controls */
+.source-apb-sop .year-links{
+  display:flex!important;
+  justify-content:center!important;
+  gap:12px!important;
+  margin:10px 0 18px!important;
+}
+.source-apb-sop .year-links a{
+  min-width:72px!important;
+  padding:9px 20px!important;
+  border-radius:999px!important;
+  font:700 16px/1 "Poppins",sans-serif!important;
+  background:#f4f4f4!important;
+  border:1px solid #ddd!important;
+  color:#4a403d!important;
+  transition:.18s ease!important;
+}
+.source-apb-sop .year-links a:first-child,
+.source-apb-sop .year-links a:hover{
+  background:#70ad20!important;
+  color:#fff!important;
+  border-color:#70ad20!important;
+}
+
+/* Home monthly agenda */
+.home-month-label{
+  display:inline-block;
+  margin:-2px 0 10px;
+  padding:4px 9px;
+  border-radius:999px;
+  background:#f7ece9;
+  color:#7F1110;
+  font:700 10px "Poppins",sans-serif;
+}
+.home-agenda-list{display:grid}
+.home-agenda-empty{
+  min-height:165px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  color:#777;
+  font-size:12px;
+}
+
+/* Warta tabs are real controls */
+.news-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  align-items:center;
+  margin:0 0 26px;
+  border-bottom:1px solid #eee;
+}
+.news-tabs button{
+  border:0;
+  background:transparent;
+  padding:0 8px 10px;
+  color:#6a625f;
+  font:600 12px "Poppins",sans-serif;
+  cursor:pointer;
+  position:relative;
+}
+.news-tabs button:hover,.news-tabs button.active{color:#7F1110}
+.news-tabs button.active::after{
+  content:"";
+  position:absolute;
+  height:2px;
+  left:0;right:0;bottom:-1px;
+  background:#7F1110;
+}
+.news-card[hidden]{display:none!important}
+
+/* Potensi Desa interactive cards */
+.potential-card{
+  cursor:pointer;
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  overflow:hidden;
+}
+.potential-card:hover,.potential-card:focus-within,.potential-card.active{
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(75,30,22,.12);
+  border-color:#cfa79e;
+}
+.potential-visual.with-photo{
+  height:188px!important;
+  background-size:cover!important;
+  background-position:center!important;
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  padding:18px!important;
+}
+.potential-visual.with-photo::after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(63,10,9,.68));
+}
+.potential-visual.with-photo span{
+  position:relative;z-index:1;color:#fff;
+  font:800 17px "Poppins",sans-serif;letter-spacing:.08em;
+}
+.potential-detail{
+  margin-top:26px;
+  display:grid;
+  grid-template-columns:minmax(260px,.8fr) minmax(0,1.2fr);
+  gap:24px;
+  border:1px solid #eadfda;
+  border-radius:14px;
+  background:#fff;
+  padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+  scroll-margin-top:100px;
+}
+.potential-detail-media img{
+  width:100%;height:330px;object-fit:cover;border-radius:10px;
+}
+.potential-detail h2{margin:0 0 7px;color:#7F1110;font-size:26px}
+.potential-detail .detail-kicker{font:700 10px "Poppins",sans-serif;color:#b28528;letter-spacing:.11em;text-transform:uppercase}
+.potential-detail p,.potential-detail li{font-size:12.5px;line-height:1.7;color:#554b48}
+.potential-detail .source-tag{font-size:9px;color:#8a7c78;border-top:1px solid #eee;padding-top:9px}
+.potential-card button{all:unset;display:block;width:100%;cursor:pointer}
+
+/* Search + filters shared by regulation and RT/RW */
+.filter-toolbar{
+  display:grid;
+  grid-template-columns:minmax(240px,1fr) repeat(3,minmax(130px,.35fr));
+  gap:10px;
+  margin:16px 0 24px;
+}
+.filter-toolbar input,.filter-toolbar select{
+  width:100%;
+  border:1px solid #dcd5d2;
+  border-radius:6px;
+  background:#fff;
+  color:#38312f;
+  padding:10px 12px;
+  font:500 12px "Poppins",sans-serif;
+  outline:none;
+}
+.filter-toolbar input:focus,.filter-toolbar select:focus{
+  border-color:#7F1110;
+  box-shadow:0 0 0 3px rgba(127,17,16,.07);
+}
+.filter-result-count{font-size:10px;color:#777;margin:-12px 0 18px}
+.regulation-table a.doc-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid #7F1110;border-radius:4px;padding:7px 10px;
+  color:#7F1110;font-weight:700;transition:.18s ease;white-space:nowrap;
+}
+.regulation-table a.doc-btn:hover{background:#7F1110;color:#fff}
+.regulation-table .status{display:inline-flex;padding:4px 7px;border-radius:999px;font-size:9px;font-weight:700}
+.regulation-table .status.archive{background:#eee;color:#666}
+.regulation-table .status.active{background:#e9f5ec;color:#287244}
+
+/* IDM progress animation */
+.idm-fill{
+  width:0!important;
+  transition:width 1.25s cubic-bezier(.2,.8,.2,1);
+}
+.idm-fill.in-view{width:var(--target)!important}
+
+/* Realisasi: animated fill + percentage inside */
+.ref-progress{
+  overflow:hidden!important;
+  position:relative!important;
+  height:24px!important;
+}
+.ref-progress .fill{
+  width:0!important;
+  height:100%!important;
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  padding-right:8px!important;
+  transition:width 1.3s cubic-bezier(.2,.8,.2,1)!important;
+}
+.ref-progress .fill.in-view{width:var(--progress)!important}
+.ref-progress .pct{
+  position:static!important;
+  color:#fff!important;
+  font:700 10px "Poppins",sans-serif!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.28);
+  white-space:nowrap;
+}
+
+/* Reference-like interactive map */
+.ref-map{
+  position:relative;
+  width:100%;
+  aspect-ratio:1024/768;
+  background:#eef397;
+  overflow:hidden;
+  border:1px solid #d3cf93;
+}
+.ref-map svg{width:100%;height:100%;display:block}
+.ref-map .village-outline{fill:#addf78;stroke:#07140f;stroke-width:8;stroke-dasharray:12 7}
+.ref-map .zone{cursor:pointer;transition:filter .18s,fill .18s,opacity .18s}
+.ref-map .zone:hover{filter:brightness(.92)}
+.ref-map .zone.active{fill:#7F1110!important;opacity:.58}
+.ref-map .dusun-border{fill:none;stroke:#c92720;stroke-width:5;stroke-dasharray:11 6;pointer-events:none}
+.ref-map .road{fill:none;stroke:#d88400;stroke-width:5;pointer-events:none}
+.ref-map .river{fill:none;stroke:#3eaab9;stroke-width:3;pointer-events:none}
+.ref-map text{pointer-events:none}
+.ref-map .main-label{font:700 21px "Poppins",sans-serif;fill:#111}
+.ref-map .outside-label{font:700 15px "Poppins",sans-serif;fill:#111}
+.ref-map .legend-label{font:600 11px "Inter",sans-serif;fill:#222}
+
+/* Directory filter states */
+.demo-person-card[hidden],.directory-section[hidden]{display:none!important}
+.directory-empty{grid-column:1/-1;padding:26px;border:1px dashed #d9cfcb;text-align:center;color:#777;font-size:12px}
+
+/* accessibility: animations should not trap reduced motion users */
+@media(prefers-reduced-motion:reduce){
+  .idm-fill,.ref-progress .fill{transition:none!important}
+}
+
+/* responsive filters and detail */
+@media(max-width:900px){
+  .filter-toolbar{grid-template-columns:1fr 1fr}
+  .potential-detail{grid-template-columns:1fr}
+  .potential-detail-media img{height:260px}
+}
+@media(max-width:560px){
+  .filter-toolbar{grid-template-columns:1fr}
+}
