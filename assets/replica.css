@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
 :root{
  --kb-red:#941410;--kb-red-dark:#6f0c0b;--kb-red-deep:#520707;--kb-gold:#c89c48;
  --kb-green:#16843f;--ink:#242020;--muted:#6f6664;--line:#ece7e5;--soft:#f8f6f5;
@@ -44,4 +44,198 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button,inp
 }
 @media(max-width:640px){
  body{font-size:13px}.kb-container{width:min(100% - 22px,1120px)}.proto-bar .kb-container{flex-direction:column;gap:2px}.kb-header,.kb-head-inner{height:66px}.kb-nav{top:66px}.kb-brand img{width:40px;height:40px}.kb-brand-copy .big{font-size:16px}.kb-brand-copy .small{font-size:8px}.hero-home{min-height:430px}.hero-home h1{font-size:32px}.hero-home h1 span{font-size:20px}.stats-grid{grid-template-columns:1fr 1fr}.stat{border-bottom:1px solid #eee}.home-split,.about-grid,.service-grid,.apb-preview,.dash-cols{grid-template-columns:1fr}.news-grid,.people-grid,.bumdes-grid,.potential-grid,.profile-cards,.dash-metrics{grid-template-columns:1fr}.flip-grid{grid-template-columns:1fr}.mini-cols{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.kb-section{padding:42px 0}.section-head h2{font-size:24px}.page-hero h1{font-size:25px}.mobile-only{display:block}.desktop-only{display:none}
+}
+
+/* ============================================================
+   SOURCE-ACCURATE OVERRIDES
+   Derived from the user-provided saved kendalbulur.id package:
+   Elementor Kit 6 + header template 3016 + footer template 3116
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap');
+
+:root{
+  --kb-red:#7F1110;
+  --kb-red-dark:#490606;
+  --kb-cream:#F4E8D0;
+  --kb-text:#292525;
+  --kb-accent:#D4A72C;
+  --kb-white:#FFFFFF;
+  --kb-light:#F4F4F4;
+  --kb-pink:#FFF7F7;
+}
+html,body{font-family:"Inter",Sans-serif;color:var(--kb-text);font-size:16px}
+h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-serif}
+.proto-bar{display:none!important}
+
+/* Header: source template 3016 */
+.kb-header{
+  height:67px;min-height:67px;background:#fff;border-bottom:1px solid #E9E9E963;
+  box-shadow:0 0 8px rgba(70,0,0,.30);position:sticky;top:0;z-index:100;
+}
+.kb-head-inner{height:67px;min-height:67px;max-width:1140px}
+.kb-brand{width:23%;min-width:23%;gap:0;position:relative;height:67px;display:block}
+.kb-brand img{position:absolute;left:0;top:6px;width:55px;height:55px;object-fit:contain}
+.kb-brand-copy{position:absolute;left:61px;top:2px;white-space:nowrap;line-height:1}
+.kb-brand-copy .small{font-family:"Inter",Sans-serif;font-size:16px;font-weight:400;color:var(--kb-text);line-height:1.05}
+.kb-brand-copy .big{font-family:"Poppins",Sans-serif;font-size:23.04px;font-weight:700;color:var(--kb-text);line-height:1;margin-top:-1px;letter-spacing:0}
+.kb-brand-copy .sub{font-family:"Inter",Sans-serif;font-size:11px;font-weight:500;color:var(--kb-text);margin-top:7px}
+.kb-nav{width:77%;height:67px;gap:0;margin-left:0;justify-content:flex-end}
+.kb-nav>a,.kb-nav-item>a{
+  font-family:"Poppins",Sans-serif;font-size:13.33px;font-weight:500;color:var(--kb-text);
+  padding:15px 0;margin:0 10px;height:auto;text-transform:uppercase;letter-spacing:0;
+}
+.kb-nav a:hover,.kb-nav .active{color:var(--kb-red)}
+.kb-caret{font-size:11px;margin-left:4px}
+.kb-dropdown{
+  top:55px;left:10px;min-width:185px;background:#fff;border:1px solid #E8E8E8;border-top:1px solid #E8E8E8;
+  border-radius:10px;box-shadow:0 8px 22px rgba(0,0,0,.10);overflow:hidden;padding:0;
+}
+.kb-dropdown a{
+  font-family:"Poppins",Sans-serif;font-size:12px;font-weight:500;color:#333;background:#fff;
+  padding:10px 15px;border-bottom:1px solid #E8E8E8;text-transform:none;
+}
+.kb-dropdown a:hover,.kb-dropdown a.active{background:var(--kb-red);color:#fff}
+
+/* Home hero: source page 15, container 5fbdd0e */
+.hero-home{
+  min-height:800px;height:800px;justify-content:flex-start;align-items:center;
+  background:url("https://kendalbulur.id/storage/2026/10/balai-desa-kendalbulur-scaled.webp") bottom center/cover no-repeat;
+  position:relative;isolation:isolate;padding:0;
+}
+.hero-home:before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:url("https://kendalbulur.id/storage/2026/10/jembatan-gantung.jpeg") bottom center/cover no-repeat;
+  opacity:0;animation:kbHeroSwap 20s ease-in-out infinite;
+}
+.hero-home:after{content:"";position:absolute;inset:0;z-index:1;background:rgba(0,0,0,.65);pointer-events:none}
+@keyframes kbHeroSwap{0%,44%{opacity:0}50%,94%{opacity:1}100%{opacity:0}}
+.hero-home .kb-container{position:relative;z-index:2;text-align:center;padding-top:130px}
+.hero-home .kicker{
+  font-family:"Poppins",Sans-serif;font-size:27.65px;font-weight:500;color:#fff;
+  letter-spacing:0;margin:0 0 8px;text-transform:uppercase;
+}
+.hero-home h1{
+  font-family:"Poppins",Sans-serif;font-size:39.81px;font-weight:700;line-height:1.13;
+  color:var(--kb-accent);margin:0 auto;text-align:center;max-width:1000px;
+}
+.hero-home h1 span{font-size:39.81px;font-weight:700;display:block}
+.hero-home .website-resmi{font-family:"Poppins",Sans-serif;font-size:39.81px;font-weight:700;color:var(--kb-accent);line-height:1.12;margin:0 0 2px}
+.hero-home p{
+  font-family:"Inter",Sans-serif;font-size:16px;font-weight:400;color:#fff;
+  max-width:800px;margin:16px auto 0;text-align:center;
+}
+.hero-home .hero-actions{margin-top:48px;display:flex;justify-content:center;gap:44px}
+.hero-home .kb-btn{
+  background:var(--kb-red);color:#fff;border:0;border-radius:0;padding:10px 30px;
+  font-family:"Inter",Sans-serif;font-size:16px;font-weight:400;transition:.5s;
+}
+.hero-home .kb-btn:hover{background:var(--kb-accent);color:var(--kb-text)}
+
+/* Home data area follows source instead of floating dashboard cards */
+.stats-grid{transform:none;box-shadow:none;border-radius:0;border:0;background:transparent;margin:18px auto 0;max-width:900px}
+.stat{border-right:0;padding:14px 26px;background:transparent}
+.stat strong{font-family:"Poppins",Sans-serif;font-size:33.18px;font-weight:700;color:var(--kb-red)}
+.stat span{font-family:"Inter",Sans-serif;font-size:14px;color:var(--kb-text)}
+.kb-section.gray{background:#fff}
+.kb-section.red-soft,.about-source{background:var(--kb-pink)}
+.home-data-source{padding:25px 0 0}
+.home-data-title{text-align:center;margin-bottom:4px}
+.home-data-title h2{font-family:"Poppins",Sans-serif;font-size:23.04px;margin:0;color:var(--kb-red)}
+.home-data-title p{font-family:"Inter",Sans-serif;font-size:14px;margin:2px 0 0;color:#555}
+.home-split{gap:30px;margin-top:48px}
+.card{border:0;border-radius:16px;box-shadow:0 0 8px 2px rgba(0,0,0,.20)}
+.news-card{border-radius:0;box-shadow:none;border:1px solid #eee}
+.news-card h3{font-family:"Poppins",Sans-serif;font-size:14px;font-weight:600}
+.news-meta,.read-more{font-family:"Inter",Sans-serif}
+
+/* Source about/BUMDes zone */
+.source-about-zone{background:#FFF7F7;padding:70px 0 0}
+.source-about-zone .about-grid{padding:0 10%}
+.people-source-panel{background:var(--kb-red);border-radius:0;box-shadow:0 0 10px rgba(0,0,0,.5);padding:38px 10%;margin-top:30px}
+.people-source-panel .section-head h2,.people-source-panel .section-head .eyebrow{color:#fff}
+.people-grid{gap:18px}
+.person{background:transparent;border:0;border-radius:0}
+.person img{height:auto;aspect-ratio:0.70/1;object-fit:cover;border-radius:0;background:transparent}
+.person .person-body{display:none}
+.bumdes-source{background:#FFF7F7;padding-top:60px}
+.unit-card{border-radius:0;box-shadow:none;border:1px solid #eee}
+
+/* APBDes/SOP source split */
+.source-apb-sop{background:#fff;padding:48px 0}
+.apb-preview{grid-template-columns:29% 1fr;gap:30px;align-items:start}
+.apb-image{border:0;padding:0;box-shadow:none}
+.year-links{justify-content:center}
+.year-links a{font-family:"Inter",Sans-serif;color:var(--kb-red);text-decoration:underline;border:0;padding:5px}
+.service-grid{gap:30px}
+
+/* Inner pages in the saved source do not have a custom red hero */
+.page-hero{display:none!important}
+.page-content{padding:42px 0 70px;background:#fff}
+.content-shell{max-width:1140px;margin:auto}
+.article h2{font-family:"Poppins",Sans-serif;font-size:27.65px;font-weight:600;color:var(--kb-text)}
+.article h3{font-family:"Poppins",Sans-serif}
+.article p,.article li{font-family:"Inter",Sans-serif;font-size:16px;line-height:1.65;color:var(--kb-text)}
+.profile-stat b{font-family:"Poppins",Sans-serif}
+
+/* Original APBDes page is a plain centered content page */
+.original-budget-poster{text-align:center;padding:10px 0 18px}
+.original-budget-poster .inline-years{list-style:none;margin:0 0 4px;padding:0;text-align:center;position:relative;top:-1em}
+.original-budget-poster .inline-years li{display:inline-block;padding:.5em}
+.original-budget-poster .inline-years a{font-family:"Inter",Sans-serif;font-size:16px;color:var(--kb-red);text-decoration:underline}
+.original-budget-poster .inline-years a.active{background:#69a619;color:#fff;text-decoration:none;padding:4px 8px}
+.original-budget-poster img{width:min(800px,100%);height:auto;margin:0 auto 2em;display:block}
+
+/* Proposed features retain source palette instead of app-like multicolor UI */
+.proposal-chip{background:#F4E8D0;color:#7F1110;border:1px solid #D4A72C;border-radius:3px}
+.dashboard-wrap{border:1px solid #eadfda;border-radius:0;box-shadow:none}
+.dash-card{border-radius:0;border-top:3px solid var(--kb-red)}
+.progress span{background:var(--kb-red)}
+.data-table th{background:var(--kb-red);font-family:"Poppins",Sans-serif}
+
+/* Footer: source template 3116 */
+.footer{
+  margin-top:0;padding:100px 0 0;
+  background:
+    linear-gradient(rgba(127,17,16,.15),rgba(73,6,6,.18)),
+    url("https://kendalbulur.id/wp-content/uploads/2026/10/Website-overlay-1.webp") center/cover no-repeat,
+    linear-gradient(180deg,var(--kb-red) 0%,var(--kb-red-dark) 100%);
+}
+.footer:before,.footer:after{display:none}
+.footer-grid{max-width:1140px;margin:auto;grid-template-columns:1.25fr .65fr .9fr 1fr;gap:38px;padding-bottom:50px}
+.footer h4{font-family:"Poppins",Sans-serif;font-size:16px;color:#fff}
+.footer p,.footer a{font-family:"Inter",Sans-serif;font-size:13px;color:#fff}
+.footer-brand img{width:72px;height:72px}
+.copyright{
+  margin:0 -9999px;padding:18px 9999px;border-top:0;background:var(--kb-red);
+  font-family:"Inter",Sans-serif;font-size:12px;color:#fff;
+}
+
+@media(max-width:1024px){
+ .kb-header,.kb-head-inner{height:67px}
+ .kb-brand{width:auto;min-width:300px}
+ .kb-nav{display:none;width:auto}
+ .kb-menu-btn{display:block;margin-left:auto}
+ .hero-home{height:800px;min-height:800px}
+ .source-about-zone .about-grid{padding:0 4%}
+ .people-source-panel{padding:35px 4%}
+}
+@media(max-width:768px){
+ .kb-header,.kb-head-inner{height:67px}
+ .kb-brand{min-width:255px}
+ .kb-brand img{width:50px;height:50px;top:8px}
+ .kb-brand-copy{left:57px;top:5px}
+ .kb-brand-copy .small{font-size:13px}
+ .kb-brand-copy .big{font-size:19.2px}
+ .kb-brand-copy .sub{font-size:9px;margin-top:5px}
+ .kb-nav{top:67px}
+ .hero-home{min-height:100vh;height:100vh;background-position:center center}
+ .hero-home .kb-container{padding-top:18vh}
+ .hero-home .kicker{font-size:23.04px}
+ .hero-home .website-resmi,.hero-home h1,.hero-home h1 span{font-size:33.18px}
+ .hero-home p{font-size:16px;padding:0 10%}
+ .hero-home .hero-actions{margin-top:30%;gap:18px}
+ .stats-grid{grid-template-columns:1fr 1fr}
+ .footer{padding:40px 20px 0;background-image:url("https://kendalbulur.id/wp-content/uploads/2026/10/Website-overlay-e1791474571541.webp"),linear-gradient(180deg,var(--kb-red),var(--kb-red-dark))}
+ .footer-grid{grid-template-columns:1fr;padding-bottom:40px}
+ .apb-preview{grid-template-columns:1fr}
 }
