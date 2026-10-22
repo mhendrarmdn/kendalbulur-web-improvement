@@ -1516,3 +1516,188 @@ h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-seri
   .kb-nav>a,.kb-nav-item>a{font-weight:650!important}
   .kb-dropdown>a,.kb-dropdown-item>a,.kb-submenu a{font-weight:550!important}
 }
+
+
+/* ==========================================================
+   AGENDA PICKER + DETAIL MODAL
+   ========================================================== */
+.agenda-filterbar{
+  display:grid;
+  grid-template-columns:minmax(150px,.8fr) minmax(110px,.45fr) minmax(150px,.7fr) auto;
+  gap:10px;
+  align-items:end;
+  margin:14px 0 18px;
+}
+.agenda-filter-field{display:grid;gap:5px}
+.agenda-filter-field label{
+  font:600 10px "Poppins",sans-serif;
+  color:#6c615e;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.agenda-filter-field select{
+  width:100%;
+  border:1px solid #d8cfcb;
+  border-radius:6px;
+  background:#fff;
+  color:#352e2c;
+  padding:10px 12px;
+  font:600 12px "Poppins",sans-serif;
+  outline:none;
+}
+.agenda-filter-field select:focus{
+  border-color:#7F1110;
+  box-shadow:0 0 0 3px rgba(127,17,16,.07);
+}
+.agenda-status-legend{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin:0 0 14px;
+}
+.agenda-status-legend span{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-size:9px;
+  color:#6f6664;
+}
+.agenda-status-legend i{
+  width:9px;height:9px;border-radius:50%;display:inline-block;
+}
+.agenda-status-legend .done{background:#9a9a9a}
+.agenda-status-legend .active{background:#2f8d50}
+.agenda-status-legend .upcoming{background:#d4a72c}
+.calendar-event.status-done{
+  background:#efefef!important;
+  color:#5c5c5c!important;
+  border-left-color:#8d8d8d!important;
+}
+.calendar-event.status-active{
+  background:#e7f5ec!important;
+  color:#1f6b3d!important;
+  border-left-color:#2f8d50!important;
+}
+.calendar-event.status-upcoming{
+  background:#fff1d3!important;
+  color:#7b5810!important;
+  border-left-color:#d4a72c!important;
+}
+.agenda-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(20,16,15,.56);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:1000;
+}
+.agenda-modal.open{display:flex}
+.agenda-modal-card{
+  width:min(620px,100%);
+  max-height:min(82vh,720px);
+  overflow:auto;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 22px 70px rgba(0,0,0,.28);
+  position:relative;
+}
+.agenda-modal-head{
+  padding:22px 58px 18px 24px;
+  border-bottom:1px solid #eee7e4;
+  background:linear-gradient(180deg,#fff,#fff9f7);
+}
+.agenda-modal-head h2{
+  margin:7px 0 0;
+  color:#292525;
+  font:700 22px/1.35 "Poppins",sans-serif;
+}
+.agenda-modal-close{
+  position:absolute;
+  top:14px;right:14px;
+  width:36px;height:36px;
+  border-radius:50%;
+  border:1px solid #eadfda;
+  background:#fff;
+  color:#7F1110;
+  font-size:22px;
+  line-height:1;
+  cursor:pointer;
+}
+.agenda-modal-close:hover,.agenda-modal-close:focus{
+  background:#7F1110;color:#fff;border-color:#7F1110;
+}
+.agenda-modal-body{padding:20px 24px 24px}
+.agenda-modal-status{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 9px;
+  border-radius:999px;
+  font:700 9px "Poppins",sans-serif;
+}
+.agenda-modal-status.done{background:#eee;color:#606060}
+.agenda-modal-status.active{background:#e7f5ec;color:#256a3d}
+.agenda-modal-status.upcoming{background:#fff1d3;color:#825f16}
+.agenda-detail-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:16px 0 18px;
+}
+.agenda-detail-item{
+  border:1px solid #eee7e4;
+  border-radius:9px;
+  padding:12px;
+  background:#fff;
+}
+.agenda-detail-item small{
+  display:block;
+  color:#8b7e79;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  margin-bottom:4px;
+}
+.agenda-detail-item b{font-size:12px;color:#332c2a}
+.agenda-modal-description{
+  margin:0;
+  font-size:12.5px;
+  line-height:1.7;
+  color:#574e4b;
+}
+.agenda-modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:20px;
+}
+
+/* Extra breathing room for reference-like village map labels */
+.ref-map{
+  aspect-ratio:1024/850!important;
+}
+.ref-map svg{
+  overflow:visible;
+}
+
+@media(max-width:760px){
+  .agenda-filterbar{grid-template-columns:1fr 1fr}
+  .agenda-filterbar .calendar-nav{grid-column:1/-1}
+  .agenda-detail-grid{grid-template-columns:1fr}
+  .agenda-modal{
+    align-items:flex-end;
+    padding:0;
+  }
+  .agenda-modal-card{
+    width:100%;
+    max-height:86vh;
+    border-radius:18px 18px 0 0;
+  }
+}
+@media(max-width:480px){
+  .agenda-filterbar{grid-template-columns:1fr}
+  .agenda-filterbar .calendar-nav{grid-column:auto}
+}
