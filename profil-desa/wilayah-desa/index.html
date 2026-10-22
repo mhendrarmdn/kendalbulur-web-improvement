@@ -1,60 +1,99 @@
 <!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wilayah Desa – Desa Kendalbulur</title><link rel="stylesheet" href="/assets/replica.css"></head><body><div data-header></div>
 <main class="page-content"><div class="kb-container">
-<div class="section-head left"><span class="proposal-chip">PETA INTERAKTIF PROTOTYPE</span><h2 style="margin-top:10px">Wilayah Desa Kendalbulur</h2><p>Desa Kendalbulur terdiri dari Dusun Rongganan, Dusun Genting, dan Dusun Kendalbulur. Klik area dusun pada peta untuk menyorot wilayah dan menampilkan informasi di panel sebelah kanan.</p></div>
-
+<div class="section-head left"><span class="proposal-chip">PETA INTERAKTIF PROTOTYPE</span><h2 style="margin-top:10px">Wilayah Desa Kendalbulur</h2><p>Peta direkonstruksi mengikuti referensi yang diberikan. Klik Dusun Rongganan, Genting, atau Kendalbulur untuk menyorot wilayah dan membuka informasi dusun.</p></div>
 <div class="profile-cards"><div class="profile-stat"><b>244,5 Ha</b><span>Luas wilayah</span></div><div class="profile-stat"><b>03</b><span>Dusun</span></div><div class="profile-stat"><b>22 / 07</b><span>RT / RW pada beranda publik</span></div></div>
 
 <div class="wilayah-interactive">
-  <div>
-    <div class="village-map-shell">
-      <svg viewBox="0 0 1024 765" role="img" aria-label="Peta Desa Kendalbulur interaktif">
-        <rect width="1024" height="765" fill="#eef397"/>
-        <text x="512" y="54" text-anchor="middle" font-family="Poppins" font-size="40" font-weight="800">PETA DESA KENDALBULUR</text>
-        <text x="512" y="86" text-anchor="middle" font-family="Poppins" font-size="25" font-weight="700">KECAMATAN BOYOLANGU, KABUPATEN TULUNGAGUNG</text>
+<div>
+<div class="ref-map">
+<svg viewBox="0 0 1024 768" role="img" aria-label="Peta Desa Kendalbulur">
+  <defs>
+    <linearGradient id="mapBg" x1="0" x2="1"><stop offset="0" stop-color="#d9efa0"/><stop offset=".55" stop-color="#fff59a"/><stop offset="1" stop-color="#d9efa0"/></linearGradient>
+  </defs>
+  <rect width="1024" height="768" fill="url(#mapBg)"/>
+  <text x="512" y="55" text-anchor="middle" font-family="Poppins" font-size="39" font-weight="800">PETA DESA KENDALBULUR</text>
+  <text x="512" y="87" text-anchor="middle" font-family="Poppins" font-size="25" font-weight="700">KECAMATAN BOYOLANGU, KABUPATEN TULUNGAGUNG</text>
 
-        <path class="map-outline" d="M135 205 L170 190 L205 203 L218 192 L252 199 L265 183 L329 189 L332 136 L370 135 L389 113 L432 74 L606 91 L607 136 L628 159 L670 174 L673 207 L742 225 L811 225 L814 245 L865 248 L862 303 L845 352 L870 375 L893 430 L916 461 L931 614 L838 644 L739 675 L625 683 L625 726 L506 739 L403 727 L262 678 L220 585 L194 514 L158 440 L132 373 Z"/>
+  <!-- overall boundary copied proportionally from the supplied reference -->
+  <path class="village-outline" d="M134 205 L166 190 L204 202 L216 191 L250 199 L263 181 L329 188 L331 134 L369 134 L389 111 L428 72 L604 91 L604 134 L628 158 L670 174 L673 207 L742 226 L809 226 L811 244 L858 249 L855 317 L848 371 L869 406 L871 432 L925 435 L930 614 L837 644 L738 676 L627 683 L625 725 L507 739 L403 727 L260 677 L221 585 L191 515 L157 442 L132 372 Z"/>
 
-        <path id="shape-rongganan" class="dusun-shape" data-dusun="rongganan" d="M135 285 L132 205 L170 190 L205 203 L218 192 L252 199 L265 183 L329 189 L332 136 L370 135 L389 113 L432 74 L606 91 L607 136 L628 159 L670 174 L673 207 L742 225 L811 225 L814 245 L865 248 L856 352 L507 331 L397 333 L282 316 Z" fill="#a9de71"/>
-        <path id="shape-genting" class="dusun-shape" data-dusun="genting" d="M135 285 L282 316 L397 333 L507 331 L856 352 L845 440 L872 460 L889 554 L827 554 L713 553 L593 553 L503 553 L413 554 L305 541 L218 515 L158 440 L132 373 Z" fill="#f0bf89"/>
-        <path id="shape-kendalbulur" class="dusun-shape" data-dusun="kendalbulur" d="M218 515 L305 541 L413 554 L503 553 L593 553 L713 553 L827 554 L889 554 L931 614 L838 644 L739 675 L625 683 L625 726 L506 739 L403 727 L262 678 Z" fill="#efe887"/>
+  <!-- zones -->
+  <path class="zone" data-dusun="rongganan" fill="#acdF75" d="M134 205 L166 190 L204 202 L216 191 L250 199 L263 181 L329 188 L331 134 L369 134 L389 111 L428 72 L604 91 L604 134 L628 158 L670 174 L673 207 L742 226 L809 226 L811 244 L858 249 L856 351 L707 347 L590 340 L484 331 L386 331 L313 327 L228 312 L134 286 Z"/>
+  <path class="zone" data-dusun="genting" fill="#f4c790" d="M134 286 L228 312 L313 327 L386 331 L484 331 L500 350 L500 553 L592 553 L705 553 L827 553 L927 553 L925 435 L871 432 L848 371 L856 351 L707 347 L590 340 L484 331 L386 331 L313 327 L228 312 Z"/>
+  <path class="zone" data-dusun="kendalbulur" fill="#f5ed87" d="M191 515 L313 550 L403 557 L500 553 L592 553 L705 553 L827 553 L927 553 L930 614 L837 644 L738 676 L627 683 L625 725 L507 739 L403 727 L260 677 L221 585 Z"/>
 
-        <path class="road" d="M265 665 L302 582 L311 493 L318 401 L333 308 L356 235 L385 151"/>
-        <path class="road" d="M332 236 L469 240 L614 248 L782 273 L865 283"/>
-        <path class="road" d="M310 410 L472 417 L472 555"/>
-        <path class="road" d="M505 553 L505 339 L575 257 L594 107"/>
-        <path class="road" d="M716 553 L714 361 L807 362 L811 553"/>
-        <path class="road" d="M432 113 L512 146 L630 196 L742 225"/>
-        <path class="road" d="M418 646 L620 644 L735 637"/>
-        <path class="road" d="M475 594 L544 592 L544 553"/>
+  <!-- administrative borders -->
+  <path class="dusun-border" d="M134 286 C235 292 291 325 386 331 C470 333 518 329 590 340 C687 344 761 349 856 351"/>
+  <path class="dusun-border" d="M484 331 C492 362 499 393 500 426 L500 553"/>
+  <path class="dusun-border" d="M191 515 C285 536 326 555 403 557 L827 553 L927 553"/>
 
-        <path class="river" d="M355 112 C339 189 319 246 293 306 C260 382 205 410 169 469"/>
-        <path class="river" d="M606 92 C604 173 557 207 526 271 C500 324 477 388 488 464"/>
-        <path class="river" d="M743 402 C710 446 699 506 707 583 C711 621 731 650 745 674"/>
+  <!-- roads -->
+  <path class="road" d="M264 676 C279 632 298 599 303 555 L311 486 L317 410 L328 342 L342 276 L363 205 L384 137"/>
+  <path class="road" d="M330 244 C421 238 481 241 556 249 C650 260 732 274 857 284"/>
+  <path class="road" d="M310 409 L469 416 L471 553"/>
+  <path class="road" d="M488 331 L488 263 L542 209 L492 182 L493 145 L543 158 L543 214"/>
+  <path class="road" d="M428 111 L493 145 L604 190 L706 224 L809 243"/>
+  <path class="road" d="M711 553 L711 364 L784 365 L784 553"/>
+  <path class="road" d="M784 448 L858 449"/>
+  <path class="road" d="M430 617 L496 618 L496 553"/>
+  <path class="road" d="M432 648 L624 648 L707 642"/>
+  <path class="road" d="M493 553 L493 618"/>
 
-        <text class="map-label" x="520" y="275" text-anchor="middle">DUSUN RONGGANAN</text>
-        <text class="map-label" x="585" y="432" text-anchor="middle">DUSUN</text><text class="map-label" x="585" y="459" text-anchor="middle">GENTING</text>
-        <text class="map-label" x="640" y="609" text-anchor="middle">DUSUN</text><text class="map-label" x="640" y="636" text-anchor="middle">KENDALBULUR</text>
+  <!-- rivers / irrigation -->
+  <path class="river" d="M381 120 C359 192 345 245 316 309 C286 366 233 408 172 465"/>
+  <path class="river" d="M604 93 C605 160 575 200 543 255 C510 312 482 364 482 450"/>
+  <path class="river" d="M759 414 C727 458 711 505 712 557 C713 611 729 643 744 674"/>
 
-        <text class="edge-label" x="92" y="144">KECAMATAN KAUMAN</text>
-        <text class="edge-label" x="629" y="138">DESA BONO</text>
-        <text class="edge-label" x="16" y="296">KECAMATAN</text><text class="edge-label" x="32" y="321">PAKEL</text>
-        <text class="edge-label" x="952" y="420" transform="rotate(-90 952 420)">DESA BOYOLANGU</text>
-        <text class="edge-label" x="337" y="742">DESA NGRANTI</text>
-        <text class="edge-label" x="133" y="514" transform="rotate(67 133 514)">KECAMATAN CAMPURDARAT</text>
+  <!-- labels -->
+  <text class="main-label" x="520" y="277" text-anchor="middle">DUSUN RONGGANAN</text>
+  <text class="main-label" x="591" y="430" text-anchor="middle">DUSUN</text><text class="main-label" x="591" y="457" text-anchor="middle">GENTING</text>
+  <text class="main-label" x="642" y="609" text-anchor="middle">DUSUN</text><text class="main-label" x="642" y="636" text-anchor="middle">KENDALBULUR</text>
 
-        <g transform="translate(527 570)"><rect x="-16" y="-14" width="32" height="22" fill="#111"/><polygon points="-20,-14 0,-28 20,-14" fill="#111"/><rect x="-4" y="-7" width="8" height="15" fill="#fff"/><text class="poi-label" x="0" y="38" text-anchor="middle">Balai Desa</text><text class="poi-label" x="0" y="54" text-anchor="middle">Kendalbulur</text></g>
-        <g transform="translate(856 473)"><circle r="15" fill="#2e8b36"/><path d="M-6 4 Q0-10 10-7 Q7 3-3 8" fill="#bce26d"/><text class="poi-label" x="0" y="36" text-anchor="middle">Nangkula</text><text class="poi-label" x="0" y="52" text-anchor="middle">Park</text></g>
+  <text class="outside-label" x="91" y="144">KECAMATAN KAUMAN</text>
+  <text class="outside-label" x="631" y="138">DESA BONO</text>
+  <text class="outside-label" x="15" y="283">KECAMATAN</text><text class="outside-label" x="42" y="306">PAKEL</text>
+  <text class="outside-label" x="965" y="465" transform="rotate(-90 965 465)">DESA BOYOLANGU</text>
+  <text class="outside-label" x="335" y="744">DESA NGRANTI</text>
+  <text class="outside-label" x="124" y="433" transform="rotate(65 124 433)">KECAMATAN</text><text class="outside-label" x="111" y="510" transform="rotate(65 111 510)">&amp; CAMPURDARAT</text>
 
-        <g transform="translate(922 122)"><text x="0" y="-15" text-anchor="middle" font-family="Poppins" font-size="32" font-weight="800">U</text><polygon points="0,0 11,36 0,27 -11,36" fill="#111"/><polygon points="0,72 11,36 0,45 -11,36" fill="#fff" stroke="#111" stroke-width="2"/><polygon points="-36,36 0,25 -9,36 0,47" fill="#fff" stroke="#111" stroke-width="2"/><polygon points="36,36 0,25 9,36 0,47" fill="#111"/></g>
+  <!-- compass -->
+  <g transform="translate(915 126)">
+    <text x="0" y="-20" text-anchor="middle" font-family="Poppins" font-size="34" font-weight="800">U</text>
+    <polygon points="0,-3 12,34 0,26 -12,34" fill="#111"/>
+    <polygon points="0,71 12,34 0,43 -12,34" fill="#fff" stroke="#111" stroke-width="2"/>
+    <polygon points="-38,34 0,22 -10,34 0,47" fill="#fff" stroke="#111" stroke-width="2"/>
+    <polygon points="38,34 0,22 10,34 0,47" fill="#111"/>
+  </g>
 
-        <g transform="translate(25 566)"><rect width="184" height="168" rx="14" fill="#fff" stroke="#222" stroke-width="2"/><text x="92" y="26" text-anchor="middle" font-family="Poppins" font-size="20" font-weight="800">LEGENDA</text><line x1="18" y1="46" x2="72" y2="46" stroke="#0d1813" stroke-width="6" stroke-dasharray="10 6"/><text class="legend" x="82" y="50">Batas Desa</text><line x1="18" y1="70" x2="72" y2="70" stroke="#cf2222" stroke-width="5" stroke-dasharray="10 6"/><text class="legend" x="82" y="74">Batas Dusun</text><line x1="18" y1="94" x2="72" y2="94" stroke="#d68700" stroke-width="5"/><text class="legend" x="82" y="98">Jalan</text><line x1="18" y1="118" x2="72" y2="118" stroke="#41a9ba" stroke-width="3"/><text class="legend" x="82" y="122">Sungai / Irigasi</text><rect x="26" y="135" width="22" height="15" fill="#111"/><polygon points="22,135 37,124 52,135" fill="#111"/><text class="legend" x="82" y="145">Balai Desa</text></g>
-      </svg>
-    </div>
-    <p class="map-instruction">Arahkan kursor untuk preview marun. Klik salah satu dusun agar highlight tetap aktif dan panel informasi berubah.</p>
-  </div>
-  <aside class="dusun-detail" data-dusun-detail></aside>
+  <!-- Balai Desa -->
+  <g transform="translate(532 595)">
+    <polygon points="-18,-15 0,-30 18,-15" fill="#111"/><rect x="-15" y="-15" width="30" height="20" fill="#111"/>
+    <rect x="-5" y="-8" width="10" height="13" fill="#fff"/>
+    <text x="0" y="38" text-anchor="middle" class="legend-label">Balai Desa</text><text x="0" y="53" text-anchor="middle" class="legend-label">Kendalbulur</text>
+  </g>
+
+  <!-- Nangkula -->
+  <g transform="translate(861 468)">
+    <circle r="16" fill="#318a37"/><path d="M-7 5 Q0-11 11-8 Q8 4-4 9" fill="#bfe66e"/>
+    <text x="0" y="38" text-anchor="middle" class="legend-label">Nangkula</text><text x="0" y="53" text-anchor="middle" class="legend-label">Park</text>
+  </g>
+
+  <!-- legend -->
+  <g transform="translate(27 566)">
+    <rect width="172" height="172" rx="13" fill="#fff" stroke="#222" stroke-width="2"/>
+    <text x="86" y="27" text-anchor="middle" font-family="Poppins" font-size="20" font-weight="800">LEGENDA</text>
+    <line x1="18" y1="48" x2="68" y2="48" stroke="#07140f" stroke-width="6" stroke-dasharray="10 6"/><text class="legend-label" x="79" y="52">Batas Desa</text>
+    <line x1="18" y1="72" x2="68" y2="72" stroke="#c92720" stroke-width="5" stroke-dasharray="10 6"/><text class="legend-label" x="79" y="76">Batas Dusun</text>
+    <line x1="18" y1="96" x2="68" y2="96" stroke="#d88400" stroke-width="5"/><text class="legend-label" x="79" y="100">Jalan</text>
+    <line x1="18" y1="120" x2="68" y2="120" stroke="#3eaab9" stroke-width="3"/><text class="legend-label" x="79" y="124">Sungai / Irigasi</text>
+    <polygon points="28,148 42,137 56,148" fill="#111"/><rect x="31" y="148" width="22" height="14" fill="#111"/><text class="legend-label" x="79" y="159">Balai Desa</text>
+  </g>
+</svg>
+</div>
+<p class="map-instruction">Hover untuk preview. Klik dusun agar area tetap maroon dan panel detail berubah.</p>
+</div>
+<aside class="dusun-detail" data-dusun-detail></aside>
 </div>
 
-<div class="demo-note"><b>Catatan prototype:</b> tampilan peta mengikuti referensi yang kamu kirim (bentuk desa, batas dusun, jalan, sungai, Balai Desa, dan Nangkula Park). Posisi garis/polygon ini masih visualisasi prototype dan perlu diganti data GIS/koordinat resmi sebelum digunakan sebagai peta administratif resmi.</div>
-</div></main>
-<div data-footer></div><script src="/assets/replica.js"></script><script src="/assets/wilayah-demo.js"></script></body></html>
+<div class="demo-note"><b>Catatan:</b> visual ini sengaja dibuat mengikuti referensi peta yang kamu berikan. Untuk publikasi administratif resmi, batas/poligon tetap perlu dicocokkan dengan data GIS atau peta resmi pemerintah desa.</div>
+</div></main><div data-footer></div><script src="/assets/replica.js"></script><script src="/assets/wilayah-demo.js"></script></body></html>
