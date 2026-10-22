@@ -1677,7 +1677,7 @@ h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-seri
 
 /* Extra breathing room for reference-like village map labels */
 .ref-map{
-  aspect-ratio:1024/850!important;
+  aspect-ratio:1024/920!important;
 }
 .ref-map svg{
   overflow:visible;
