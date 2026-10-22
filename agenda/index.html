@@ -1,10 +1,39 @@
 <!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Agenda Desa – Desa Kendalbulur</title><link rel="stylesheet" href="/assets/replica.css"></head><body><div data-header></div>
 <main class="page-content"><div class="kb-container"><section class="agenda-demo">
-<div class="section-head left"><span class="proposal-chip">REFERENSI INTERAKSI RDIS</span><h2 style="margin-top:10px">Agenda Desa</h2><p>Kalender bulanan dan riwayat agenda. Item berlabel DEMO adalah contoh tambahan untuk menunjukkan alur sebelum operator mengisi data resmi.</p></div>
+<div class="section-head left"><span class="proposal-chip">REFERENSI INTERAKSI RDIS</span><h2 style="margin-top:10px">Agenda Desa</h2><p>Pilih bulan, tahun, dan status kegiatan. Klik agenda untuk membuka detail acara di halaman yang sama.</p></div>
 
-<div class="calendar-toolbar"><div class="calendar-nav"><button data-cal-prev>‹</button><button data-cal-today>Hari ini</button><button data-cal-next>›</button></div><div class="calendar-title" data-cal-title></div><div class="calendar-views"><button class="active" data-agenda-view="calendar">Kalender</button><button data-agenda-view="history">Riwayat</button></div></div>
+<div class="agenda-filterbar">
+  <div class="agenda-filter-field"><label for="agenda-month">Bulan</label><select id="agenda-month" data-agenda-month></select></div>
+  <div class="agenda-filter-field"><label for="agenda-year">Tahun</label><select id="agenda-year" data-agenda-year></select></div>
+  <div class="agenda-filter-field"><label for="agenda-status">Status</label><select id="agenda-status" data-agenda-status><option value="all">Semua status</option><option value="active">Sedang berlangsung</option><option value="upcoming">Mendatang</option><option value="done">Selesai</option></select></div>
+  <div class="calendar-nav"><button data-cal-prev aria-label="Bulan sebelumnya">‹</button><button data-cal-today>Hari ini</button><button data-cal-next aria-label="Bulan berikutnya">›</button></div>
+</div>
 
-<section data-calendar-section><div class="calendar-grid" data-cal-grid></div><div class="demo-note">Klik salah satu agenda pada kalender untuk melihat tanggal, jam, dan lokasi.</div></section>
+<div class="calendar-toolbar"><div class="calendar-title" data-cal-title></div><div class="calendar-views"><button class="active" data-agenda-view="calendar">Kalender</button><button data-agenda-view="history">Riwayat</button></div></div>
+<div class="agenda-status-legend"><span><i class="done"></i>Selesai</span><span><i class="active"></i>Sedang berlangsung</span><span><i class="upcoming"></i>Mendatang</span></div>
+
+<section data-calendar-section><div class="calendar-grid" data-cal-grid></div><div class="demo-note">Klik agenda pada kalender untuk melihat status, waktu mulai/selesai, lokasi, kategori, dan deskripsi kegiatan.</div></section>
 <section data-history-section style="display:none"><div class="agenda-history" data-history></div></section>
 </section></div></main>
+
+<div class="agenda-modal" data-agenda-modal aria-hidden="true">
+  <article class="agenda-modal-card" role="dialog" aria-modal="true" aria-labelledby="agenda-modal-title">
+    <button class="agenda-modal-close" data-agenda-close aria-label="Tutup detail agenda">×</button>
+    <header class="agenda-modal-head">
+      <span class="agenda-modal-status" data-modal-status></span>
+      <h2 id="agenda-modal-title" data-modal-title></h2>
+    </header>
+    <div class="agenda-modal-body">
+      <div class="agenda-detail-grid">
+        <div class="agenda-detail-item"><small>Tanggal mulai</small><b data-modal-start></b></div>
+        <div class="agenda-detail-item"><small>Tanggal selesai</small><b data-modal-end></b></div>
+        <div class="agenda-detail-item"><small>Lokasi</small><b data-modal-place></b></div>
+        <div class="agenda-detail-item"><small>Kategori</small><b data-modal-category></b></div>
+      </div>
+      <p class="agenda-modal-description" data-modal-description></p>
+      <div class="agenda-modal-actions"><button class="kb-btn kb-btn-red" data-agenda-close>Tutup</button></div>
+    </div>
+  </article>
+</div>
+
 <div data-footer></div><script src="/assets/replica.js"></script><script src="/assets/agenda-demo.js"></script></body></html>
