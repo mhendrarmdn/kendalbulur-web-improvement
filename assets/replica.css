@@ -443,3 +443,147 @@ h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-seri
     top:52px!important;
   }
 }
+
+
+/* ==========================================================
+   ORIGINAL NAV BEHAVIOR — active underline, clean chevrons,
+   and right-side nested submenu for RT/RW.
+   ========================================================== */
+@media (min-width:1025px){
+  .kb-nav > a,
+  .kb-nav-item > a{
+    position:relative!important;
+    color:#292525!important;
+  }
+  .kb-nav > a.active,
+  .kb-nav-item > a.active{
+    color:#7F1110!important;
+  }
+  .kb-nav > a.active::after,
+  .kb-nav-item > a.active::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:8px;
+    height:2px;
+    background:#7F1110;
+  }
+
+  .kb-caret{
+    display:inline-block!important;
+    width:5px!important;
+    height:5px!important;
+    border-right:1.5px solid currentColor!important;
+    border-bottom:1.5px solid currentColor!important;
+    transform:rotate(45deg)!important;
+    margin-left:5px!important;
+    margin-top:-4px!important;
+    font-size:0!important;
+    flex:0 0 auto!important;
+  }
+
+  .kb-dropdown{
+    overflow:visible!important;
+  }
+  .kb-dropdown-item{
+    position:relative!important;
+  }
+  .kb-dropdown-item > a{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:18px!important;
+  }
+  .kb-side-caret{
+    display:inline-block;
+    width:7px;
+    height:7px;
+    border-right:2px solid currentColor;
+    border-bottom:2px solid currentColor;
+    transform:rotate(-45deg);
+    flex:0 0 auto;
+    margin-left:16px;
+  }
+  .kb-submenu{
+    position:absolute;
+    left:calc(100% - 2px);
+    top:0;
+    min-width:205px;
+    background:#fff;
+    border:1px solid #E8E8E8;
+    border-radius:10px;
+    box-shadow:0 8px 22px rgba(0,0,0,.12);
+    opacity:0;
+    pointer-events:none;
+    transform:translateX(5px);
+    transition:.16s ease;
+    overflow:hidden;
+    z-index:130;
+  }
+  .kb-dropdown-item:hover > .kb-submenu,
+  .kb-dropdown-item:focus-within > .kb-submenu{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateX(0);
+  }
+  .kb-submenu a{
+    display:block;
+    padding:10px 15px;
+    font-family:"Poppins",Sans-serif;
+    font-size:12px;
+    font-weight:500;
+    color:#333;
+    background:#fff;
+    border-bottom:1px solid #E8E8E8;
+    white-space:nowrap;
+  }
+  .kb-submenu a:last-child{border-bottom:0}
+  .kb-submenu a:hover,
+  .kb-submenu a.active{
+    background:#7F1110!important;
+    color:#fff!important;
+  }
+
+  .kb-dropdown > a.active,
+  .kb-dropdown-item > a.active{
+    background:#7F1110!important;
+    color:#fff!important;
+  }
+}
+
+@media(max-width:1024px){
+  .kb-caret{
+    display:inline-block;
+    width:5px;
+    height:5px;
+    border-right:1.5px solid currentColor;
+    border-bottom:1.5px solid currentColor;
+    transform:rotate(45deg);
+    margin-left:6px;
+    margin-top:-4px;
+    font-size:0;
+  }
+  .kb-dropdown-item.has-children > a{
+    display:flex!important;
+    justify-content:space-between!important;
+    align-items:center!important;
+  }
+  .kb-side-caret{
+    width:6px;height:6px;
+    border-right:1.5px solid currentColor;
+    border-bottom:1.5px solid currentColor;
+    transform:rotate(45deg);
+    margin-left:auto;
+  }
+  .kb-submenu{
+    display:none;
+    position:static;
+    box-shadow:none;
+    border:0;
+    border-left:2px solid #eee;
+    margin-left:14px;
+  }
+  .kb-dropdown-item.open > .kb-submenu{display:block}
+  .kb-submenu a{display:block;padding:10px 18px!important;font-size:12px}
+}
