@@ -35,7 +35,7 @@ const nav=[
  {t:'PPID',c:[
    ['APBDesa','/anggaran/'],
    ['Agenda','/agenda/'],
-   ['Realisasi','/realisasi-apbdesa/']
+   ['Realisasi','/realisasi-apbdesa/'],\n   ['Simpeldesa','/simpeldesa/']
  ]},
  {t:'WARTA DESA',u:'/warta-desa/'},
  {t:'POTENSI DESA',u:'/potensi-desa/'}
