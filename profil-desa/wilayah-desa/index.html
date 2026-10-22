@@ -1,1 +1,31 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wilayah Desa – Desa Kendalbulur</title><link rel="stylesheet" href="/assets/replica.css"></head><body><div data-header></div><section class="page-hero"><div class="kb-container"><div class="crumb">Beranda / Profil Desa / Wilayah</div><h1>Wilayah Desa</h1></div></section><main class="page-content"><div class="kb-container"><div class="content-shell"><article class="article"><h2>Data Wilayah</h2><p>Luas wilayah Desa Kendalbulur sekitar 2,44 km² atau 244,5 hektar.</p><div class="profile-cards"><div class="profile-stat"><b>177,5 Ha</b><span>Lahan Sawah</span></div><div class="profile-stat"><b>10 Ha</b><span>Lahan Perikanan</span></div><div class="profile-stat"><b>57 Ha</b><span>Perumahan & Fasilitas Umum</span></div></div><h2>Batas Wilayah</h2><ul><li>Utara: Desa Bono</li><li>Selatan: Desa Ngranti</li><li>Barat: Desa Gesikan dan Tawing</li><li>Timur: Desa Boyolangu</li></ul><h2>Pembagian Dusun</h2><p>Desa Kendalbulur terdiri dari Dusun Kendalbulur, Dusun Genting, dan Dusun Rongganan.</p></article><aside><div class="side-box"><h3>Menu Profil Desa</h3><div class="side-links"><a href="/profil-desa/profil-umum/">Profil Umum</a><a href="/profil-desa/sejarah-desa/">Sejarah Desa</a><a href="/profil-desa/wilayah-desa/">Wilayah Desa</a><a href="/profil-desa/peta-desa/">Peta Desa</a><a href="/profil-desa/sotk/">SOTK</a><a href="/profil-desa/idm/">IDM</a></div></div></aside></div></div></main><div data-footer></div><script src="/assets/replica.js"></script></body></html>
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wilayah Desa – Desa Kendalbulur</title><link rel="stylesheet" href="/assets/replica.css"></head><body><div data-header></div>
+<main class="page-content"><div class="kb-container">
+<div class="section-head left"><span class="proposal-chip">REFERENSI INTERAKSI ISFO</span><h2 style="margin-top:10px">Wilayah Desa Kendalbulur</h2><p>Desa Kendalbulur terdiri dari tiga dusun: Kendalbulur, Genting, dan Rongganan. Klik wilayah pada peta untuk mengubah highlight marun dan melihat informasi dusun.</p></div>
+
+<div class="profile-cards"><div class="profile-stat"><b>244,5 Ha</b><span>Luas wilayah (profil desa)</span></div><div class="profile-stat"><b>03</b><span>Dusun</span></div><div class="profile-stat"><b>22 / 07</b><span>RT / RW pada beranda publik</span></div></div>
+
+<div class="wilayah-interactive">
+  <div class="map-stage">
+    <svg viewBox="0 0 720 520" role="img" aria-label="Peta interaktif tiga dusun Kendalbulur" style="width:100%;display:block;background:#f7ef6a">
+      <defs><filter id="sh"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity=".22"/></filter></defs>
+      <path d="M165 90 L260 58 L390 70 L500 98 L580 160 L610 260 L575 355 L500 425 L395 460 L280 450 L190 410 L135 320 L118 215 Z" fill="#9c9b66" stroke="#2e2e2e" stroke-width="4" stroke-dasharray="7 5" filter="url(#sh)"/>
+      <path d="M165 90 L260 58 L390 70 L500 98 L570 170 L520 250 L350 235 L210 205 L118 215 Z" fill="#b5ad70" opacity=".76"/>
+      <path d="M210 205 L350 235 L520 250 L545 340 L410 365 L245 345 L135 320 L118 215 Z" fill="#aca66b" opacity=".76"/>
+      <path d="M245 345 L410 365 L545 340 L500 425 L395 460 L280 450 L190 410 L135 320 Z" fill="#a29a63" opacity=".78"/>
+      <text x="355" y="155" text-anchor="middle" font-family="Poppins" font-size="22" font-weight="700" fill="#333">RONGGANAN</text>
+      <text x="350" y="300" text-anchor="middle" font-family="Poppins" font-size="22" font-weight="700" fill="#333">GENTING</text>
+      <text x="360" y="408" text-anchor="middle" font-family="Poppins" font-size="22" font-weight="700" fill="#333">KENDALBULUR</text>
+      <text x="355" y="28" text-anchor="middle" font-family="Poppins" font-size="18" font-weight="700">PETA DESA KENDALBULUR KEC. BOYOLANGU</text>
+      <text x="360" y="500" text-anchor="middle" font-family="Inter" font-size="12">Berdasarkan referensi peta yang diberikan - batas internal dusun pada prototype bersifat ilustratif</text>
+    </svg>
+    <button class="dusun-zone zone-rongganan" data-dusun="rongganan" aria-label="Pilih Dusun Rongganan"><span>Rongganan</span></button>
+    <button class="dusun-zone zone-genting" data-dusun="genting" aria-label="Pilih Dusun Genting"><span>Genting</span></button>
+    <button class="dusun-zone zone-kendalbulur" data-dusun="kendalbulur" aria-label="Pilih Dusun Kendalbulur"><span>Kendalbulur</span></button>
+  </div>
+  <aside class="dusun-detail" data-dusun-detail></aside>
+</div>
+
+<div class="demo-note"><b>Catatan:</b> outline desa mengikuti gambaran peta referensi yang kamu kirim, tetapi pembagian polygon internal tiga dusun masih prototype visual. Untuk versi produksi, batas dusun sebaiknya diganti dengan data GIS/koordinat resmi dari pemerintah desa.</div>
+
+<h2>Batas Desa</h2><ul><li>Utara: Desa Bono</li><li>Selatan: Desa Ngranti</li><li>Timur: Desa Boyolangu</li><li>Barat: Desa Gesikan / wilayah Kecamatan Pakel</li></ul>
+</div></main><div data-footer></div><script src="/assets/replica.js"></script><script src="/assets/wilayah-demo.js"></script></body></html>
