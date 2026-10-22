@@ -1,13 +1,131 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prototype Website Desa Kendalbulur</title><link rel="stylesheet" href="./assets/styles.css"></head><body><div id="site-header"></div>
-<section class="hero"><div class="container"><div class="eyebrow">Prototype KKM • Website Desa</div><h1>Kendalbulur yang lebih informatif, rapi, dan mudah digunakan.</h1><p>Prototype ini merangkum perbaikan utama hasil audit dan wawancara operator: transparansi APBDes, akses Simpeldesa, direktori RT/RW, Potensi Desa, arsip regulasi, konsistensi konten, serta UI yang lebih proporsional.</p><div class="hero-actions"><a class="btn btn-primary" href="./apbdes/">Lihat Dashboard APBDes</a><a class="btn btn-outline" href="./audit/">Lihat Audit Kekurangan</a></div></div></section>
-<section class="section"><div class="container"><div class="section-title"><div><div class="eyebrow" style="color:var(--wine)">Prioritas Pengembangan</div><h2>Enam pekerjaan utama hasil wawancara operator</h2><p>Fokus dibuat realistis untuk masa KKM dan tetap mudah diteruskan oleh operator WordPress setelah pendampingan.</p></div></div><div class="grid g3">
-<a class="card" href="./apbdes/"><div class="icon">01</div><h3>APBDes Interaktif</h3><p>Ringkasan anggaran, grafik, progress realisasi, tabel rinci, filter tahun, dan unduh PDF.</p></a>
-<a class="card" href="./simpeldesa/"><div class="icon">02</div><h3>Akses Simpeldesa</h3><p>Landing informasi singkat dan tombol menuju layanan resmi tanpa membuat integrasi API.</p></a>
-<a class="card" href="./rt-rw/"><div class="icon">03</div><h3>Direktori RT/RW</h3><p>Template kartu interaktif untuk foto, nama, jabatan, wilayah, dan kontak yang disetujui.</p></a>
-<a class="card" href="./potensi-desa/"><div class="icon">04</div><h3>Potensi Desa</h3><p>Wisata, pertanian, perikanan, UMKM, budaya, dan BUMDes dalam kategori yang mudah dipahami.</p></a>
-<a class="card" href="./regulasi/"><div class="icon">05</div><h3>Arsip Regulasi</h3><p>Perdes, Perkades, dan SK dengan metadata yang lebih rapi, status validasi, dan tautan dokumen.</p></a>
-<a class="card" href="./audit/"><div class="icon">06</div><h3>UI/UX & Konten</h3><p>Perbaikan proporsi, link rusak, halaman kosong, Lorem Ipsum, statistik tidak konsisten, dan responsivitas.</p></a>
-</div></div></section>
-<section class="section" style="background:#fff"><div class="container"><div class="section-title"><div><div class="eyebrow" style="color:var(--wine)">Data Terverifikasi dari Situs Publik</div><h2>Fondasi yang sudah dimiliki Kendalbulur</h2></div></div><div class="grid g4"><div class="card metric"><div class="label">Penduduk</div><div class="value">4.190</div><span class="tag">Beranda publik</span></div><div class="card metric"><div class="label">Jumlah KK</div><div class="value">1.477</div><span class="tag">Beranda publik</span></div><div class="card metric"><div class="label">Dusun</div><div class="value">03</div><span class="tag">Perlu sinkronisasi halaman lain</span></div><div class="card metric"><div class="label">RT / RW</div><div class="value">22 / 07</div><span class="tag">Basis direktori</span></div></div><div class="notice" style="margin-top:18px">Angka statistik di atas mengikuti tampilan beranda publik saat audit. Sebelum dipakai sebagai sumber data tunggal di WordPress, operator perlu memvalidasi dan menyamakan seluruh halaman profil/statistik.</div></div></section>
-<section class="section"><div class="container"><div class="section-title"><div><div class="eyebrow" style="color:var(--wine)">Prinsip Implementasi</div><h2>Satu prototype, dua jalur deployment</h2></div></div><div class="grid g2"><div class="card"><h3>Vercel</h3><ul class="feature-list"><li>Static HTML/CSS/JS tanpa build process</li><li>Deploy langsung dari GitHub</li><li>Mudah dipreview tim sebelum menyentuh website produksi</li><li>Setiap halaman memiliki URL sendiri</li></ul></div><div class="card"><h3>WordPress / Elementor</h3><ul class="feature-list"><li>Section dapat dipindah ke HTML Widget Elementor</li><li>CSS global dapat ditempatkan di Additional CSS / Elementor Custom CSS</li><li>Link PDF menggunakan Media Library WordPress</li><li>Konten RT/RW dan Potensi Desa dapat dikelola operator</li></ul></div></div></div></section>
-<div id="site-footer"></div><script src="./assets/site.js"></script></body></html>
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Desa Kendalbulur – Kec. Boyolangu Kab. Tulungagung</title>
+<link rel="stylesheet" href="/assets/replica.css">
+</head>
+<body>
+<div data-header></div>
+
+<section class="hero-home">
+  <div class="kb-container">
+    <div class="kicker">SELAMAT DATANG DI</div>
+    <div class="website-resmi">WEBSITE RESMI</div>
+    <h1>PEMERINTAH DESA KENDALBULUR</h1>
+    <p>Bersama Membangun Desa, Mewujudkan Masyarakat Sejahtera</p>
+    <div class="hero-actions">
+      <a class="kb-btn" href="/profil-desa/profil-umum/">Klik di sini</a>
+      <a class="kb-btn simpeldesa-cta" href="/simpeldesa/">AKSES SIMPELDESA</a>
+    </div>
+  </div>
+</section>
+
+<section class="kb-section home-data-source">
+<div class="kb-container">
+  <div class="home-data-title">
+    <h2>Data Warga</h2>
+    <p>Gambaran umum desa kendalbulur dalam angka</p>
+  </div>
+  <div class="stats-grid">
+    <div class="stat"><strong>4.190</strong><span>Jumlah Penduduk</span></div>
+    <div class="stat"><strong>1.477</strong><span>Jumlah KK</span></div>
+    <div class="stat"><strong>03</strong><span>Dusun</span></div>
+    <div class="stat"><strong>22/07</strong><span>RT/RW</span></div>
+  </div>
+
+  <div class="home-split">
+    <div class="card">
+      <div class="section-head left" style="margin-bottom:4px"><h2 style="font-size:23.04px">Agenda</h2></div>
+      <div class="agenda-item"><div class="agenda-date"><b>11</b><small>Okt</small></div><div><strong>LELANG TANAH KAS DESA</strong></div></div>
+      <div class="agenda-item"><div class="agenda-date"><b>09</b><small>Agu</small></div><div><strong>Pawai Kebudayaan Tahun 2026</strong></div></div>
+      <div style="text-align:right;margin-top:10px"><a class="read-more" href="/agenda/">Selengkapnya</a></div>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="fake-map"><div class="map-pin"></div></div>
+      <div style="padding:14px 18px;text-align:center"><strong>Lokasi Kantor<br>Desa Kendalbulur</strong></div>
+    </div>
+  </div>
+
+  <div style="margin-top:72px">
+    <div class="section-head left" style="display:flex;justify-content:space-between;align-items:end">
+      <div><h2 style="font-size:23.04px">Berita & Kegiatan</h2><p>informasi terbaru seputar kegiatan dan perkembangan desa</p></div>
+      <a class="read-more" href="/warta-desa/">Lihat Semua</a>
+    </div>
+    <div class="news-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="news-card"><div class="news-thumb"><img src="https://kendalbulur.id/storage/2026/10/KKM-PKN-STAN-Desa-Kendalbulur.webp" alt="KKM PKN STAN" onerror="this.style.display='none'"></div><div class="news-body"><h3>Kades Anang Mustofa Terima 8 Mahasiswa PKN STAN untuk KKM 2026 di Desa Kendalbulur</h3><a class="read-more" href="https://kendalbulur.id" target="_blank">Selengkapnya</a></div></div>
+      <div class="news-card"><div class="news-thumb"><img src="https://kendalbulur.id/storage/2026/10/WhatsApp-Image-2026-10-21-at-20.32.43.jpeg" alt="Silaturahmi DPMD" onerror="this.style.display='none'"></div><div class="news-body"><h3>Silaturahmi Kepala DPMD Dr. Agus Kuncoro dengan Kepala Desa se-Kecamatan, Tekankan Inovasi Berbasis Potensi Lokal</h3><a class="read-more" href="https://kendalbulur.id" target="_blank">Selengkapnya</a></div></div>
+      <div class="news-card"><div class="news-thumb"><img src="https://kendalbulur.id/storage/2026/10/Peninjauan-Kolam-Tematik-5.webp" alt="Kolam Tematik" onerror="this.style.display='none'"></div><div class="news-body"><h3>Pemerintah Desa Kendalbulur Bersama PT Adhi Karya dan Dinas Perikanan Tinjau Kesiapan Lokasi Pembangunan Kolam Tematik</h3><a class="read-more" href="https://kendalbulur.id" target="_blank">Selengkapnya</a></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="source-about-zone">
+<div class="kb-container">
+  <div class="about-grid" style="padding-bottom:38px">
+    <div class="about-copy">
+      <div class="section-head left"><h2>Sekilas Tentang Kami</h2></div>
+      <p>Secara Umum wilayah kami merupakan daerah dataran rendah yang subur di lalui sungai Parit Agung dengan ketinggian wilayah 90 mdpl.</p>
+      <p>Kendalbulur memiliki prioritas pembangunan desa dengan konsep lapangan wisata untuk selanjutnya pengelolaan dan pengembangannya dilakukan oleh BUMDES dan menjadikan Badan Usaha Milik Desa (BUMDes) sebagai lembaga yang mengelola produktivitas usaha masyarakat serta sebagai lembaga dalam meningkatkan pendapatan asli desa (PAD).</p>
+      <div class="mini-cols">
+        <div><h4>Geografis</h4><ul><li>Luas wilayah : + 244,5 Ha</li><li>Lahan Sawah : 177.5 Ha</li><li>Lahan Perikanan : 10 Ha</li><li>Perumahan dan Fasilitas Umum : 57 Ha</li></ul></div>
+        <div><h4>Orbitasi</h4><ul><li>Jarak ke ibu kota kecamatan : 1 Km</li><li>Jarak ke ibu kota kabupaten : 4 Km</li><li>Jarak ke ibu kota provinsi : 150 Km</li></ul></div>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</div>
+
+<div class="people-source-panel">
+  <div class="kb-container">
+    <div class="section-head left" style="margin-bottom:20px"><h2>Pemerintah Desa</h2></div>
+    <div style="display:flex;gap:18px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory">
+      <div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/1.-ANANG-MUSTOFA-1.png" alt="Anang Mustofa" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div><div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/2.-Bu-Yudiarti-1.png" alt="Yudiarti" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div><div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/3.-Edi-Subroto-1.png" alt="Edi Subroto" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div><div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/4.-LINDAPUSPITASARI-1.png" alt="Linda Puspitasari" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div><div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/5.-Fery-1.png" alt="Feri Widya Utama" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div><div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/6.-ARI-KUSUMA-1.png" alt="Ari Kusuma" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div><div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/7.-SAIFUL-HAMZAH.webp" alt="Saiful Hamzah" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div><div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/8.-DAMIRI-1.png" alt="Damiri" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div><div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/9.-SUMBODO-1.png" alt="Sumbodo" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div><div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/10.-SUPRIYADI-1.png" alt="Supriyadi" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div><div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/11.-AGUS-DIYANTO-1.webp" alt="Agus Dianto" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div><div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/12.-ANDIK-PURWANTO-2.webp" alt="Andik Purwanto" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div><div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/13.-GALUH-1.webp" alt="Galuh" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div><div style="flex:0 0 195px;scroll-snap-align:start"><img src="https://kendalbulur.id/storage/2025/11/14.-DARMA-1.webp" alt="Darma" style="width:100%;height:auto;display:block" onerror="this.closest('div').style.display='none'"></div>
+    </div>
+  </div>
+</div>
+
+<div class="kb-container bumdes-source">
+  <div class="section-head"><h2 style="font-size:23.04px">Profil Badan Usaha Milik Desa Kendalbulur</h2></div>
+  <div style="display:flex;justify-content:center;margin-bottom:24px">
+    <div style="text-align:center"><div style="font-size:14px">Unit Usaha</div><h3 style="margin:2px 0;color:var(--kb-red)">BUMDesa LASARASTI</h3></div>
+  </div>
+  <div class="bumdes-grid">
+    <div class="unit-card"><h3>Nangkula Park</h3><p>Taman rekreasi yang menawarkan berbagai fasilitas seperti spot selfie, kuliner, taman bunga, area bermain air, dan ruang meeting, yang cocok untuk semua kalangan,</p></div>
+    <div class="unit-card"><h3>Minapadi</h3><p>Wisata edukasi pertanian terpadu yang menggabungkan budidaya padi dan ikan dalam satu lahan sawah yang sama. Luas Area untuk Minapadi ini adalah 400 ru.</p></div>
+    <div class="unit-card"><h3>Unit Usaha Simpan Pinjam</h3><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p></div>
+    <div class="unit-card"><h3>Unit Usaha Pertanian</h3><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p></div>
+    <div class="unit-card"><h3>Unit Usaha Kios online</h3><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p></div>
+    <div class="unit-card" style="background:#F4E8D0"><span class="proposal-chip">FITUR USULAN</span><h3>Katalog Produk</h3><p>Foto, harga, lokasi, kontak dan tautan pemesanan untuk produk BUMDes/UMKM yang telah diverifikasi.</p></div>
+  </div>
+  <div style="margin-top:25px;background:linear-gradient(rgba(127,17,16,.77),rgba(127,17,16,.77)),url('https://kendalbulur.id/wp-content/uploads/2025/11/3d-cartoon-latin-american-village-scenery.jpg') center/cover;padding:48px 32px;color:#fff;display:flex;justify-content:space-between;align-items:center">
+    <h2 style="margin:0;color:#fff">Kenali Lebih Lanjut Profil BUMDesa Kami</h2><a class="kb-btn" style="background:#fff;color:var(--kb-red)" href="/lembaga-desa/bumdesa/">Lihat Profil</a>
+  </div>
+</div>
+</section>
+
+<section class="source-apb-sop">
+<div class="kb-container">
+  <div class="service-grid">
+    <div style="text-align:center">
+      <h3 style="font-size:23.04px;margin-top:0">APBDesa</h3>
+      <div class="year-links"><a href="/anggaran/">2026</a><a href="/anggaran/">2025</a></div>
+      <div style="width:min(430px,100%);aspect-ratio:1/1;margin:0 auto;background:linear-gradient(145deg,#d7dfdb,#f4d49d);display:grid;place-items:center;padding:24px">
+        <div><b style="font-family:Poppins,sans-serif;font-size:24px;color:var(--kb-red)">APBDesa 2026</b><p style="font-size:13px">Infografis anggaran asli tetap tersedia pada halaman APBDesa.</p><a class="kb-btn kb-btn-red" href="/anggaran/">Lihat APBDesa</a></div>
+      </div>
+      <div style="margin-top:12px"><a class="kb-btn kb-btn-red" href="/realisasi-apbdesa/">Lihat Realisasi Anggaran</a></div>
+    </div>
+    <div class="service-copy">
+      <h2 style="font-size:27.65px">Standar Operasional Prosedur (SOP)<br>Pelayanan Surat Menyurat Desa Kendalbulur</h2>
+      <p><b>Dasar :</b><br>Perdes No 12 Tahun 2020 Tentang Standar Pelayanan Minimal (SPM) dan Perdes No 11 tahun 2021 Tentang Jam Kerja Kantor</p>
+      <img src="https://kendalbulur.id/storage/2025/12/WhatsApp-Image-2025-12-01-at-17.54.49.jpeg" alt="SOP Pelayanan" style="width:100%;height:auto">
+      <div style="margin-top:14px"><span class="proposal-chip">FITUR USULAN</span> <a class="read-more" href="/simpeldesa/">Tambahkan penjelasan & tombol Simpeldesa →</a></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div data-footer></div>
+<script src="/assets/replica.js"></script>
+</body></html>
