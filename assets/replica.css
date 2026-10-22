@@ -1508,3 +1508,11 @@ h1,h2,h3,h4,h5,h6,.section-head h2,.page-hero h1{font-family:"Poppins",Sans-seri
 @media(max-width:560px){
   .filter-toolbar{grid-template-columns:1fr}
 }
+
+
+/* Requested navigation emphasis across desktop/tablet/mobile */
+.kb-nav>a,.kb-nav-item>a{font-weight:650!important}
+@media(max-width:1024px){
+  .kb-nav>a,.kb-nav-item>a{font-weight:650!important}
+  .kb-dropdown>a,.kb-dropdown-item>a,.kb-submenu a{font-weight:550!important}
+}
