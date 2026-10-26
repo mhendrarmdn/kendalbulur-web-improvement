@@ -1,0 +1,33 @@
+name: Package WordPress Plugin
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wordpress-plugin/kendalbulur-enhancements/**'
+      - '.github/workflows/package-wordpress-plugin.yml'
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate PHP syntax
+        run: |
+          find wordpress-plugin/kendalbulur-enhancements -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Build installable ZIP
+        run: |
+          cd wordpress-plugin
+          zip -r ../kendalbulur-enhancements.zip kendalbulur-enhancements             -x '*/.DS_Store' '*/__MACOSX/*'
+
+      - name: Upload packaged plugin
+        uses: actions/upload-artifact@v4
+        with:
+          name: kendalbulur-enhancements-wordpress-plugin
+          path: kendalbulur-enhancements.zip
+          if-no-files-found: error
