@@ -5,6 +5,7 @@ class KBE_Shortcodes {
     private static $assets=false;
 
     public static function init() {
+        add_action('wp_enqueue_scripts',[__CLASS__,'maybe_enqueue_assets'],20);
         add_shortcode('kb_agenda',[__CLASS__,'agenda']);
         add_shortcode('kb_potensi',[__CLASS__,'potensi']);
         add_shortcode('kb_regulasi',[__CLASS__,'regulasi']);
@@ -12,6 +13,16 @@ class KBE_Shortcodes {
         add_shortcode('kb_simpeldesa',[__CLASS__,'simpeldesa']);
         add_shortcode('kb_data_warga',[__CLASS__,'data_warga']);
         add_shortcode('kb_idm',[__CLASS__,'idm']);
+    }
+
+    public static function maybe_enqueue_assets() {
+        if (is_admin()) return;
+        global $post;
+        if (!$post || !isset($post->ID)) return;
+        $haystack = (string) $post->post_content;
+        $elementor = get_post_meta($post->ID,'_elementor_data',true);
+        if (is_string($elementor)) $haystack .= ' '.$elementor;
+        if (strpos($haystack,'[kb_') !== false) self::assets();
     }
 
     private static function assets() {
