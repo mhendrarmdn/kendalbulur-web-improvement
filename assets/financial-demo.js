@@ -469,6 +469,33 @@ function renderIncomeAllocation(year,pieTarget,legendTarget){
   colors:['#1565C0','#2E7D32','#F9A825','#6A1B9A','#00838F','#EF6C00','#C62828']
  });
 }
+function renderBudgetView(year){
+ const select=document.querySelector('[data-budget-view-select]');
+ const pie=document.querySelector('[data-budget-view-pie]');
+ const legend=document.querySelector('[data-budget-view-legend]');
+ if(!pie&&!legend)return;
+ const view=select?.value||'income';
+ const kicker=document.querySelector('[data-budget-view-kicker]');
+ const title=document.querySelector('[data-budget-view-title]');
+ const description=document.querySelector('[data-budget-view-description]');
+ const sideTitle=document.querySelector('[data-budget-side-title]');
+ const sideDescription=document.querySelector('[data-budget-side-description]');
+ if(view==='expense'){
+   if(kicker)kicker.textContent='BELANJA';
+   if(title)title.textContent='Alokasi Belanja';
+   if(description)description.textContent='Ke mana anggaran desa dialokasikan dan berapa porsi setiap bidang belanja.';
+   if(sideTitle)sideTitle.textContent='Bidang Belanja';
+   if(sideDescription)sideDescription.textContent='Setiap bidang dibandingkan terhadap total belanja. Klik bidang untuk membuka rincian sub-bidangnya.';
+   renderBudgetAllocation(year,pie,legend);
+ }else{
+   if(kicker)kicker.textContent='PENDAPATAN';
+   if(title)title.textContent='Komposisi Pendapatan';
+   if(description)description.textContent='Dari mana anggaran desa berasal dan berapa kontribusi tiap sumber pendapatan.';
+   if(sideTitle)sideTitle.textContent='Sumber Pendapatan';
+   if(sideDescription)sideDescription.textContent='Setiap akun dibandingkan terhadap total pendapatan. Klik akun untuk membuka rincian sumber di bawahnya.';
+   renderIncomeAllocation(year,pie,legend);
+ }
+}
 function rowHtml(row){
  const diff=row.b-row.r, p=pct(row.r,row.b);
  const cls=row.type==='chapter'?'level-0':row.type==='group'?'level-1':row.type==='total'?'total-row':row.type==='grand'?'grand-total':'';
@@ -522,8 +549,7 @@ function setYear(year){
  const po=document.querySelector('[data-poster]'); if(po) poster(year,po);
  const bs=document.querySelector('[data-budget-summary]'); if(bs) renderBudgetSummary(year,bs);
  const bt=document.querySelector('[data-budget-table]'); if(bt) renderBudgetTable(year,bt);
- const ip=document.querySelector('[data-income-pie]'), il=document.querySelector('[data-income-legend]'); if(ip||il) renderIncomeAllocation(year,ip,il);
- const bp=document.querySelector('[data-budget-pie]'), bl=document.querySelector('[data-budget-legend]'); if(bp||bl) renderBudgetAllocation(year,bp,bl);
+ renderBudgetView(year);
  window.KB_FINANCIAL_YEAR=year;
 }
 function downloadPdf(kind,year){
@@ -543,6 +569,8 @@ function downloadPdf(kind,year){
 function init(){
  document.querySelectorAll('[data-year-btn]').forEach(b=>b.addEventListener('click',()=>setYear(Number(b.dataset.yearBtn))));
  document.querySelectorAll('[data-download]').forEach(b=>b.addEventListener('click',()=>downloadPdf(b.dataset.download,window.KB_FINANCIAL_YEAR||2026)));
+ const viewSelect=document.querySelector('[data-budget-view-select]');
+ if(viewSelect)viewSelect.addEventListener('change',()=>renderBudgetView(window.KB_FINANCIAL_YEAR||2026));
  setYear(2026);
 }
 window.KBFinancial={

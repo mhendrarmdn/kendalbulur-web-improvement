@@ -19,49 +19,35 @@
   <div class="budget-summary-grid" data-budget-summary></div>
 
   <section class="budget-visual-section">
-    <div class="budget-visual-heading">
-      <span class="budget-section-kicker">PENDAPATAN</span>
-      <h3>Komposisi Pendapatan</h3>
-      <p>Dari mana anggaran desa berasal dan berapa kontribusi tiap sumber pendapatan.</p>
+    <div class="budget-view-toolbar">
+      <div class="budget-visual-heading">
+        <span class="budget-section-kicker" data-budget-view-kicker>PENDAPATAN</span>
+        <h3 data-budget-view-title>Komposisi Pendapatan</h3>
+        <p data-budget-view-description>Dari mana anggaran desa berasal dan berapa kontribusi tiap sumber pendapatan.</p>
+      </div>
+      <label class="budget-view-select-wrap">
+        <span>Tampilkan</span>
+        <select data-budget-view-select aria-label="Pilih visualisasi APBDesa">
+          <option value="income">Pendapatan</option>
+          <option value="expense">Belanja</option>
+        </select>
+      </label>
     </div>
+
     <div class="budget-allocation">
       <div class="budget-chart-panel">
-        <div class="budget-pie" data-income-pie></div>
+        <div class="budget-pie" data-budget-view-pie></div>
         <div class="budget-chart-tooltip" data-chart-tooltip hidden></div>
         <div class="budget-active-detail" data-chart-detail>
-          <b>Detail pendapatan</b>
+          <b data-budget-detail-label>Detail pendapatan</b>
           <span>Arahkan kursor atau klik bagian chart untuk melihat sumber pendapatan, nominal, dan persentase.</span>
         </div>
         <p class="budget-chart-hint">Hover untuk preview. Klik untuk mempertahankan pilihan.</p>
       </div>
       <div class="budget-allocation-side">
-        <h3 style="font-family:Poppins,sans-serif;margin:0 0 5px">Sumber Pendapatan</h3>
-        <p class="budget-allocation-intro">Setiap akun dibandingkan terhadap total pendapatan. Klik akun untuk membuka rincian sumber di bawahnya.</p>
-        <div class="budget-legend" data-income-legend></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="budget-visual-section">
-    <div class="budget-visual-heading">
-      <span class="budget-section-kicker">BELANJA</span>
-      <h3>Alokasi Belanja</h3>
-      <p>Ke mana anggaran desa dialokasikan dan berapa porsi setiap bidang belanja.</p>
-    </div>
-    <div class="budget-allocation">
-      <div class="budget-chart-panel">
-        <div class="budget-pie" data-budget-pie></div>
-        <div class="budget-chart-tooltip" data-chart-tooltip hidden></div>
-        <div class="budget-active-detail" data-chart-detail>
-          <b>Detail alokasi</b>
-          <span>Arahkan kursor atau klik bagian chart untuk melihat nama akun, nominal, dan persentase.</span>
-        </div>
-        <p class="budget-chart-hint">Hover untuk preview. Klik untuk mempertahankan pilihan.</p>
-      </div>
-      <div class="budget-allocation-side">
-        <h3 style="font-family:Poppins,sans-serif;margin:0 0 5px">Bidang Belanja</h3>
-        <p class="budget-allocation-intro">Setiap bidang dibandingkan terhadap total belanja. Klik bidang untuk membuka rincian sub-bidangnya.</p>
-        <div class="budget-legend" data-budget-legend></div>
+        <h3 style="font-family:Poppins,sans-serif;margin:0 0 5px" data-budget-side-title>Sumber Pendapatan</h3>
+        <p class="budget-allocation-intro" data-budget-side-description>Setiap akun dibandingkan terhadap total pendapatan. Klik akun untuk membuka rincian sumber di bawahnya.</p>
+        <div class="budget-legend" data-budget-view-legend></div>
       </div>
     </div>
   </section>
