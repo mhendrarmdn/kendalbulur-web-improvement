@@ -1,5 +1,5 @@
 <!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>APBDesa | DESA KENDALBULUR</title><link rel="stylesheet" href="/assets/replica.css"></head><body>
+<title>APBDesa | DESA KENDALBULUR</title><link rel="stylesheet" href="/assets/replica.css"><link rel="stylesheet" href="/assets/operator-demo.css"></head><body>
 <div data-header></div>
 <main class="page-content" style="padding-top:18px"><div class="kb-container">
 <section class="original-budget-poster">
@@ -10,29 +10,34 @@
 
 <section class="dashboard-wrap">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
-    <div><span class="proposal-chip">FITUR USULAN OPERATOR</span><h2 style="margin:9px 0 3px">Dashboard APBDesa <span data-year-label>2026</span></h2>
-    <p style="margin:0;color:#6d625f;font-size:11px">Angka realisasi pada prototype adalah dummy untuk menunjukkan cara kerja visualisasi. Bukan data resmi Desa Kendalbulur.</p></div>
-    <div class="download-actions">
-      <button class="download-btn" data-download="budget">Unduh PDF Anggaran</button>
-      <button class="download-btn" data-download="realization">Unduh PDF Realisasi</button>
+    <div><span class="proposal-chip">APBDESA — ANGGARAN &amp; ALOKASI</span><h2 style="margin:9px 0 3px">Anggaran APBDesa <span data-year-label>2026</span></h2>
+    <p style="margin:0;color:#6d625f;font-size:11px">Halaman ini khusus menampilkan rencana anggaran dan arah alokasinya. Realisasi dipisahkan ke menu Realisasi APBDesa.</p></div>
+    <div class="download-actions"><button class="download-btn" data-download="budget">Unduh PDF Anggaran</button></div>
+  </div>
+
+  <div class="budget-summary-grid" data-budget-summary></div>
+
+  <div class="budget-allocation">
+    <div><div class="budget-pie" data-budget-pie></div></div>
+    <div>
+      <h3 style="font-family:Poppins,sans-serif;margin:0 0 5px">Alokasi Belanja</h3>
+      <p style="font-size:10px;color:#756966;margin-top:0">Pie chart dihitung otomatis dari total anggaran pada setiap akun belanja.</p>
+      <div class="budget-legend" data-budget-legend></div>
     </div>
   </div>
 
-  <div class="dash-metrics" data-metrics></div>
-
-  <h3 style="font-family:Poppins,sans-serif;margin-top:28px">Rincian Anggaran &amp; Realisasi</h3>
+  <h3 style="font-family:Poppins,sans-serif;margin-top:28px">Rincian Anggaran</h3>
   <div class="finance-table-wrap"><table class="finance-table">
-    <thead><tr><th style="width:76px">Kode</th><th>Uraian</th><th>Anggaran (Rp)</th><th>Realisasi (Rp)</th><th>Lebih/(Kurang) (Rp)</th><th>%</th></tr></thead>
-    <tbody data-financial-body></tbody>
+    <thead><tr><th style="width:76px">Kode</th><th>Uraian</th><th>Anggaran (Rp)</th></tr></thead>
+    <tbody data-budget-table></tbody>
   </table></div>
 
-  <div class="reference-note">Format akun mengikuti struktur referensi Cibiru Wetan. Baris bab/subbab dibuat tebal dan berwarna, sedangkan subtotal/total diberi fill khusus agar hierarki anggaran mudah dibaca.</div>
-
-  <div class="realization-progress-grid" data-progress-grid></div>
+  <div class="reference-note">APBDesa pada rancangan baru tidak lagi mencampurkan kolom realisasi. Operator mengelola akun, subakun, dan nominal melalui panel operator/WordPress; visual alokasi diperbarui otomatis.</div>
+  <div class="operator-link-note"><b>Demo operator:</b> buka <a href="/operator/"><b>/operator/</b></a>, ubah akun/subakun atau nominal anggaran, lalu kembali ke halaman ini untuk melihat perubahan.</div>
 </section>
 </div></main>
 <div data-footer></div>
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js"></script>
 <script src="/assets/replica.js"></script><script src="/assets/financial-demo.js"></script>
-<script src="/assets/progress-animate.js"></script></body></html>
+</body></html>
