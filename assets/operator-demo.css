@@ -61,3 +61,13 @@
  .budget-allocation-head{grid-template-columns:1fr}.budget-allocation-amount{text-align:left;min-width:0;padding-left:21px}
  .budget-chart-tooltip{width:200px}
 }
+
+
+/* Fix duplicate donut center from legacy styles */
+.budget-pie:after{content:none!important;display:none!important}
+.budget-pie-center{
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-50%,-50%)!important;
+  margin:0!important;
+}
