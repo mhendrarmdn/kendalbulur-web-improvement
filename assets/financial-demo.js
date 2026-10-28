@@ -5,8 +5,8 @@ const pct = (r,b) => b ? (r/b*100).toFixed(2).replace('.',',') : '0,00';
 const esc = v => String(v ?? '').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 const rpCompact = n => {
   const value=Number(n)||0, abs=Math.abs(value);
-  if(abs>=1e9) return 'Rp '+(value/1e9).toFixed(abs>=10e9?1:2).replace(/\.00$/,'').replace('.',',')+' M';
-  if(abs>=1e6) return 'Rp '+(value/1e6).toFixed(abs>=10e6?1:2).replace(/\.00$/,'').replace('.',',')+' Jt';
+  if(abs>=1e9) return 'Rp '+(value/1e9).toFixed(abs>=10e9?1:2).replace(/\.00$/,'').replace('.',',')+' miliar';
+  if(abs>=1e6) return 'Rp '+(value/1e6).toFixed(abs>=10e6?1:2).replace(/\.00$/,'').replace('.',',')+' juta';
   return rp(value);
 };
 
@@ -340,24 +340,33 @@ function renderBudgetBreakdown(year,pieTarget,legendTarget,options){
    return 'M '+os.x.toFixed(3)+' '+os.y.toFixed(3)+' A '+outer+' '+outer+' 0 '+large+' 1 '+oe.x.toFixed(3)+' '+oe.y.toFixed(3)+' L '+ie.x.toFixed(3)+' '+ie.y.toFixed(3)+' A '+inner+' '+inner+' 0 '+large+' 0 '+is.x.toFixed(3)+' '+is.y.toFixed(3)+' Z';
  };
  let cursor=0;
- const slices=groups.map((x,i)=>{
+ const sliceParts=groups.map((x,i)=>{
    const percent=total?x.value/total*100:0;
    const start=cursor*3.6,end=(cursor+percent)*3.6;
    cursor+=percent;
-   return '<path class="budget-slice" data-chart-slice="'+i+'" tabindex="0" role="button" aria-label="'+esc(x.name)+', '+rp(x.value)+', '+percent.toFixed(2).replace('.',',')+' persen" d="'+segmentPath(start,end)+'" fill="'+colors[i%colors.length]+'" stroke="#fff" stroke-width="1.3"></path>';
- }).join('');
+   const mid=(start+end)/2;
+   const lp=point(42.5,mid);
+   const path='<path class="budget-slice" data-chart-slice="'+i+'" tabindex="0" role="button" aria-label="'+esc(x.name)+', '+rp(x.value)+', '+percent.toFixed(2).replace('.',',')+' persen" d="'+segmentPath(start,end)+'" fill="'+colors[i%colors.length]+'" stroke="#fff" stroke-width="1.8"></path>';
+   const label=percent>=7
+     ? '<text class="budget-slice-label" x="'+lp.x.toFixed(2)+'" y="'+lp.y.toFixed(2)+'" text-anchor="middle" dominant-baseline="middle">'+percent.toFixed(1).replace('.',',')+'%</text>'
+     : '';
+   return {path,label};
+ });
+ const slices=sliceParts.map(x=>x.path).join('');
+ const labels=sliceParts.map(x=>x.label).join('');
 
  if(pieTarget){
-   pieTarget.innerHTML='<svg viewBox="0 0 120 120" role="img" aria-label="'+esc(options.chartAria)+' '+year+'">'+slices+'</svg><div class="budget-pie-center" data-chart-center><small>'+esc(options.totalLabel)+'</small><b>'+rpCompact(total)+'</b><span>100%</span></div>';
+   pieTarget.innerHTML='<svg viewBox="0 0 120 120" role="img" aria-label="'+esc(options.chartAria)+' '+year+'">'+slices+labels+'</svg><div class="budget-pie-center" data-chart-center><small>'+esc(options.totalLabel)+'</small><b>'+rpCompact(total)+'</b><span>100%</span><em>Persentase dibulatkan</em></div>';
  }
  if(legendTarget){
    legendTarget.innerHTML=groups.map((x,i)=>{
      const p=total?x.value/total*100:0;
+     const color=colors[i%colors.length];
      const childRows=x.children.map(ch=>{
        const childPct=x.value?ch.value/x.value*100:0;
-       return '<div class="budget-subitem"><div><b>'+esc(ch.name)+'</b><small>'+esc(ch.code)+' · '+childPct.toFixed(1).replace('.',',')+'% dari '+esc(options.childRelation)+'</small></div><strong>'+rp(ch.value)+'</strong></div>';
+       return '<div class="budget-subitem"><div><b>'+esc(ch.name)+'</b><small><span class="budget-code-badge">Kode '+esc(ch.code)+'</span> '+childPct.toFixed(1).replace('.',',')+'% dari '+esc(options.childRelation)+'</small></div><strong>'+rp(ch.value)+'</strong></div>';
      }).join('');
-     return '<article class="budget-allocation-row" data-chart-row="'+i+'"><button type="button" class="budget-allocation-head" data-chart-toggle="'+i+'" aria-expanded="false"><span class="budget-allocation-label"><span class="budget-legend-dot" style="background:'+colors[i%colors.length]+'"></span><span><b>'+esc(x.name)+'</b><small>'+esc(x.code)+'</small><span class="budget-expand-label">'+esc(options.expandLabel)+'</span></span></span><span class="budget-allocation-amount"><strong>'+rp(x.value)+'</strong><span>'+p.toFixed(2).replace('.',',')+'%</span></span></button><div class="budget-progress"><span style="width:'+Math.max(1,p).toFixed(2)+'%;background:'+colors[i%colors.length]+'"></span></div><div class="budget-subitems">'+childRows+'</div></article>';
+     return '<article class="budget-allocation-row" data-chart-row="'+i+'" style="--item-color:'+color+'"><button type="button" class="budget-allocation-head" data-chart-toggle="'+i+'" aria-expanded="false"><span class="budget-allocation-label"><span class="budget-legend-dot" style="background:'+color+'"></span><span><b>'+esc(x.name)+'</b><small><span class="budget-code-badge">Kode '+esc(x.code)+'</span></small><span class="budget-expand-label">'+esc(options.expandLabel)+' <span class="budget-chevron" aria-hidden="true">⌄</span></span></span></span><span class="budget-allocation-amount"><strong>'+rp(x.value)+'</strong><span>'+p.toFixed(2).replace('.',',')+'%</span></span></button><div class="budget-progress"><span style="width:'+Math.max(1,p).toFixed(2)+'%;background:'+color+'"></span></div><div class="budget-subitems">'+childRows+'</div></article>';
    }).join('');
  }
 
@@ -383,7 +392,7 @@ function renderBudgetBreakdown(year,pieTarget,legendTarget,options){
    if(center){
      center.innerHTML=info
        ? '<small>'+esc(info.name)+'</small><b>'+rpCompact(info.value)+'</b><span>'+info.p.toFixed(2).replace('.',',')+'%</span>'
-       : '<small>'+esc(options.totalLabel)+'</small><b>'+rpCompact(total)+'</b><span>100%</span>';
+       : '<small>'+esc(options.totalLabel)+'</small><b>'+rpCompact(total)+'</b><span>100%</span><em>Persentase dibulatkan</em>';
    }
    if(detail){
      detail.innerHTML=info
@@ -425,18 +434,24 @@ function renderBudgetBreakdown(year,pieTarget,legendTarget,options){
    row.addEventListener('pointerenter',()=>setHover(i));
    row.addEventListener('pointerleave',clearHover);
  });
+ const toggleRow=(row,btn,i)=>{
+   const opening=!row.classList.contains('is-open');
+   rows.forEach(r=>{
+     if(r!==row){r.classList.remove('is-open');const b=r.querySelector('[data-chart-toggle]');if(b)b.setAttribute('aria-expanded','false');}
+   });
+   row.classList.toggle('is-open',opening);
+   btn.setAttribute('aria-expanded',String(opening));
+   selectedIndex=i;showState(current());
+ };
  root.querySelectorAll('[data-chart-toggle]').forEach((btn,i)=>{
+   const row=btn.closest('[data-chart-row]');
    btn.addEventListener('focus',()=>setHover(i));
    btn.addEventListener('blur',clearHover);
-   btn.addEventListener('click',()=>{
-     const row=btn.closest('[data-chart-row]');
-     const opening=!row.classList.contains('is-open');
-     rows.forEach(r=>{
-       if(r!==row){r.classList.remove('is-open');const b=r.querySelector('[data-chart-toggle]');if(b)b.setAttribute('aria-expanded','false');}
-     });
-     row.classList.toggle('is-open',opening);
-     btn.setAttribute('aria-expanded',String(opening));
-     selectedIndex=i;showState(current());
+   btn.addEventListener('click',e=>{e.stopPropagation();toggleRow(row,btn,i);});
+   row.addEventListener('click',e=>{
+     if(e.target.closest('.budget-subitems'))return;
+     if(e.target.closest('[data-chart-toggle]'))return;
+     toggleRow(row,btn,i);
    });
  });
  showState(null);
@@ -452,7 +467,7 @@ function renderBudgetAllocation(year,pieTarget,legendTarget){
   expandLabel:'Lihat sub-bidang',
   detailTitle:'Detail alokasi',
   detailEmpty:'Arahkan kursor atau klik bagian chart untuk melihat nama akun, nominal, dan persentase.',
-  colors:['#C62828','#F9A825','#1565C0','#2E7D32','#6A1B9A','#00838F','#EF6C00']
+  colors:['#C62828','#F9A825','#1565C0','#00838F','#6A1B9A','#EF6C00','#546E7A']
  });
 }
 
@@ -466,7 +481,7 @@ function renderIncomeAllocation(year,pieTarget,legendTarget){
   expandLabel:'Lihat rincian sumber',
   detailTitle:'Detail pendapatan',
   detailEmpty:'Arahkan kursor atau klik bagian chart untuk melihat sumber pendapatan, nominal, dan persentase.',
-  colors:['#1565C0','#2E7D32','#F9A825','#6A1B9A','#00838F','#EF6C00','#C62828']
+  colors:['#1565C0','#00838F','#F9A825','#6A1B9A','#EF6C00','#546E7A','#C62828']
  });
 }
 function renderBudgetView(year){
