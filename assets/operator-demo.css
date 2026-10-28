@@ -71,3 +71,12 @@
   transform:translate(-50%,-50%)!important;
   margin:0!important;
 }
+
+
+/* Pendapatan + Belanja section hierarchy */
+.budget-visual-section{margin-top:34px;padding-top:28px;border-top:1px solid #eee4e1}
+.budget-visual-section:first-of-type{margin-top:26px}
+.budget-visual-heading{margin-bottom:-8px}
+.budget-visual-heading h3{font-family:Poppins,sans-serif;font-size:20px;margin:5px 0 4px;color:#342c2a}
+.budget-visual-heading p{font-size:10px;color:#756966;margin:0;line-height:1.5}
+.budget-section-kicker{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.13em;color:#7F1110;background:#fff3f0;border:1px solid #efd4cf;border-radius:999px;padding:4px 8px}
