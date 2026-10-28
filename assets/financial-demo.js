@@ -3,7 +3,7 @@ const nf = new Intl.NumberFormat('id-ID');
 const rp = n => n == null ? '—' : 'Rp ' + nf.format(Math.round(n));
 const pct = (r,b) => b ? (r/b*100).toFixed(2).replace('.',',') : '0,00';
 
-const DATA = {
+const SEED_DATA = {
   2026: {
     label:'DEMO 2026',
     income:[
@@ -164,6 +164,85 @@ const DATA = {
   }
 };
 
+const STORAGE_KEY='kb_financial_operator_demo_v1';
+const clone=v=>JSON.parse(JSON.stringify(v));
+function loadData(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed=JSON.parse(raw);
+      if(parsed && typeof parsed==='object') return parsed;
+    }
+  }catch(e){}
+  return clone(SEED_DATA);
+}
+let DATA=loadData();
+function persistData(){
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(DATA));}catch(e){}
+  window.dispatchEvent(new CustomEvent('kbfinancialchange',{detail:{data:DATA}}));
+}
+function resetData(){DATA=clone(SEED_DATA);persistData();return DATA;}
+function getYearData(year){
+  const d=DATA[String(year)];
+  if(!d) throw new Error('Tahun '+year+' tidak tersedia.');
+  return d;
+}
+function getGroups(year,section){
+  if(section!=='income' && section!=='expense') throw new Error('Bagian akun tidak didukung.');
+  return getYearData(year)[section];
+}
+function listGroups(year,section){return clone(getGroups(year,section));}
+function addGroup(year,section,payload){
+  const groups=getGroups(year,section), code=String(payload.code||'').trim(), name=String(payload.name||'').trim();
+  if(!code||!name) throw new Error('Kode dan nama akun wajib diisi.');
+  if(groups.some(g=>g.code===code)) throw new Error('Kode akun sudah digunakan.');
+  groups.push({code,name,children:[]}); persistData(); return true;
+}
+function updateGroup(year,section,oldCode,payload){
+  const groups=getGroups(year,section), g=groups.find(x=>x.code===oldCode);
+  if(!g) throw new Error('Akun tidak ditemukan.');
+  const code=String(payload.code||'').trim(), name=String(payload.name||'').trim();
+  if(!code||!name) throw new Error('Kode dan nama akun wajib diisi.');
+  if(code!==oldCode && groups.some(x=>x.code===code)) throw new Error('Kode akun sudah digunakan.');
+  g.code=code; g.name=name; persistData(); return true;
+}
+function deleteGroup(year,section,code){
+  const groups=getGroups(year,section), i=groups.findIndex(x=>x.code===code);
+  if(i<0) throw new Error('Akun tidak ditemukan.');
+  groups.splice(i,1); persistData(); return true;
+}
+function getGroup(year,section,groupCode){
+  const g=getGroups(year,section).find(x=>x.code===groupCode);
+  if(!g) throw new Error('Akun tidak ditemukan.');
+  if(!Array.isArray(g.children)) g.children=[];
+  return g;
+}
+function addLeaf(year,section,groupCode,payload){
+  const g=getGroup(year,section,groupCode);
+  const code=String(payload.code||'').trim(), name=String(payload.name||'').trim();
+  if(!code||!name) throw new Error('Kode dan nama subakun wajib diisi.');
+  if(g.children.some(x=>x.code===code)) throw new Error('Kode subakun sudah digunakan pada akun ini.');
+  g.children.push({code,name,b:Number(payload.b)||0,r:Number(payload.r)||0}); persistData(); return true;
+}
+function updateLeaf(year,section,groupCode,oldCode,payload){
+  const g=getGroup(year,section,groupCode), x=g.children.find(v=>v.code===oldCode);
+  if(!x) throw new Error('Subakun tidak ditemukan.');
+  const code=String(payload.code||'').trim(), name=String(payload.name||'').trim();
+  if(!code||!name) throw new Error('Kode dan nama subakun wajib diisi.');
+  if(code!==oldCode && g.children.some(v=>v.code===code)) throw new Error('Kode subakun sudah digunakan.');
+  x.code=code; x.name=name; x.b=Number(payload.b)||0; x.r=Number(payload.r)||0; persistData(); return true;
+}
+function updateLeafAmounts(year,section,groupCode,leafCode,b,r){
+  const g=getGroup(year,section,groupCode), x=g.children.find(v=>v.code===leafCode);
+  if(!x) throw new Error('Subakun tidak ditemukan.');
+  x.b=Number(b)||0; x.r=Number(r)||0; persistData(); return true;
+}
+function deleteLeaf(year,section,groupCode,leafCode){
+  const g=getGroup(year,section,groupCode), i=g.children.findIndex(v=>v.code===leafCode);
+  if(i<0) throw new Error('Subakun tidak ditemukan.');
+  g.children.splice(i,1); persistData(); return true;
+}
+
 function sumChildren(g,k){return g.children.reduce((s,x)=>s+(x[k]||0),0)}
 function totalGroups(groups,k){return groups.reduce((s,g)=>s+sumChildren(g,k),0)}
 function rowsForYear(year){
@@ -202,6 +281,47 @@ function totals(year){
   pembiayaan:get('PEMBIAYAAN NETTO'),
   silpa:get('SILPA/SiLPA TAHUN BERJALAN')
  };
+}
+
+function budgetRows(year){
+ return rowsForYear(year).filter(r=>!['SURPLUS / (DEFISIT)','SILPA/SiLPA TAHUN BERJALAN'].includes(r.name));
+}
+function renderBudgetSummary(year,target){
+ const t=totals(year);
+ target.innerHTML=[
+  ['Total Pendapatan',t.pendapatan.b],
+  ['Total Belanja',t.belanja.b],
+  ['Pembiayaan Netto',t.pembiayaan.b],
+  ['SiLPA Rencana',t.silpa.b]
+ ].map(([n,v])=>'<div class="budget-summary-card"><small>'+n+'</small><b>'+rp(v)+'</b></div>').join('');
+}
+function renderBudgetTable(year,target){
+ target.innerHTML=budgetRows(year).map(row=>{
+  const cls=row.type==='chapter'?'level-0':row.type==='group'?'level-1':row.type==='total'?'total-row':row.type==='grand'?'grand-total':'';
+  const indent=row.level===1?'indent-1':row.level===2?'indent-2':'';
+  return '<tr class="'+cls+'"><td>'+row.code+'</td><td class="'+indent+'">'+row.name+'</td><td class="num">'+nf.format(row.b)+'</td></tr>';
+ }).join('');
+}
+function renderBudgetAllocation(year,pieTarget,legendTarget){
+ const groups=DATA[year].expense.map(g=>({name:g.name,value:sumChildren(g,'b')})).filter(x=>x.value>0);
+ const total=groups.reduce((s,x)=>s+x.value,0);
+ const colors=['#7F1110','#D4A72C','#A94B3F','#C88D6C','#8B6F47','#5E7D69','#8B5D8C'];
+ let cursor=0;
+ const stops=groups.map((x,i)=>{
+   const start=cursor, end=cursor+(total?x.value/total*100:0); cursor=end;
+   return colors[i%colors.length]+' '+start.toFixed(2)+'% '+end.toFixed(2)+'%';
+ });
+ if(pieTarget){
+   pieTarget.style.background=stops.length?'conic-gradient('+stops.join(',')+')':'#eee';
+   pieTarget.setAttribute('aria-label','Diagram alokasi belanja APBDesa '+year);
+   pieTarget.innerHTML='<div><b>'+rp(total)+'</b><span>Total Belanja</span></div>';
+ }
+ if(legendTarget){
+   legendTarget.innerHTML=groups.map((x,i)=>{
+     const p=total?x.value/total*100:0;
+     return '<div class="budget-legend-row"><span class="budget-legend-dot" style="background:'+colors[i%colors.length]+'"></span><div><b>'+x.name+'</b><small>'+rp(x.value)+' · '+p.toFixed(1).replace('.',',')+'%</small></div></div>';
+   }).join('');
+ }
 }
 function rowHtml(row){
  const diff=row.b-row.r, p=pct(row.r,row.b);
@@ -254,6 +374,9 @@ function setYear(year){
  const pg=document.querySelector('[data-progress-grid]'); if(pg) renderProgress(year,pg);
  const mt=document.querySelector('[data-metrics]'); if(mt) renderMetrics(year,mt);
  const po=document.querySelector('[data-poster]'); if(po) poster(year,po);
+ const bs=document.querySelector('[data-budget-summary]'); if(bs) renderBudgetSummary(year,bs);
+ const bt=document.querySelector('[data-budget-table]'); if(bt) renderBudgetTable(year,bt);
+ const bp=document.querySelector('[data-budget-pie]'), bl=document.querySelector('[data-budget-legend]'); if(bp||bl) renderBudgetAllocation(year,bp,bl);
  window.KB_FINANCIAL_YEAR=year;
 }
 function downloadPdf(kind,year){
@@ -275,6 +398,10 @@ function init(){
  document.querySelectorAll('[data-download]').forEach(b=>b.addEventListener('click',()=>downloadPdf(b.dataset.download,window.KB_FINANCIAL_YEAR||2026)));
  setYear(2026);
 }
-window.KBFinancial={DATA,rowsForYear,totals,setYear,downloadPdf};
+window.KBFinancial={
+ get DATA(){return DATA;},
+ SEED_DATA,rowsForYear,totals,setYear,downloadPdf,persistData,resetData,listGroups,
+ addGroup,updateGroup,deleteGroup,addLeaf,updateLeaf,updateLeafAmounts,deleteLeaf
+};
 document.addEventListener('DOMContentLoaded',init);
 })();
