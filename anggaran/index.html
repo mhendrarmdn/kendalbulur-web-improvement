@@ -11,17 +11,26 @@
 <section class="dashboard-wrap">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
     <div><span class="proposal-chip">APBDESA — ANGGARAN &amp; ALOKASI</span><h2 style="margin:9px 0 3px">Anggaran APBDesa <span data-year-label>2026</span></h2>
-    <p style="margin:0;color:#6d625f;font-size:11px">Halaman ini khusus menampilkan rencana anggaran dan arah alokasinya. Realisasi dipisahkan ke menu Realisasi APBDesa.</p></div>
+    <p style="margin:0;color:#6d625f;font-size:11px">Halaman ini khusus menampilkan rencana anggaran dan arah alokasinya.</p>
+    <a class="budget-realisasi-link" href="/realisasi-apbdesa/">Lihat Realisasi APBDesa →</a></div>
     <div class="download-actions"><button class="download-btn" data-download="budget">Unduh PDF Anggaran</button></div>
   </div>
 
   <div class="budget-summary-grid" data-budget-summary></div>
 
   <div class="budget-allocation">
-    <div><div class="budget-pie" data-budget-pie></div></div>
-    <div>
+    <div class="budget-chart-panel">
+      <div class="budget-pie" data-budget-pie></div>
+      <div class="budget-chart-tooltip" data-budget-tooltip hidden></div>
+      <div class="budget-active-detail" data-budget-detail>
+        <b>Detail alokasi</b>
+        <span>Arahkan kursor atau klik bagian chart untuk melihat nama akun, nominal, dan persentase.</span>
+      </div>
+      <p class="budget-chart-hint">Hover untuk preview. Klik untuk mempertahankan pilihan.</p>
+    </div>
+    <div class="budget-allocation-side">
       <h3 style="font-family:Poppins,sans-serif;margin:0 0 5px">Alokasi Belanja</h3>
-      <p style="font-size:10px;color:#756966;margin-top:0">Pie chart dihitung otomatis dari total anggaran pada setiap akun belanja.</p>
+      <p class="budget-allocation-intro">Setiap bidang dibandingkan terhadap total belanja. Klik bidang untuk membuka rincian sub-bidangnya.</p>
       <div class="budget-legend" data-budget-legend></div>
     </div>
   </div>
