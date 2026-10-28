@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Demo Operator APBDesa | Desa Kendalbulur</title>
+<link rel="stylesheet" href="/assets/replica.css">
+<link rel="stylesheet" href="/assets/operator-demo.css">
+</head>
+<body>
+<div data-header></div>
+<main class="page-content operator-demo-page">
+  <div class="kb-container">
+    <section class="operator-hero">
+      <div><span class="proposal-chip">DEMO OPERATOR</span><h1>Kelola APBDesa &amp; Realisasi</h1>
+      <p>Prototype ini meniru alur pengelolaan yang nantinya diterapkan di WordPress. Data tersimpan hanya pada browser perangkat ini.</p></div>
+      <div class="operator-hero-actions"><a class="kb-btn kb-btn-red" href="/anggaran/" target="_blank">Lihat APBDesa ↗</a><a class="kb-btn kb-btn-soft" href="/realisasi-apbdesa/" target="_blank">Lihat Realisasi ↗</a></div>
+    </section>
+
+    <div class="operator-notice"><b>Untuk presentasi stakeholder:</b> perubahan di panel ini langsung terbaca oleh halaman APBDesa dan Realisasi pada browser yang sama. Tombol “Reset data demo” mengembalikan data awal.</div>
+
+    <section class="operator-toolbar">
+      <label>Tahun<select data-op-year><option value="2026">2026</option><option value="2025">2025</option></select></label>
+      <label>Jenis akun<select data-op-section><option value="income">Pendapatan</option><option value="expense">Belanja / Alokasi</option></select></label>
+      <button class="button-secondary" type="button" data-reset-demo>Reset data demo</button>
+    </section>
+
+    <div class="operator-grid">
+      <section class="operator-card">
+        <div class="operator-card-head"><div><small>MASTER DATA</small><h2>Nama Akun</h2></div><button class="button-primary" type="button" data-add-group>+ Tambah akun</button></div>
+        <p class="operator-help">Akun adalah kelompok utama, misalnya “Bidang Pelaksanaan Pembangunan Desa”.</p>
+        <div class="operator-table-wrap"><table class="operator-table"><thead><tr><th>Kode</th><th>Nama akun</th><th>Subakun</th><th>Aksi</th></tr></thead><tbody data-group-body></tbody></table></div>
+      </section>
+
+      <section class="operator-card">
+        <div class="operator-card-head"><div><small>MASTER DATA</small><h2>Subakun &amp; Nilai</h2></div><button class="button-primary" type="button" data-add-leaf>+ Tambah subakun</button></div>
+        <div class="operator-select-row"><label>Pilih akun<select data-group-select></select></label></div>
+        <p class="operator-help">Setelah akun dipilih, subakun di bawahnya muncul otomatis. Inilah pola dropdown yang nantinya dipakai operator.</p>
+        <div class="operator-table-wrap"><table class="operator-table"><thead><tr><th>Kode</th><th>Nama subakun</th><th>Anggaran</th><th>Realisasi</th><th>Aksi</th></tr></thead><tbody data-leaf-body></tbody></table></div>
+      </section>
+    </div>
+
+    <section class="operator-card operator-preview">
+      <div class="operator-card-head"><div><small>PREVIEW</small><h2>Ringkasan data aktif</h2></div></div>
+      <div class="dash-metrics" data-op-metrics></div>
+    </section>
+  </div>
+</main>
+
+<div class="operator-modal" data-op-modal hidden>
+ <div class="operator-modal-dialog">
+  <div class="operator-modal-head"><h3 data-modal-title>Form</h3><button type="button" data-modal-close>×</button></div>
+  <form data-modal-form>
+   <div data-modal-fields></div>
+   <div class="operator-modal-actions"><button type="button" class="button-secondary" data-modal-cancel>Batal</button><button type="submit" class="button-primary">Simpan</button></div>
+  </form>
+ </div>
+</div>
+
+<div data-footer></div>
+<script src="/assets/replica.js"></script>
+<script src="/assets/financial-demo.js"></script>
+<script src="/assets/operator-demo.js"></script>
+</body></html>
