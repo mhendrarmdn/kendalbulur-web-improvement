@@ -80,3 +80,15 @@
 .budget-visual-heading h3{font-family:Poppins,sans-serif;font-size:20px;margin:5px 0 4px;color:#342c2a}
 .budget-visual-heading p{font-size:10px;color:#756966;margin:0;line-height:1.5}
 .budget-section-kicker{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.13em;color:#7F1110;background:#fff3f0;border:1px solid #efd4cf;border-radius:999px;padding:4px 8px}
+
+
+/* APBDesa Pendapatan / Belanja dropdown */
+.budget-view-toolbar{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:-8px}
+.budget-view-select-wrap{display:grid;gap:5px;min-width:190px}
+.budget-view-select-wrap>span{font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7d706c}
+.budget-view-select-wrap select{width:100%;min-height:42px;border:1px solid #d8cbc7;border-radius:8px;background:#fff;color:#382f2d;padding:0 38px 0 12px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(70,25,20,.04)}
+.budget-view-select-wrap select:focus{outline:2px solid rgba(127,17,16,.16);outline-offset:2px;border-color:#a45b53}
+@media(max-width:640px){
+ .budget-view-toolbar{align-items:stretch;flex-direction:column;margin-bottom:2px}
+ .budget-view-select-wrap{min-width:0;width:100%}
+}
