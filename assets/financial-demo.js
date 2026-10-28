@@ -2,6 +2,13 @@
 const nf = new Intl.NumberFormat('id-ID');
 const rp = n => n == null ? '—' : 'Rp ' + nf.format(Math.round(n));
 const pct = (r,b) => b ? (r/b*100).toFixed(2).replace('.',',') : '0,00';
+const esc = v => String(v ?? '').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const rpCompact = n => {
+  const value=Number(n)||0, abs=Math.abs(value);
+  if(abs>=1e9) return 'Rp '+(value/1e9).toFixed(abs>=10e9?1:2).replace(/\.00$/,'').replace('.',',')+' M';
+  if(abs>=1e6) return 'Rp '+(value/1e6).toFixed(abs>=10e6?1:2).replace(/\.00$/,'').replace('.',',')+' Jt';
+  return rp(value);
+};
 
 const SEED_DATA = {
   2026: {
@@ -288,12 +295,16 @@ function budgetRows(year){
 }
 function renderBudgetSummary(year,target){
  const t=totals(year);
- target.innerHTML=[
-  ['Total Pendapatan',t.pendapatan.b],
-  ['Total Belanja',t.belanja.b],
-  ['Pembiayaan Netto',t.pembiayaan.b],
-  ['SiLPA Rencana',t.silpa.b]
- ].map(([n,v])=>'<div class="budget-summary-card"><small>'+n+'</small><b>'+rp(v)+'</b></div>').join('');
+ const primary=[
+  {name:'Total Pendapatan',value:t.pendapatan.b,note:'Rencana seluruh penerimaan desa pada tahun anggaran.'},
+  {name:'Total Belanja',value:t.belanja.b,note:'Total rencana belanja yang dialokasikan ke bidang dan sub-bidang.'}
+ ];
+ const secondary=[
+  {name:'Pembiayaan Netto',value:t.pembiayaan.b,tip:'Selisih antara penerimaan pembiayaan dan pengeluaran pembiayaan desa.',note:'Komponen pembiayaan, bukan pendapatan atau belanja rutin.'},
+  {name:'SiLPA Rencana',value:t.silpa.b,tip:'Sisa Lebih Perhitungan Anggaran yang direncanakan pada akhir tahun anggaran.',note:'Nilai turunan setelah pendapatan, belanja, dan pembiayaan diperhitungkan.'}
+ ];
+ const card=(x,kind)=>'<article class="budget-summary-card '+kind+'"><small>'+esc(x.name)+(x.tip?' <span class="budget-info" tabindex="0" aria-label="Penjelasan '+esc(x.name)+'">i<span class="budget-info-tip">'+esc(x.tip)+'</span></span>':'')+'</small><b>'+rp(x.value)+'</b><em>'+esc(x.note)+'</em></article>';
+ target.innerHTML='<div class="budget-summary-primary">'+primary.map(x=>card(x,'primary')).join('')+'</div><div class="budget-summary-secondary">'+secondary.map(x=>card(x,'secondary')).join('')+'</div>';
 }
 function renderBudgetTable(year,target){
  target.innerHTML=budgetRows(year).map(row=>{
@@ -303,25 +314,129 @@ function renderBudgetTable(year,target){
  }).join('');
 }
 function renderBudgetAllocation(year,pieTarget,legendTarget){
- const groups=DATA[year].expense.map(g=>({name:g.name,value:sumChildren(g,'b')})).filter(x=>x.value>0);
+ const raw=DATA[year].expense||[];
+ const groups=raw.map(g=>({
+   code:g.code,
+   name:g.name,
+   value:sumChildren(g,'b'),
+   children:(g.children||[]).map(x=>({code:x.code,name:x.name,value:Number(x.b)||0}))
+ })).filter(x=>x.value>0);
  const total=groups.reduce((s,x)=>s+x.value,0);
- const colors=['#7F1110','#D4A72C','#A94B3F','#C88D6C','#8B6F47','#5E7D69','#8B5D8C'];
+ const colors=['#C62828','#F9A825','#1565C0','#2E7D32','#6A1B9A','#00838F','#EF6C00'];
+ const tooltip=document.querySelector('[data-budget-tooltip]');
+ const detail=document.querySelector('[data-budget-detail]');
+ let selectedIndex=null, hoverIndex=null;
+
+ const point=(r,a)=>{
+   const rad=(a-90)*Math.PI/180;
+   return {x:60+r*Math.cos(rad),y:60+r*Math.sin(rad)};
+ };
+ const segmentPath=(start,end)=>{
+   const outer=54,inner=31.5,large=(end-start)>180?1:0;
+   const os=point(outer,start),oe=point(outer,end),ie=point(inner,end),is=point(inner,start);
+   return 'M '+os.x.toFixed(3)+' '+os.y.toFixed(3)+' A '+outer+' '+outer+' 0 '+large+' 1 '+oe.x.toFixed(3)+' '+oe.y.toFixed(3)+' L '+ie.x.toFixed(3)+' '+ie.y.toFixed(3)+' A '+inner+' '+inner+' 0 '+large+' 0 '+is.x.toFixed(3)+' '+is.y.toFixed(3)+' Z';
+ };
  let cursor=0;
- const stops=groups.map((x,i)=>{
-   const start=cursor, end=cursor+(total?x.value/total*100:0); cursor=end;
-   return colors[i%colors.length]+' '+start.toFixed(2)+'% '+end.toFixed(2)+'%';
- });
+ const slices=groups.map((x,i)=>{
+   const percent=total?x.value/total*100:0;
+   const start=cursor*3.6,end=(cursor+percent)*3.6;
+   cursor+=percent;
+   return '<path class="budget-slice" data-budget-slice="'+i+'" tabindex="0" role="button" aria-label="'+esc(x.name)+', '+rp(x.value)+', '+percent.toFixed(2).replace('.',',')+' persen" d="'+segmentPath(start,end)+'" fill="'+colors[i%colors.length]+'" stroke="#fff" stroke-width="1.3"></path>';
+ }).join('');
+
  if(pieTarget){
-   pieTarget.style.background=stops.length?'conic-gradient('+stops.join(',')+')':'#eee';
-   pieTarget.setAttribute('aria-label','Diagram alokasi belanja APBDesa '+year);
-   pieTarget.innerHTML='<div><b>'+rp(total)+'</b><span>Total Belanja</span></div>';
+   pieTarget.innerHTML='<svg viewBox="0 0 120 120" role="img" aria-label="Diagram interaktif alokasi belanja APBDesa '+year+'">'+slices+'</svg><div class="budget-pie-center" data-budget-center><small>Total Belanja</small><b>'+rpCompact(total)+'</b><span>100%</span></div>';
  }
  if(legendTarget){
    legendTarget.innerHTML=groups.map((x,i)=>{
      const p=total?x.value/total*100:0;
-     return '<div class="budget-legend-row"><span class="budget-legend-dot" style="background:'+colors[i%colors.length]+'"></span><div><b>'+x.name+'</b><small>'+rp(x.value)+' · '+p.toFixed(1).replace('.',',')+'%</small></div></div>';
+     const childRows=x.children.map(ch=>{
+       const childPct=x.value?ch.value/x.value*100:0;
+       return '<div class="budget-subitem"><div><b>'+esc(ch.name)+'</b><small>'+esc(ch.code)+' · '+childPct.toFixed(1).replace('.',',')+'% dari bidang</small></div><strong>'+rp(ch.value)+'</strong></div>';
+     }).join('');
+     return '<article class="budget-allocation-row" data-budget-row="'+i+'"><button type="button" class="budget-allocation-head" data-budget-toggle="'+i+'" aria-expanded="false"><span class="budget-allocation-label"><span class="budget-legend-dot" style="background:'+colors[i%colors.length]+'"></span><span><b>'+esc(x.name)+'</b><small>'+esc(x.code)+'</small><span class="budget-expand-label">Lihat sub-bidang</span></span></span><span class="budget-allocation-amount"><strong>'+rp(x.value)+'</strong><span>'+p.toFixed(2).replace('.',',')+'%</span></span></button><div class="budget-progress"><span style="width:'+Math.max(1,p).toFixed(2)+'%;background:'+colors[i%colors.length]+'"></span></div><div class="budget-subitems">'+childRows+'</div></article>';
    }).join('');
  }
+
+ const center=document.querySelector('[data-budget-center]');
+ const rows=[...document.querySelectorAll('[data-budget-row]')];
+ const paths=[...document.querySelectorAll('[data-budget-slice]')];
+
+ const infoFor=i=>{
+   if(i==null||!groups[i]) return null;
+   const x=groups[i],p=total?x.value/total*100:0;
+   return {...x,p,color:colors[i%colors.length]};
+ };
+ const showState=i=>{
+   const info=infoFor(i);
+   paths.forEach((el,idx)=>{
+     el.classList.toggle('is-active',idx===i);
+     el.classList.toggle('is-dimmed',i!=null&&idx!==i);
+   });
+   rows.forEach((el,idx)=>{
+     el.classList.toggle('is-active',idx===i);
+     el.classList.toggle('is-dimmed',i!=null&&idx!==i);
+   });
+   if(center){
+     center.innerHTML=info
+       ? '<small>'+esc(info.name)+'</small><b>'+rpCompact(info.value)+'</b><span>'+info.p.toFixed(2).replace('.',',')+'%</span>'
+       : '<small>Total Belanja</small><b>'+rpCompact(total)+'</b><span>100%</span>';
+   }
+   if(detail){
+     detail.innerHTML=info
+       ? '<b>'+esc(info.name)+'</b><strong>'+rp(info.value)+'</strong><span>'+info.p.toFixed(2).replace('.',',')+'% dari total belanja APBDesa '+year+'.</span>'
+       : '<b>Detail alokasi</b><span>Arahkan kursor atau klik bagian chart untuk melihat nama akun, nominal, dan persentase.</span>';
+   }
+ };
+ const current=()=>hoverIndex!=null?hoverIndex:selectedIndex;
+ const setHover=i=>{hoverIndex=i;showState(current());};
+ const clearHover=()=>{hoverIndex=null;showState(current());};
+ const select=i=>{selectedIndex=selectedIndex===i?null:i;showState(current());};
+
+ const showTooltip=(i,event)=>{
+   if(!tooltip)return;
+   const info=infoFor(i); if(!info)return;
+   tooltip.innerHTML='<b>'+esc(info.name)+'</b><strong>'+rp(info.value)+'</strong><br><span>'+info.p.toFixed(2).replace('.',',')+'% dari total belanja</span>';
+   tooltip.hidden=false;
+   const panel=tooltip.closest('.budget-chart-panel'),rect=panel?.getBoundingClientRect();
+   if(rect&&event&&'clientX' in event){
+     const maxX=Math.max(8,rect.width-238),maxY=Math.max(8,rect.height-90);
+     tooltip.style.left=Math.min(maxX,Math.max(8,event.clientX-rect.left+12))+'px';
+     tooltip.style.top=Math.min(maxY,Math.max(8,event.clientY-rect.top+12))+'px';
+   }else{
+     tooltip.style.left='50%';tooltip.style.top='12px';tooltip.style.transform='translateX(-50%)';
+   }
+ };
+ const hideTooltip=()=>{if(tooltip){tooltip.hidden=true;tooltip.style.transform='';}};
+
+ paths.forEach((el,i)=>{
+   el.addEventListener('pointerenter',e=>{setHover(i);showTooltip(i,e);});
+   el.addEventListener('pointermove',e=>showTooltip(i,e));
+   el.addEventListener('pointerleave',()=>{clearHover();hideTooltip();});
+   el.addEventListener('focus',()=>{setHover(i);showTooltip(i);});
+   el.addEventListener('blur',()=>{clearHover();hideTooltip();});
+   el.addEventListener('click',()=>select(i));
+   el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(i);}});
+ });
+ rows.forEach((row,i)=>{
+   row.addEventListener('pointerenter',()=>setHover(i));
+   row.addEventListener('pointerleave',clearHover);
+ });
+ document.querySelectorAll('[data-budget-toggle]').forEach((btn,i)=>{
+   btn.addEventListener('focus',()=>setHover(i));
+   btn.addEventListener('blur',clearHover);
+   btn.addEventListener('click',()=>{
+     const row=btn.closest('[data-budget-row]');
+     const opening=!row.classList.contains('is-open');
+     rows.forEach(r=>{
+       if(r!==row){r.classList.remove('is-open');const b=r.querySelector('[data-budget-toggle]');if(b)b.setAttribute('aria-expanded','false');}
+     });
+     row.classList.toggle('is-open',opening);
+     btn.setAttribute('aria-expanded',String(opening));
+     selectedIndex=i;showState(current());
+   });
+ });
+ showState(null);
 }
 function rowHtml(row){
  const diff=row.b-row.r, p=pct(row.r,row.b);
@@ -365,7 +480,7 @@ function renderMetrics(year,target){
 }
 function poster(year,target){
  const t=totals(year);
- target.innerHTML=`<div class="demo-poster"><div class="demo-poster-head"><b>DESA KENDALBULUR</b><span>APBDesa ${year}</span></div><div class="demo-poster-grid"><div><h4>PENDAPATAN</h4><strong>${rp(t.pendapatan.b)}</strong><p>Realisasi demo: ${rp(t.pendapatan.r)}</p></div><div><h4>BELANJA</h4><strong>${rp(t.belanja.b)}</strong><p>Realisasi demo: ${rp(t.belanja.r)}</p></div><div><h4>PEMBIAYAAN NETTO</h4><strong>${rp(t.pembiayaan.b)}</strong><p>Realisasi demo: ${rp(t.pembiayaan.r)}</p></div></div><div class="demo-watermark">DATA DEMO UNTUK PROTOTYPE - BUKAN DATA RESMI</div></div>`;
+ target.innerHTML=`<div class="demo-poster"><div class="demo-poster-head"><b>DESA KENDALBULUR</b><span>APBDesa ${year}</span></div><div class="demo-poster-grid"><div><h4>PENDAPATAN</h4><strong>${rp(t.pendapatan.b)}</strong><p>Rencana pendapatan desa</p></div><div><h4>BELANJA</h4><strong>${rp(t.belanja.b)}</strong><p>Rencana alokasi belanja</p></div><div><h4>PEMBIAYAAN NETTO</h4><strong>${rp(t.pembiayaan.b)}</strong><p>Selisih penerimaan & pengeluaran pembiayaan</p></div></div><div class="demo-watermark">DATA DEMO UNTUK PROTOTYPE - BUKAN DATA RESMI</div></div>`;
 }
 function setYear(year){
  document.querySelectorAll('[data-year-btn]').forEach(b=>b.classList.toggle('active',Number(b.dataset.yearBtn)===year));
