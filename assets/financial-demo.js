@@ -567,19 +567,239 @@ function setYear(year){
  renderBudgetView(year);
  window.KB_FINANCIAL_YEAR=year;
 }
-function downloadPdf(kind,year){
+function downloadBudgetPdf(year){
+ const {jsPDF}=window.jspdf||{};
+ if(!jsPDF){alert('Generator PDF belum termuat. Coba refresh halaman.');return;}
+ if(!window.jspdf || !jsPDF.API || !docAutoTableAvailable()){alert('Komponen tabel PDF belum termuat. Coba refresh halaman.');return;}
+
+ const d=DATA[year],t=totals(year);
+ const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
+ const pageW=doc.internal.pageSize.getWidth();
+ const pageH=doc.internal.pageSize.getHeight();
+ const margin=14;
+ const brand=[127,17,16];
+ const soft=[249,245,243];
+ const ink=[42,36,34];
+ const muted=[104,93,89];
+ let y=14;
+
+ function footer(){
+   const n=doc.internal.getNumberOfPages();
+   for(let p=1;p<=n;p++){
+     doc.setPage(p);
+     doc.setDrawColor(225,216,212);
+     doc.line(margin,pageH-11,pageW-margin,pageH-11);
+     doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...muted);
+     doc.text('Pemerintah Desa Kendalbulur - APBDesa '+year,margin,pageH-6);
+     doc.text('Halaman '+p+' dari '+n,pageW-margin,pageH-6,{align:'right'});
+   }
+ }
+
+ function pageHeader(isFirst){
+   if(!isFirst){
+     doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(...brand);
+     doc.text('APBDesa Pemerintah Desa Kendalbulur - Tahun Anggaran '+year,margin,14);
+     doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...muted);
+     doc.text('ANGGARAN DAN ALOKASI - DATA DEMO PROTOTYPE',margin,19);
+     y=27;
+   }
+ }
+
+ function nextPage(){
+   doc.addPage('a4','landscape');
+   pageHeader(false);
+ }
+
+ function ensureSpace(needed){
+   if(y+needed>pageH-18) nextPage();
+ }
+
+ function summaryCard(x,w,label,value,primary){
+   doc.setFillColor(...(primary?[255,250,249]:soft));
+   doc.setDrawColor(...(primary?brand:[218,207,203]));
+   doc.roundedRect(x,y,w,23,2,2,'FD');
+   if(primary){
+     doc.setFillColor(...brand);
+     doc.rect(x,y,w,2.2,'F');
+   }
+   doc.setFont('helvetica','bold');doc.setFontSize(7.5);doc.setTextColor(...muted);
+   doc.text(label,x+5,y+7.5);
+   doc.setFont('helvetica','bold');doc.setFontSize(primary?13:11);doc.setTextColor(...(primary?brand:ink));
+   doc.text(rp(value),x+5,y+16);
+ }
+
+ function sectionRows(groups,totalLabel){
+   const rows=[];
+   groups.forEach(g=>{
+     rows.push({type:'group',cells:[g.code,g.name,nf.format(sumChildren(g,'b'))]});
+     (g.children||[]).forEach(ch=>rows.push({type:'leaf',cells:[ch.code,ch.name,nf.format(ch.b||0)]}));
+   });
+   rows.push({type:'total',cells:['',totalLabel,nf.format(totalGroups(groups,'b'))]});
+   return rows;
+ }
+
+ function drawSection(title,subtitle,groups,totalLabel){
+   ensureSpace(25);
+   doc.setFont('helvetica','bold');doc.setFontSize(12);doc.setTextColor(...brand);
+   doc.text(title,margin,y);
+   doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(...muted);
+   if(subtitle) doc.text(subtitle,margin,y+5);
+   const rows=sectionRows(groups,totalLabel);
+   const startY=y+9;
+   doc.autoTable({
+     startY,
+     margin:{left:margin,right:margin,bottom:17},
+     head:[['Kode','Uraian','Anggaran (Rp)']],
+     body:rows.map(r=>r.cells),
+     tableWidth:'auto',
+     styles:{font:'helvetica',fontSize:7.2,cellPadding:2,valign:'middle',textColor:ink,lineColor:[231,224,221],lineWidth:.15},
+     headStyles:{fillColor:brand,textColor:[255,255,255],fontStyle:'bold',fontSize:7.5},
+     columnStyles:{0:{cellWidth:28},1:{cellWidth:174},2:{cellWidth:67,halign:'right'}},
+     didParseCell:data=>{
+       if(data.section!=='body')return;
+       const meta=rows[data.row.index];
+       if(!meta)return;
+       if(meta.type==='group'){
+         data.cell.styles.fillColor=[250,247,246];
+         data.cell.styles.fontStyle='bold';
+         data.cell.styles.textColor=ink;
+       }else if(meta.type==='leaf'){
+         if(data.column.index===1)data.cell.styles.cellPadding={top:2,right:2,bottom:2,left:7};
+         data.cell.styles.textColor=[68,60,57];
+       }else if(meta.type==='total'){
+         data.cell.styles.fillColor=[127,17,16];
+         data.cell.styles.textColor=[255,255,255];
+         data.cell.styles.fontStyle='bold';
+       }
+     },
+     didDrawPage:()=>{}
+   });
+   y=doc.lastAutoTable.finalY+9;
+ }
+
+ function financingRows(){
+   const rows=[];
+   [d.financing.receipt,d.financing.spend].forEach(g=>{
+     rows.push({type:'group',cells:[g.code,g.name,nf.format(sumChildren(g,'b'))]});
+     (g.children||[]).forEach(ch=>rows.push({type:'leaf',cells:[ch.code,ch.name,nf.format(ch.b||0)]}));
+   });
+   const receipt=sumChildren(d.financing.receipt,'b');
+   const spend=sumChildren(d.financing.spend,'b');
+   rows.push({type:'total',cells:['','PEMBIAYAAN NETTO',nf.format(receipt-spend)]});
+   return rows;
+ }
+
+ // Cover / summary
+ doc.setFont('helvetica','bold');doc.setFontSize(18);doc.setTextColor(...ink);
+ doc.text('ANGGARAN PENDAPATAN DAN BELANJA DESA (APBDesa)',margin,y);
+ y+=7;
+ doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(...brand);
+ doc.text('Pemerintah Desa Kendalbulur - Tahun Anggaran '+year,margin,y);
+ y+=6;
+ doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...muted);
+ doc.text('Dokumen ini khusus memuat rencana anggaran dan alokasi. Realisasi disajikan pada laporan terpisah.',margin,y);
+ doc.setTextColor(...brand);
+ doc.text('DATA DEMO UNTUK PROTOTYPE - BUKAN DATA RESMI',pageW-margin,y,{align:'right'});
+ y+=9;
+
+ const gap=4;
+ const cardW=(pageW-(margin*2)-(gap*3))/4;
+ summaryCard(margin,cardW,'TOTAL PENDAPATAN',t.pendapatan.b,true);
+ summaryCard(margin+(cardW+gap),cardW,'TOTAL BELANJA',t.belanja.b,true);
+ summaryCard(margin+2*(cardW+gap),cardW,'PEMBIAYAAN NETTO',t.pembiayaan.b,false);
+ summaryCard(margin+3*(cardW+gap),cardW,'SiLPA RENCANA',t.silpa.b,false);
+ y+=29;
+
+ doc.setFillColor(...soft);doc.setDrawColor(226,216,212);
+ doc.roundedRect(margin,y,pageW-(margin*2),13,2,2,'FD');
+ doc.setFont('helvetica','normal');doc.setFontSize(7.2);doc.setTextColor(...muted);
+ doc.text('Pembiayaan Netto: selisih penerimaan dan pengeluaran pembiayaan.',margin+5,y+5);
+ doc.text('SiLPA: Sisa Lebih Perhitungan Anggaran yang direncanakan pada akhir tahun.',margin+5,y+9.5);
+ y+=20;
+
+ drawSection('A. PENDAPATAN','Rincian rencana sumber pendapatan desa.',d.income,'JUMLAH PENDAPATAN');
+ drawSection('B. BELANJA','Rincian alokasi belanja per bidang dan sub-bidang.',d.expense,'JUMLAH BELANJA');
+
+ ensureSpace(30);
+ doc.setFont('helvetica','bold');doc.setFontSize(12);doc.setTextColor(...brand);
+ doc.text('C. PEMBIAYAAN',margin,y);
+ doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(...muted);
+ doc.text('Penerimaan pembiayaan, pengeluaran pembiayaan, dan pembiayaan netto.',margin,y+5);
+ const fRows=financingRows();
+ doc.autoTable({
+   startY:y+9,
+   margin:{left:margin,right:margin,bottom:17},
+   head:[['Kode','Uraian','Anggaran (Rp)']],
+   body:fRows.map(r=>r.cells),
+   styles:{font:'helvetica',fontSize:7.2,cellPadding:2,valign:'middle',textColor:ink,lineColor:[231,224,221],lineWidth:.15},
+   headStyles:{fillColor:brand,textColor:[255,255,255],fontStyle:'bold'},
+   columnStyles:{0:{cellWidth:28},1:{cellWidth:174},2:{cellWidth:67,halign:'right'}},
+   didParseCell:data=>{
+     if(data.section!=='body')return;
+     const meta=fRows[data.row.index];if(!meta)return;
+     if(meta.type==='group'){data.cell.styles.fillColor=[250,247,246];data.cell.styles.fontStyle='bold';}
+     else if(meta.type==='leaf'&&data.column.index===1)data.cell.styles.cellPadding={top:2,right:2,bottom:2,left:7};
+     else if(meta.type==='total'){data.cell.styles.fillColor=brand;data.cell.styles.textColor=[255,255,255];data.cell.styles.fontStyle='bold';}
+   }
+ });
+ y=doc.lastAutoTable.finalY+9;
+
+ ensureSpace(25);
+ const surplus=t.pendapatan.b-t.belanja.b;
+ doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(...ink);
+ doc.text('D. RINGKASAN AKHIR ANGGARAN',margin,y);
+ y+=6;
+ const endRows=[
+   ['Surplus / (Defisit)',nf.format(surplus)],
+   ['Pembiayaan Netto',nf.format(t.pembiayaan.b)],
+   ['SiLPA Rencana',nf.format(t.silpa.b)]
+ ];
+ doc.autoTable({
+   startY:y,
+   margin:{left:margin,right:margin,bottom:17},
+   body:endRows,
+   theme:'grid',
+   styles:{font:'helvetica',fontSize:8,cellPadding:2.4,textColor:ink,lineColor:[222,213,209],lineWidth:.2},
+   columnStyles:{0:{cellWidth:202,fontStyle:'bold'},1:{cellWidth:67,halign:'right',fontStyle:'bold'}},
+   didParseCell:data=>{
+     if(data.row.index===2){data.cell.styles.fillColor=[127,17,16];data.cell.styles.textColor=[255,255,255];}
+   }
+ });
+
+ footer();
+ doc.save('APBDes_'+year+'_Anggaran_DEMO.pdf');
+}
+
+function docAutoTableAvailable(){
+ const {jsPDF}=window.jspdf||{};
+ return !!(jsPDF&&jsPDF.API&&typeof jsPDF.API.autoTable==='function');
+}
+
+function downloadRealizationPdf(year){
  const {jsPDF}=window.jspdf||{}; if(!jsPDF){alert('Generator PDF belum termuat. Coba refresh halaman.');return;}
  const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
- doc.setFont('helvetica','bold');doc.setFontSize(16);doc.text(kind==='budget'?'APBDesa - Anggaran':'Laporan Realisasi APBDesa',14,16);
+ doc.setFont('helvetica','bold');doc.setFontSize(16);doc.text('Laporan Realisasi APBDesa',14,16);
  doc.setFontSize(11);doc.text('Pemerintah Desa Kendalbulur - Tahun '+year,14,23);
  doc.setTextColor(127,17,16);doc.text('DATA DEMO UNTUK PROTOTYPE - BUKAN DATA RESMI',14,30);doc.setTextColor(0,0,0);
  const body=rowsForYear(year).map(r=>[
-   r.code,r.name,nf.format(r.b),kind==='budget'?'—':nf.format(r.r),kind==='budget'?'—':nf.format(r.b-r.r),kind==='budget'?'—':pct(r.r,r.b)+'%'
+   r.code,r.name,nf.format(r.b),nf.format(r.r),nf.format(r.b-r.r),pct(r.r,r.b)+'%'
  ]);
  if(doc.autoTable){
-  doc.autoTable({startY:35,head:[['Kode','Uraian','Anggaran (Rp)','Realisasi (Rp)','Lebih/(Kurang)','%']],body,styles:{fontSize:7,cellPadding:1.7},headStyles:{fillColor:[127,17,16]},columnStyles:{1:{cellWidth:100}}});
+   doc.autoTable({
+     startY:35,
+     head:[['Kode','Uraian','Anggaran (Rp)','Realisasi (Rp)','Lebih/(Kurang)','%']],
+     body,
+     styles:{fontSize:7,cellPadding:1.7},
+     headStyles:{fillColor:[127,17,16]},
+     columnStyles:{1:{cellWidth:100}}
+   });
  }
- doc.save((kind==='budget'?'APBDes_':'Realisasi_APBDes_')+year+'_DEMO.pdf');
+ doc.save('Realisasi_APBDes_'+year+'_DEMO.pdf');
+}
+
+function downloadPdf(kind,year){
+ if(kind==='budget') downloadBudgetPdf(year);
+ else downloadRealizationPdf(year);
 }
 function init(){
  document.querySelectorAll('[data-year-btn]').forEach(b=>b.addEventListener('click',()=>setYear(Number(b.dataset.yearBtn))));
