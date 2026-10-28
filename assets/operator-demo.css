@@ -165,3 +165,127 @@
  .budget-allocation-amount{text-align:left!important;min-width:0!important;padding-left:24px!important;margin-top:4px}
  .budget-slice-label{font-size:5px}
 }
+
+
+/* ===== APBDesa final visual polish ===== */
+.budget-slice-label{
+  fill:#fff!important;
+  stroke:none!important;
+  paint-order:normal!important;
+  font-size:4.7px!important;
+  font-weight:800!important;
+  letter-spacing:0!important;
+}
+
+.budget-pie-center b{
+  white-space:normal!important;
+  max-width:92%!important;
+  font-size:17px!important;
+}
+.budget-pie-center em{display:none!important}
+
+.budget-rounding-note{
+  margin:11px auto 0;
+  max-width:340px;
+  text-align:center;
+  font-size:12px;
+  line-height:1.45;
+  color:#5f5552;
+}
+
+.budget-active-detail{
+  min-height:70px;
+  justify-content:center;
+}
+.budget-active-detail span{line-height:1.5!important}
+
+.budget-allocation-row{
+  cursor:pointer;
+}
+.budget-allocation-head{
+  padding:13px 15px 9px!important;
+  gap:16px!important;
+}
+.budget-allocation-label{
+  grid-template-columns:14px minmax(0,1fr)!important;
+  align-items:start!important;
+}
+.budget-item-copy{
+  display:block;
+  min-width:0;
+}
+.budget-item-copy>b{
+  display:block;
+  font-size:13px!important;
+  line-height:1.4!important;
+  color:#292321!important;
+}
+.budget-item-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:7px;
+}
+.budget-code-badge{
+  flex:0 0 auto;
+}
+.budget-expand-label{
+  margin:0!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:flex-end;
+  gap:6px!important;
+  white-space:nowrap;
+  color:#4f4542!important;
+}
+.budget-chevron{
+  width:16px;
+  height:16px;
+  flex:0 0 16px;
+  display:block;
+  transition:transform .18s ease;
+  transform-origin:50% 50%;
+}
+.budget-allocation-row.is-open .budget-chevron{
+  transform:rotate(180deg);
+}
+
+.budget-allocation-amount{
+  align-self:start!important;
+  padding-top:0!important;
+}
+.budget-allocation-amount strong{
+  line-height:1.35!important;
+}
+.budget-allocation-amount span{
+  color:var(--item-color,#403735)!important;
+}
+
+.budget-progress{
+  margin-top:0!important;
+}
+
+@media(min-width:901px){
+  .budget-chart-panel{
+    position:sticky!important;
+    top:86px;
+    align-self:start;
+  }
+}
+
+@media(max-width:640px){
+  .budget-item-meta{
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .budget-expand-label{
+    margin-left:auto!important;
+  }
+  .budget-rounding-note{
+    font-size:12px;
+  }
+  .budget-pie-center b{
+    font-size:15px!important;
+  }
+}

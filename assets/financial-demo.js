@@ -5,8 +5,8 @@ const pct = (r,b) => b ? (r/b*100).toFixed(2).replace('.',',') : '0,00';
 const esc = v => String(v ?? '').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 const rpCompact = n => {
   const value=Number(n)||0, abs=Math.abs(value);
-  if(abs>=1e9) return 'Rp '+(value/1e9).toFixed(abs>=10e9?1:2).replace(/\.00$/,'').replace('.',',')+' miliar';
-  if(abs>=1e6) return 'Rp '+(value/1e6).toFixed(abs>=10e6?1:2).replace(/\.00$/,'').replace('.',',')+' juta';
+  if(abs>=1e9) return 'Rp '+(value/1e9).toFixed(2).replace('.',',')+' miliar';
+  if(abs>=1e6) return 'Rp '+(value/1e6).toFixed(2).replace('.',',')+' juta';
   return rp(value);
 };
 
@@ -348,7 +348,7 @@ function renderBudgetBreakdown(year,pieTarget,legendTarget,options){
    const lp=point(42.5,mid);
    const path='<path class="budget-slice" data-chart-slice="'+i+'" tabindex="0" role="button" aria-label="'+esc(x.name)+', '+rp(x.value)+', '+percent.toFixed(2).replace('.',',')+' persen" d="'+segmentPath(start,end)+'" fill="'+colors[i%colors.length]+'" stroke="#fff" stroke-width="1.8"></path>';
    const label=percent>=7
-     ? '<text class="budget-slice-label" x="'+lp.x.toFixed(2)+'" y="'+lp.y.toFixed(2)+'" text-anchor="middle" dominant-baseline="middle">'+percent.toFixed(1).replace('.',',')+'%</text>'
+     ? '<text class="budget-slice-label" x="'+lp.x.toFixed(2)+'" y="'+lp.y.toFixed(2)+'" text-anchor="middle" dominant-baseline="middle">'+percent.toFixed(2).replace('.',',')+'%</text>'
      : '';
    return {path,label};
  });
@@ -356,7 +356,7 @@ function renderBudgetBreakdown(year,pieTarget,legendTarget,options){
  const labels=sliceParts.map(x=>x.label).join('');
 
  if(pieTarget){
-   pieTarget.innerHTML='<svg viewBox="0 0 120 120" role="img" aria-label="'+esc(options.chartAria)+' '+year+'">'+slices+labels+'</svg><div class="budget-pie-center" data-chart-center><small>'+esc(options.totalLabel)+'</small><b>'+rpCompact(total)+'</b><span>100%</span><em>Persentase dibulatkan</em></div>';
+   pieTarget.innerHTML='<svg viewBox="0 0 120 120" role="img" aria-label="'+esc(options.chartAria)+' '+year+'">'+slices+labels+'</svg><div class="budget-pie-center" data-chart-center><small>'+esc(options.totalLabel)+'</small><b>'+rpCompact(total)+'</b><span>100%</span></div>';
  }
  if(legendTarget){
    legendTarget.innerHTML=groups.map((x,i)=>{
@@ -366,7 +366,7 @@ function renderBudgetBreakdown(year,pieTarget,legendTarget,options){
        const childPct=x.value?ch.value/x.value*100:0;
        return '<div class="budget-subitem"><div><b>'+esc(ch.name)+'</b><small><span class="budget-code-badge">Kode '+esc(ch.code)+'</span> '+childPct.toFixed(1).replace('.',',')+'% dari '+esc(options.childRelation)+'</small></div><strong>'+rp(ch.value)+'</strong></div>';
      }).join('');
-     return '<article class="budget-allocation-row" data-chart-row="'+i+'" style="--item-color:'+color+'"><button type="button" class="budget-allocation-head" data-chart-toggle="'+i+'" aria-expanded="false"><span class="budget-allocation-label"><span class="budget-legend-dot" style="background:'+color+'"></span><span><b>'+esc(x.name)+'</b><small><span class="budget-code-badge">Kode '+esc(x.code)+'</span></small><span class="budget-expand-label">'+esc(options.expandLabel)+' <span class="budget-chevron" aria-hidden="true">⌄</span></span></span></span><span class="budget-allocation-amount"><strong>'+rp(x.value)+'</strong><span>'+p.toFixed(2).replace('.',',')+'%</span></span></button><div class="budget-progress"><span style="width:'+Math.max(1,p).toFixed(2)+'%;background:'+color+'"></span></div><div class="budget-subitems">'+childRows+'</div></article>';
+     return '<article class="budget-allocation-row" data-chart-row="'+i+'" style="--item-color:'+color+'"><button type="button" class="budget-allocation-head" data-chart-toggle="'+i+'" aria-expanded="false"><span class="budget-allocation-label"><span class="budget-legend-dot" style="background:'+color+'"></span><span class="budget-item-copy"><b>'+esc(x.name)+'</b><span class="budget-item-meta"><span class="budget-code-badge">Kode '+esc(x.code)+'</span><span class="budget-expand-label">'+esc(options.expandLabel)+' <svg class="budget-chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span></span><span class="budget-allocation-amount"><strong>'+rp(x.value)+'</strong><span>'+p.toFixed(2).replace('.',',')+'%</span></span></button><div class="budget-progress"><span style="width:'+Math.max(1,p).toFixed(2)+'%;background:'+color+'"></span></div><div class="budget-subitems">'+childRows+'</div></article>';
    }).join('');
  }
 
@@ -392,7 +392,7 @@ function renderBudgetBreakdown(year,pieTarget,legendTarget,options){
    if(center){
      center.innerHTML=info
        ? '<small>'+esc(info.name)+'</small><b>'+rpCompact(info.value)+'</b><span>'+info.p.toFixed(2).replace('.',',')+'%</span>'
-       : '<small>'+esc(options.totalLabel)+'</small><b>'+rpCompact(total)+'</b><span>100%</span><em>Persentase dibulatkan</em>';
+       : '<small>'+esc(options.totalLabel)+'</small><b>'+rpCompact(total)+'</b><span>100%</span>';
    }
    if(detail){
      detail.innerHTML=info
@@ -466,8 +466,8 @@ function renderBudgetAllocation(year,pieTarget,legendTarget){
   chartAria:'Diagram interaktif alokasi belanja APBDesa',
   expandLabel:'Lihat sub-bidang',
   detailTitle:'Detail alokasi',
-  detailEmpty:'Arahkan kursor atau klik bagian chart untuk melihat nama akun, nominal, dan persentase.',
-  colors:['#C62828','#F9A825','#1565C0','#00838F','#6A1B9A','#EF6C00','#546E7A']
+  detailEmpty:'Pilih bagian grafik untuk melihat nama bidang, nominal, dan persentase.',
+  colors:['#C62828','#B26A00','#0277BD','#00838F','#6A1B9A','#D84315','#455A64']
  });
 }
 
@@ -480,8 +480,8 @@ function renderIncomeAllocation(year,pieTarget,legendTarget){
   chartAria:'Diagram interaktif komposisi pendapatan APBDesa',
   expandLabel:'Lihat rincian sumber',
   detailTitle:'Detail pendapatan',
-  detailEmpty:'Arahkan kursor atau klik bagian chart untuk melihat sumber pendapatan, nominal, dan persentase.',
-  colors:['#1565C0','#00838F','#F9A825','#6A1B9A','#EF6C00','#546E7A','#C62828']
+  detailEmpty:'Pilih bagian grafik untuk melihat sumber pendapatan, nominal, dan persentase.',
+  colors:['#3949AB','#006064','#AD1457','#5D4037','#827717','#455A64','#C2185B']
  });
 }
 function renderBudgetView(year){
