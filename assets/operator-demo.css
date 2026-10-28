@@ -92,3 +92,76 @@
  .budget-view-toolbar{align-items:stretch;flex-direction:column;margin-bottom:2px}
  .budget-view-select-wrap{min-width:0;width:100%}
 }
+
+
+/* ===== APBDesa chart polish & accessibility ===== */
+.budget-pie>div.budget-pie-center{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:56%!important;
+  aspect-ratio:1!important;
+  transform:translate(-50%,-50%)!important;
+  margin:0!important;
+  z-index:3!important;
+  border-radius:50%!important;
+  background:#fff!important;
+  box-shadow:none!important;
+}
+.budget-pie-center small{font-size:11px!important;line-height:1.25;color:#5f5552!important}
+.budget-pie-center b{font-size:18px!important;line-height:1.2;margin:5px 0 3px!important;color:#211d1c!important}
+.budget-pie-center span{font-size:12px!important;line-height:1.25;color:#3f3734!important;font-weight:800!important}
+.budget-pie-center em{display:block;margin-top:4px;font-style:normal;font-size:9px;line-height:1.2;color:#7c716d}
+
+.budget-slice{stroke:#fff!important;stroke-width:1.8!important}
+.budget-slice:focus-visible{stroke:#201b1a!important;stroke-width:2.6!important;filter:drop-shadow(0 0 3px rgba(0,0,0,.28))}
+.budget-slice-label{font-size:5.3px;font-weight:800;fill:#fff;stroke:rgba(0,0,0,.42);stroke-width:.85px;paint-order:stroke;pointer-events:none;letter-spacing:.02em}
+
+.budget-chart-panel{min-height:0!important}
+.budget-active-detail{margin-top:14px!important}
+.budget-active-detail b{font-size:13px!important}
+.budget-active-detail span{font-size:12px!important;color:#5f5552!important}
+.budget-active-detail strong{font-size:15px!important}
+.budget-chart-hint{font-size:12px!important;color:#625854!important;margin-top:12px!important}
+.mobile-chart-hint{display:none}
+
+.budget-allocation-row{cursor:pointer}
+.budget-allocation-row:hover,.budget-allocation-row:focus-within{border-color:#bfa49d;box-shadow:0 7px 20px rgba(71,29,24,.09);transform:translateY(-1px)}
+.budget-allocation-head{align-items:start!important;padding:14px 15px 10px!important}
+.budget-allocation-label{grid-template-columns:14px minmax(0,1fr)!important;gap:10px!important}
+.budget-legend-dot{width:12px!important;height:12px!important;margin-top:3px!important}
+.budget-allocation-label b{font-size:13px!important;line-height:1.4!important;color:#292321!important}
+.budget-allocation-label small{font-size:12px!important;color:#625854!important;margin-top:5px!important}
+.budget-code-badge{display:inline-flex;align-items:center;border:1px solid #ddd0cc;background:#f8f5f4;color:#564b48;border-radius:999px;padding:2px 7px;font-size:11px;font-weight:700;line-height:1.3}
+.budget-expand-label{font-size:12px!important;color:#554a47!important;font-weight:700!important;margin-top:8px!important;gap:7px!important}
+.budget-expand-label:after{content:none!important}
+.budget-chevron{display:inline-block;font-size:16px;line-height:1;transition:transform .18s ease;transform-origin:center}
+.budget-allocation-row.is-open .budget-chevron{transform:rotate(180deg)}
+
+.budget-allocation-amount{align-self:start!important;text-align:right!important;min-width:150px!important;padding-top:0!important}
+.budget-allocation-amount strong{font-size:14px!important;line-height:1.35!important;color:#27211f!important}
+.budget-allocation-amount span{font-size:12px!important;color:#403735!important;font-weight:800!important;margin-top:4px!important}
+.budget-progress{height:9px!important;margin:1px 15px 13px!important}
+
+.budget-subitems{padding:7px 15px 10px!important}
+.budget-subitem{padding:10px 0!important}
+.budget-subitem b{font-size:12px!important;color:#3a3230!important}
+.budget-subitem small{font-size:12px!important;color:#665b57!important;line-height:1.45}
+.budget-subitem strong{font-size:12px!important;color:#2f2927!important}
+
+.budget-allocation-intro{font-size:12px!important;color:#5d5350!important;line-height:1.55!important}
+.budget-visual-heading p{font-size:12px!important;color:#5d5350!important}
+.budget-view-select-wrap>span{font-size:11px!important;color:#5f5552!important}
+.budget-view-select-wrap select{font-size:13px!important}
+
+@media(max-width:640px){
+ .desktop-chart-hint{display:none}
+ .mobile-chart-hint{display:inline}
+ .budget-pie-center small{font-size:10px!important}
+ .budget-pie-center b{font-size:16px!important}
+ .budget-pie-center span{font-size:11px!important}
+ .budget-pie-center em{font-size:8px}
+ .budget-allocation-head{grid-template-columns:minmax(0,1fr)!important}
+ .budget-allocation-amount{text-align:left!important;min-width:0!important;padding-left:24px!important;margin-top:4px}
+ .budget-slice-label{font-size:5px}
+}
