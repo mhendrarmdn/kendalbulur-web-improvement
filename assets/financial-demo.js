@@ -346,9 +346,11 @@ function renderBudgetBreakdown(year,pieTarget,legendTarget,options){
    cursor+=percent;
    const mid=(start+end)/2;
    const lp=point(42.5,mid);
+   const onRight=Math.cos((mid-90)*Math.PI/180)>0;
+   const labelX=lp.x+(percent>=40&&onRight?2.2:0);
    const path='<path class="budget-slice" data-chart-slice="'+i+'" tabindex="0" role="button" aria-label="'+esc(x.name)+', '+rp(x.value)+', '+percent.toFixed(2).replace('.',',')+' persen" d="'+segmentPath(start,end)+'" fill="'+colors[i%colors.length]+'" stroke="#fff" stroke-width="1.8"></path>';
    const label=percent>=7
-     ? '<text class="budget-slice-label" x="'+lp.x.toFixed(2)+'" y="'+lp.y.toFixed(2)+'" text-anchor="middle" dominant-baseline="middle">'+percent.toFixed(2).replace('.',',')+'%</text>'
+     ? '<text class="budget-slice-label" x="'+labelX.toFixed(2)+'" y="'+lp.y.toFixed(2)+'" text-anchor="middle" dominant-baseline="middle">'+percent.toFixed(2).replace('.',',')+'%</text>'
      : '';
    return {path,label};
  });
