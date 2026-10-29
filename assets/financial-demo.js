@@ -345,7 +345,8 @@ function renderBudgetBreakdown(year,pieTarget,legendTarget,options){
    const start=cursor*3.6,end=(cursor+percent)*3.6;
    cursor+=percent;
    const mid=(start+end)/2;
-   const lp=point(42.5,mid);
+   const labelRadius=percent>=40?36.5:39.5;
+   const lp=point(labelRadius,mid);
    const path='<path class="budget-slice" data-chart-slice="'+i+'" tabindex="0" role="button" aria-label="'+esc(x.name)+', '+rp(x.value)+', '+percent.toFixed(2).replace('.',',')+' persen" d="'+segmentPath(start,end)+'" fill="'+colors[i%colors.length]+'" stroke="#fff" stroke-width="1.8"></path>';
    const label=percent>=7
      ? '<text class="budget-slice-label" x="'+lp.x.toFixed(2)+'" y="'+lp.y.toFixed(2)+'" text-anchor="middle" dominant-baseline="middle">'+percent.toFixed(2).replace('.',',')+'%</text>'
